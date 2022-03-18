@@ -1,3 +1,7 @@
+---
+description: Learning Cypress by doing Cypress
+---
+
 # Automation Tutorial
 
 This tutorial helps you learn Cypress test automation.
