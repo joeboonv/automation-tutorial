@@ -1,4 +1,5 @@
 ---
+title: Automation Tutorial
 description: Learning Cypress by doing Cypress
 ---
 
@@ -17,7 +18,7 @@ Beginners who want to learn automation and more advanced topics for anyone who w
 ## Key information
 
 Course length: 12 x 1 hour sessions  
-Language: English
+Language: English  
 Learning Methods: Online materials, Interactive Exercises, Online assessment
 
 ## What is Cypress
