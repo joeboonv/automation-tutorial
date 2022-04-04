@@ -38,4 +38,4 @@ Cypress lets you write automated tests that check websites are working correctly
 
 ## Let's get started
 
-__[Start by setting up Cypress](c1/c1e1.md)__
+:point_right: __[Start by setting up Cypress](c1/c1e1.md)__
