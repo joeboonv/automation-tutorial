@@ -36,8 +36,8 @@ Cypress lets you write automated tests that check websites are working correctly
 - Understanding of HTML, CSS and how to write reslient selectors for elements
 - API - How to interact with API's, mock responses and make assertions
 
-<details>
-  <summary>__Resources included in the course__</summary>
+<details><summary><b>Resources included in the course</b></summary>
+<p>
 
 ## What's included
 
@@ -52,6 +52,7 @@ Cypress lets you write automated tests that check websites are working correctly
 - :thought_balloon: Questions to get you thinking
 - :elephant: :cherry_blossom: :sun_with_face: :gem: :rainbow: virtual rewards to mark your progress!
 
+</p>
 </details>
 
 ## Let's get started
