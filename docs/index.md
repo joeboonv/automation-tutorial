@@ -38,7 +38,7 @@ Cypress lets you write automated tests that check websites are working correctly
 
 <details><summary><b>Resources included in the course</b></summary>
 
-- :computer: Interactive exercises where you will create automated tests to check what you have learned
+- :computer: Interactive exercises to use what you have learned
 - :bulb: Helpful hints
 - :memo: Reminders to capture data
 - :speech_balloon: Extracts from official documentation
