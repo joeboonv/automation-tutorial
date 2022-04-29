@@ -1,5 +1,6 @@
 theme: jekyll-theme-cayman
 show_downloads: false
+markdown: CommonMarkGhPages
 github:
   is_project_page: false
 plugins:
