@@ -1,7 +1,11 @@
 theme: jekyll-theme-cayman
 show_downloads: false
 markdown: CommonMarkGhPages
+logo: "https://joeboonv.github.io/automation-tutorial/images/favicon.png"
+gh_edit_link: false
+
 github:
   is_project_page: false
+
 plugins:
   - jemoji
