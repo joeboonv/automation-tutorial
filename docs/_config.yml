@@ -9,3 +9,7 @@ github:
 
 plugins:
   - jemoji
+
+commonmark:
+  options: ["UNSAFE", "SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
