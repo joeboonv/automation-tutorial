@@ -36,6 +36,24 @@ Cypress lets you write automated tests that check websites are working correctly
 - Understanding of HTML, CSS and how to write reslient selectors for elements
 - API - How to interact with API's, mock responses and make assertions
 
+<details>
+  <summary>__Resources included in the course__</summary>
+
+## What's included
+
+- :computer: Interactive exercises where you will create automated tests to check what you have learned
+- :bulb: Helpful hints
+- :memo: Reminders to capture data
+- :speech_balloon: Extracts from official documentation
+- :book: External resources where you can learn more
+- :point_right: Links to move through the tutorial
+- :heavy_check_mark: Skip parts you've already done
+- :sunglasses: Interesting extra info
+- :thought_balloon: Questions to get you thinking
+- :elephant: :cherry_blossom: :sun_with_face: :gem: :rainbow: virtual rewards to mark your progress!
+
+</details>
+
 ## Let's get started
 
 __[:point_right: Start by setting up Cypress](c1/c1e1/c1e1.md)__
