@@ -14,7 +14,9 @@ title: Chapter 1 - Recap
 
 That was the hard part, now for the __fun part__.
 
-# You've earned a break :coffee:
+# You've earned a break
+
+<img class="emoji" title=":coffee:" alt=":coffee:" src="https://github.githubassets.com/images/icons/emoji/unicode/2615.png" height="128" width="128">
 
 ## What's next?
 
