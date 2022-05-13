@@ -10,4 +10,12 @@ title: Chapter 1 - Recap
 - Checked Cypress by running the example tests
 - Installed VS Code, for writing your own tests
 
+## Well done
+
+That was the hard part, now for the __fun part__.
+
+# You've earned a break :coffee:
+
+## What's next?
+
 __[:point_right: You're ready to write your first test!](../../c2/)__
