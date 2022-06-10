@@ -11,7 +11,7 @@ title: Chapter 2 - Your first test
 
 ## Prerequisites
 
-- Node and Cypress are installed    :heavy_tick:
-- Visual Studio Code is installed   :heavy_tick:
+- Node and Cypress are installed    ✔️
+- Visual Studio Code is installed   ✔️
 
 __[:point_right: I'm ready to learn about Mocha](c2e1/c2e1.md)__
