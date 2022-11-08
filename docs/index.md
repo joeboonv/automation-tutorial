@@ -28,7 +28,7 @@ Cypress lets you write automated tests that check websites are working correctly
 ## What you'll learn
 
 - Cypress from the basics to advanced concepts
-- Cucumber and Gherkin for BDD scenarios
+- Describing BDD scenarios in Mocha
 - Learn the key concepts of the Git source control system
 - How to organize and reuse code with the Page Object design pattern
 - When and what to automate
