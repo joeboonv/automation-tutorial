@@ -1,3 +1,5 @@
+# Signed in
+
 <style>
   h1 {
     text-align: center;
@@ -6,11 +8,8 @@
     padding: 10px 40px;
   }
   .middle {
-    text-align: center;
+    text-align: center;    
   }
 </style>
 
-# Signed in
-
 <br/><br/><br/>
-
