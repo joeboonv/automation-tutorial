@@ -5,7 +5,7 @@ description: Learning Cypress by doing Cypress
 
 ## Course overview
 
-Welcome to our interactive Automation Tutorial! 
+Welcome to our interactive Automation Tutorial!
 
 The objective of this tutorial is to help you learn Cypress test automation.
 
