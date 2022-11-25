@@ -1,4 +1,6 @@
-# Login
+---
+title: Login
+---
 
 <style>
   h1 {
@@ -28,7 +30,7 @@
 <br/><br/><br/>
 
 <div class="middle">
-  <form action="signin.md">
+  <form action="signin.html">
     <p>
       <label for="username">User name</label>
       <input type="text" id="username"/>

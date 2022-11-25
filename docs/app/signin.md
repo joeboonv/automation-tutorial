@@ -1,4 +1,6 @@
-# Signed in
+---
+title: Signed In
+---
 
 <style>
   h1 {

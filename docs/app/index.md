@@ -1,3 +1,7 @@
+---
+title: Welcome to the Tutorial App
+---
+
 <style>
   h1 {
     text-align: center;
@@ -10,11 +14,9 @@
   }
 </style>
 
-# Welcome to the Tutorial App
-
 <br/><br/><br/>
 
-<form action="login.md">
+<form action="login.html">
 <div class="middle">
   <button type="submit" id="loginButton">Login</button>
 </div>
