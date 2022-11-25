@@ -32,7 +32,7 @@ Visit [https://joeboonv.github.io/automation-tutorial/app/](https://joeboonv.git
     - [strikethrough](https://github.github.com/gfm/#strikethrough-extension-) `use like ~that~ this`
     - [autolink](https://github.github.com/gfm/#autolinks-extension-) to convert www urls into hyperlinks
     - [table](https://github.github.com/gfm/#tables-extension-) to easily create tables
-    - [tagfilter](https://github.github.com/gfm/#disallowed-raw-html-extension-) to filter out dangerous HTML tags
+    - [tagfilter is false](https://github.github.com/gfm/#disallowed-raw-html-extension-) to allow `<style>` HTML tags
 
 ## Contributing
 

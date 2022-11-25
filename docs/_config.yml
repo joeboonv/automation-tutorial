@@ -12,4 +12,4 @@ plugins:
 
 commonmark:
   options: ["UNSAFE"]
-  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+  extensions: ["strikethrough", "autolink", "table"]

@@ -8,7 +8,7 @@
     padding: 10px 40px;
   }
   .middle {
-    text-align: center;    
+    text-align: center;
   }
 </style>
 
