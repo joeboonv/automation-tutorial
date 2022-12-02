@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+details > summary:first-of-type {
+  display: list-item;
+}
+
+.page-header {
+  color: rgb(5, 5, 75);
+  text-align: left;
+  background-color: #996611;
+  background-image: linear-gradient(120deg, #ececce, #996611);
+  margin: 40px;
+  padding: 10px;
+}
