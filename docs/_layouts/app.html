@@ -10,16 +10,15 @@
     <meta name="theme-color" content="#209930"><!-- original cayman theme-color #157878-->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/app_style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="icon" type="image/png" href="/app/favicon.png">
+    <link rel="icon" type="image/png" href="{{ '/app/favicon.png' | relative_url }}">
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+      <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
     </header>
-    
-    <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
 
     <main id="content" class="main-content" role="main">
       {{ content }}
