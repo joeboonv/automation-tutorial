@@ -12,8 +12,6 @@ title: Welcome to the Tutorial App
   }
 </style>
 
-<br/><br/>
-
 <form action="login.html">
 <div class="middle">
   <button type="submit" id="loginButton">Login</button>

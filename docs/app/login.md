@@ -39,8 +39,6 @@ description: Authenticate to use the tutorial app
   }
 </style>
 
-<br/>
-
 <div class="flex-centre">
  <form action="signin.html">
   <div class="table">
