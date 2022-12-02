@@ -1,6 +1,7 @@
 ---
 layout: app
 title: Login
+description: Authenticate to use the tutorial app
 ---
 
 <style>
