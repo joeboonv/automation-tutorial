@@ -1,4 +1,5 @@
 ---
+layout: app
 title: Tutorial App
 ---
 
