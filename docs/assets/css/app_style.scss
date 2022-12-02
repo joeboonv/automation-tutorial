@@ -8,10 +8,31 @@ details > summary:first-of-type {
 }
 
 .page-header {
-  color: rgb(5, 5, 75);
+  color: #05054b;
   text-align: left;
-  background-color: #996611;
-  background-image: linear-gradient(120deg, #ececce, #996611);
+  background-color: #991111;
+  background-image: linear-gradient(120deg, #aa8888, #991111);
   margin: 40px;
   padding: 10px;
+}
+
+.project-name {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  color: #05054b;
+}
+
+input {
+  border-color: #991111;
+}
+
+button {
+  border-color: #991111;
+  color: #991111;
 }

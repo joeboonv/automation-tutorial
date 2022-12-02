@@ -4,9 +4,6 @@ title: Welcome to the Tutorial App
 ---
 
 <style>
-  h1 {
-    text-align: center;
-  }
   button {
     padding: 10px 40px;
   }

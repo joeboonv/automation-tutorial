@@ -4,9 +4,6 @@ title: Login
 ---
 
 <style>
-  h1 {
-    text-align: center;
-  }
   .table {
     display: table;
   }
