@@ -25,7 +25,7 @@ title: Login
     margin: 5px 0px;
   }
   button {
-    margin: 20px 0px;
+    margin: 40px 0px;
     padding: 10px 40px;
   }
   .flex-centre {
@@ -40,7 +40,7 @@ title: Login
   }
 </style>
 
-<br/><br/><br/>
+<br/>
 
 <div class="flex-centre">
  <form action="signin.html">
