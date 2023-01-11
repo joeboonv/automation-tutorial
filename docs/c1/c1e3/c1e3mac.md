@@ -1,24 +1,17 @@
 ---
-title: Install Node
+title: Install Node on Mac
 ---
 
 ![Node js logo](nodejs.png)
 
 ## :dvd: Install Node.js and npm
 
-1. Download [Node.js version v18.13.0 Windows Installer](https://nodejs.org/download/release/v18.13.0/node-v18.13.0-x64.msi)
+1. Download [Node.js version v18.13.0 Installer for that matches your computer](https://nodejs.org/download/release/v18.13.0/)
+   - chose a Darwin installer, or the .pkg version for 64-bit ARM64
 
-1. Run the installer (the .msi file you downloaded in the previous step)
+1. Run the installer
 
-1. Follow the prompts in the installer
-
-    - Accept the license agreement
-
-      ![Node installation window with license agreement](node-setup-agreement.png)
-
-    - Click the `Next` button a few times and accept the default installation settings
-
-      ![Node installation window with options](node-setup-options.png)
+1. Accept the default installation settings
 
 1. Restart your computer if prompted
 

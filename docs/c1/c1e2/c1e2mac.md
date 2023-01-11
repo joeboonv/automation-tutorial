@@ -1,5 +1,5 @@
 ---
-title: Check Node is installed
+title: Check Node is installed - Mac
 ---
 
 ## Do you have Node.js and npm installed already?
@@ -8,12 +8,7 @@ Cypress is written in JavaScript and needs Node which is a JavaScript runtime en
 
 We recommend Node.js version 18.13.0 LTS (includes npm 8.19.3).
 
-<details>
-  <summary><b>How to check Node and npm are installed and see the version</b></summary>
-
-## :bulb: How to check if Node and npm are installed
-
-Open the Windows Command Prompt, Powershell or a similar command line tool, and type:
+Open a terminal window and run:
 
 ```bash
 node -v
@@ -23,7 +18,7 @@ This should print the version number so you’ll see something like this `v18.13
 
 We recommend Node.js version v18.13.0 LTS (Long term support)
 
-If you see an error message or a different version please [:point_right: install Node](../c1e3/c1e3.md).
+If you see an error message or a different version please [:point_right: install Node](../c1e3/c1e3mac.md).
 
 ## :bulb: How to check if npm is installed
 
@@ -39,6 +34,6 @@ You should see something like this `8.19.3`.
 
 __[:heavy_check_mark: Yes, Node and npm are already installed on my computer](../c1e4/c1e4.md)__
 
-__[:point_right: I need to install Node and npm](../c1e3/c1e3.md)__
+__[:point_right: I need to install Node and npm](../c1e3/c1e3mac.md)__
 
 :sunglasses: 'npm' is 'Node Package Manager'. It let's you install third party JavaScript libraries and use them with Node.js. There are thousands of free modules available, including Cypress!
