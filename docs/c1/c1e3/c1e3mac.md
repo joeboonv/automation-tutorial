@@ -8,7 +8,8 @@ title: Install Node on Mac
 
 1. Download [Node.js version v18.13.0 Installer for that matches your computer](https://nodejs.org/download/release/v18.13.0/)
    - chose a Darwin installer, or the .pkg version for 64-bit ARM64
-
+     
+     
 1. Run the installer
 
 1. Accept the default installation settings
