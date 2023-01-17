@@ -1,5 +1,5 @@
 ---
-title: Chapter 2 - Your first test
+title: Chapter 3 - Your first test
 ---
 
 ## What you'll learn
@@ -14,4 +14,4 @@ title: Chapter 2 - Your first test
 - Node and Cypress are installed    ✔️
 - Visual Studio Code is installed   ✔️
 
-__[:point_right: I'm ready to learn about Mocha](c2e1/c2e1.md)__
+__[:point_right: I'm ready to learn about Mocha](c3e1/c3e1.md)__
