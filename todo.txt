@@ -1,0 +1,8 @@
+Follow c1 in a new folder and check it works
+
+TEST 18.13.0 (includes npm 8.19.3)
+
+TEST keep c1e2 as windows and add c1e2mac
+
+Chapter 2 Make empty test project?? + run Cypress (leave examples??)
+(ask Luke to move ch2->ch3? or do it if he has no outstanding changes + pull after)

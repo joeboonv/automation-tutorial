@@ -6,7 +6,7 @@ title: Chapter 1 - Setup
 
 - How to create a new test project folder
 - Installing Cypress
-- Running Cypress example tests
+- Installing VS Code
 
 ## Prerequisites
 

@@ -18,6 +18,4 @@ title: Chapter 1 - Recap
 
 ## What's next?
 
-That was the hard part, now for the __fun part__.
-
-__[:point_right: You're ready to write your first test!](../../c2/)__
+__[:point_right: Set up your Test Project!](../../c2/)__
