@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <title>Ancient Temple of Ocypress</title>
+    <style>
+.image-container {
+  position: relative;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.templeDoorButton {
+  visibility: hidden;
+  position: absolute; /* set button to an absolute position */
+  top: 397px; /* adjust the top position of the button */
+  left: 760px; /* adjust the left position of the button */
+  height: 125px;
+  width: 44px;
+  z-index: 2; /* set a higher z-index than the image */
+  background-color: #101111; 
+  border-radius: 4px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  cursor: pointer; /* change mouse cursor on hover */
+  text-align: center;
+  text-decoration: none;
+  color: #272626; /* set your desired text color */
+}
+
+.animated-button-dark {
+  background-color: #00000000;
+  animation: darkToStone 8s infinite;
+  animation-play-state: paused;
+}
+
+@keyframes darkToStone {
+  0% {background-color: #10111170;}
+  50% {background-color: #c8b48c33;}
+  100% {background-color: #10111170;}
+}
+    </style>
+    <script language="javascript">
+      let hoverTempleCount = 0;
+      function hoverTemple() {
+        hoverTempleCount++;
+        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
+      }
+
+      // let hoverDoorCount = 0;
+      function hoverDoor() {
+        // hoverDoorCount++;
+        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
+      }
+
+      function openDoor(event) {
+        if (isHuman()) {
+          window.alert("You are too tall to fit into that small door. Please send CyBot in there.")
+        } else {
+          window.alert("Entering the ancient temple");
+        }
+        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
+        // window.alert("openDoor " + event.x + " " + event.y);
+      }
+
+      function isHuman() {
+        return hoverTempleCount > 3;
+      }
+
+      function bodyLoad() {
+        setTimeout(showtempleDoorButton, 3000);
+      }
+
+      function showtempleDoorButton() {
+        let door = document.getElementById('templeDoor');
+        door.style.visibility = 'visible';
+        door.style.animationPlayState = 'running';
+      }
+
+    </script>
+  </head>
+
+  <body onload="bodyLoad();">
+
+    <!-- <p id="info">Info</p>   -->
+
+    <div class="image-container">
+      <img src="img/ashutosh-dvivedi-BZQslOwhW2I-unsplash.jpg" onmousemove="hoverTemple();" width="1000" alt="Ancient template with an open door">
+      <button id="templeDoor" class="templeDoorButton animated-button-dark" onmousemove="hoverDoor();" onclick="openDoor(event);">.</button>
+    </div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
+    <p>Photo by <a href="https://unsplash.com/@old_wolf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ashutosh Dvivedi</a> on <a href="https://unsplash.com/photos/BZQslOwhW2I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>.
+      <a href="https://unsplash.com/license">Licence.</a>
+    </p>
+    
+    
+    
+  </body>
+</html>
