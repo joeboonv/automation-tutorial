@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <title>Ancient Temple of Ocypress</title>
+    <style>
+.image-container {
+  position: relative;
+  width: 1000px;
+  height: 662px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.fullImage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+.backgroundImage {
+  z-index: -1;
+  background-color: black; 
+}
+
+.foregroundImage {
+  z-index: 99;
+}
+
+.animatingWheel {
+  position: relative;
+  animation: rollFromLeftToRightAndBack 6s infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  left: -300px;
+  top: 80px;
+  width: 290px;
+  height: 290px;
+}
+
+@keyframes rollFromLeftToRightAndBack {
+  0%   { left: -300px; rotate: 0deg;   }
+  100% { left: 300px;  rotate: 180deg; }
+}
+    </style>
+    <script language="javascript">
+
+      let hoverTempleCount = 0;
+      function hoverTemple() {
+        hoverTempleCount++;
+        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
+      }
+
+      // let hoverDoorCount = 0;
+      function hoverDoor() {
+        // hoverDoorCount++;
+        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
+      }
+
+      function openDoor(event) {
+        if (isHuman()) {
+          window.alert('You are too tall to fit into that small door. Please send CyBot in there.');
+        } else {
+          window.alert('Entering the ancient temple');
+        }
+        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
+        // window.alert("openDoor " + event.x + " " + event.y);
+      }
+
+      function isHuman() {
+        return hoverTempleCount > 3 && !isCypressRunning();
+      }
+
+      function isCypressRunning() {
+        return window.Cypress;
+      }
+
+
+
+    </script>
+  </head>
+
+  <body>
+    <!-- <p id="info">Info</p>   -->
+
+    <div class="image-container">
+      <img
+        src="img/r2-background.png"
+        alt="Underground door"
+        class="fullImage backgroundImage"
+      />
+
+      <img
+        src="img/r2-wheel.png"
+        alt="rotating stone wheel"
+        class="animatingWheel"
+      />
+
+      <img
+        src="img/r2-foreground.png"
+        alt="Underground foyer"
+        class="fullImage foregroundImage"
+      />
+
+      <br/>
+      <p>.</p>
+
+    </div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
+    <p>Photo by Arun Varadarajan on <a href="https://commons.wikimedia.org/wiki/Category:Large_Underground_Temple#/media/File:Underground_Siva_Temple.JPG">Wikimedia</a>.
+      <a href="https://commons.wikimedia.org/wiki/File:Underground_Siva_Temple.JPG">Licence.</a>
+    </p>
+  </body>
+</html>
