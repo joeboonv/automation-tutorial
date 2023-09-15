@@ -64,13 +64,14 @@
           window.alert('You are too tall to fit into that small door. Please send CyBot in there.');
         } else {
           window.alert('Entering the ancient temple');
+          window.location.href = 'r2.html';
         }
         // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
         // window.alert("openDoor " + event.x + " " + event.y);
       }
 
       function isHuman() {
-        return hoverTempleCount > 3 && !isCypressRunning();
+        return hoverTempleCount > 3 || !isCypressRunning();
       }
 
       function isCypressRunning() {
