@@ -30,23 +30,96 @@
   z-index: 99;
 }
 
-.animatingWheel {
+.wheel {
   position: relative;
-  animation: rollFromLeftToRightAndBack 6s infinite;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
-  left: -300px;
-  top: 80px;
-  width: 290px;
-  height: 290px;
+  left: 0px;
+  top: 40px;
+  width: 550px;
+  height: 550px;
 }
 
-@keyframes rollFromLeftToRightAndBack {
-  0%   { left: -300px; rotate: 0deg;   }
-  100% { left: 300px;  rotate: 180deg; }
+.swingingWheel {
+  animation-name: rollFromLeftToRightAndBack;
+  animation-duration: 6s;
+  animation-delay: 2s;
+  animation-iteration-count: 6;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  transform-origin: 50% -200%;
+  rotate: -9deg;
 }
+
+.fallingWheel {
+  animation-name: fallForwards;
+  animation-duration: 1500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  transform-origin: 0% 10%;
+  rotate: 0deg;
+}
+
+@keyframes fallForwards {
+  0%  { rotate: 0deg; top: 40px }
+  50% { rotate: 0deg; top: 80px; left: 10px }
+  100% { rotate: 8deg; top: 80px; left: 50px }
+}
+
     </style>
+
+    <style id="keyframesRoll">
+      @keyframes rollFromLeftToRightAndBack {
+        0%   { rotate: -9deg;  }
+        100% { rotate: 9deg; }
+      }
+    </style>
+
     <script language="javascript">
+      // TODO pause to show stone - otherwise it loads before the other images?
+      // We can make the wheel much larger and swing it "from somewhere above the ceiling" 
+      //   so it is like a pendulum, and blocks the door unless it lines up
+      // OR Make it move more slowly, longer than Cypress timeout, then stop animating, then
+      // carry on and block the door
+
+      let right = true;
+      let maxRotationDeg = 9;
+      let rotationReductionStep = 3;
+      let iterationCount = 0;
+      let rightRotationDeg = -maxRotationDeg;
+      let leftRotationDeg = maxRotationDeg;
+      function reduceWheelAnimation() {
+        iterationCount++;
+        console.log(`Animation iteration count: ${iterationCount}`);
+        var kf = document.getElementById('keyframesRoll');
+        if (right) {
+          rightRotationDeg += rotationReductionStep;
+        } else {
+          leftRotationDeg -= rotationReductionStep;
+        }
+        right = !right;
+        
+        kf.innerHTML = getRollKeyframes(rightRotationDeg, leftRotationDeg);
+      };
+
+      function getRollKeyframes(rightRotationDeg, leftRotationDeg) {
+        return `@keyframes rollFromLeftToRightAndBack { 0% { rotate: ${rightRotationDeg}deg; } 100% { rotate: ${leftRotationDeg}deg; } }`;
+      }
+
+      function endOfWheelAnimation() {
+        setTimeout(startFallAnimation, 2000);
+      }
+
+      function startFallAnimation() {
+        const wheel = document.querySelector('.wheel');
+        wheel.setAttribute('class', 'wheel fallingWheel');
+      }
+
+      function addListeners() {
+        const wheel = document.querySelector('.wheel');
+        wheel.addEventListener("animationiteration", reduceWheelAnimation);
+        wheel.addEventListener("animationend", endOfWheelAnimation);
+      }
 
       let hoverTempleCount = 0;
       function hoverTemple() {
@@ -78,12 +151,10 @@
         return window.Cypress;
       }
 
-
-
     </script>
   </head>
 
-  <body>
+  <body onload="javascript:addListeners();">
     <!-- <p id="info">Info</p>   -->
 
     <div class="image-container">
@@ -94,9 +165,9 @@
       />
 
       <img
-        src="img/r2-wheel.png"
-        alt="rotating stone wheel"
-        class="animatingWheel"
+        src="img/r2-wheel.gif"
+        alt="rotating stone wheel showing the mayan calendar"
+        class="wheel swingingWheel"
       />
 
       <img
