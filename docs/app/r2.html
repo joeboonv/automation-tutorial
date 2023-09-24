@@ -40,12 +40,13 @@
 
 .swingingWheel {
   animation-name: swing;
-  animation-duration: 1s; /* 4s */
-  animation-delay: 3s;
+  animation-duration: 3s;
+  animation-delay: 2s;
   animation-iteration-count: 8;
   animation-timing-function: ease-in-out;
   animation-direction: alternate;
   animation-fill-mode: forwards;
+  animation-play-state: paused;
   transform-origin: 50% -200%;
   rotate: -15deg;
 }
@@ -53,6 +54,7 @@
 .fallingWheel {
   animation-name: fall;
   animation-duration: 1200ms;
+  animation-delay: 100ms;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
@@ -70,7 +72,7 @@
 
     <style id="keyframesRoll">
       @keyframes swing {
-        0%   { rotate: -15deg;  }
+        0%   { rotate: -15deg; }
         100% { rotate: 12deg; }
       }
     </style>
@@ -115,13 +117,25 @@
       function showPortalButton() {
         const container = document.querySelector('.image-container');
         const button = document.createElement('button');
-        container.appendChild(button);
+        // container.appendChild(button);
+      }
+
+      function startSwing() { 
+        const wheel = document.querySelector('.wheel');
+        wheel.style['animation-play-state'] = 'running';
       }
 
       function startFall() {
         enter = false;
         const wheel = document.querySelector('.wheel');
-        wheel.setAttribute('class', 'wheel fallingWheel');
+        wheel.classList.remove('swingingWheel');
+        wheel.classList.add('fallingWheel');
+      }
+
+      function loaded() {
+        addListeners();
+        // TODO random delay before starting swing, more than 2s, so no one delay in test works. Use setTimeout.
+        startSwing();
       }
 
       function addListeners() {
@@ -163,7 +177,7 @@
     </script>
   </head>
 
-  <body onload="javascript:addListeners();">
+  <body onload="javascript:loaded();">
     <!-- <p id="info">Info</p>   -->
 
     <div class="image-container">
