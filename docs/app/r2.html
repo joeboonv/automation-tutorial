@@ -39,8 +39,8 @@
 }
 
 .swingingWheel {
-  animation-name: swingRightToLeft;
-  animation-duration: 4s;
+  animation-name: swing;
+  animation-duration: 1s; /* 4s */
   animation-delay: 3s;
   animation-iteration-count: 8;
   animation-timing-function: ease-in-out;
@@ -69,7 +69,7 @@
     </style>
 
     <style id="keyframesRoll">
-      @keyframes swingRightToLeft {
+      @keyframes swing {
         0%   { rotate: -15deg;  }
         100% { rotate: 12deg; }
       }
@@ -82,12 +82,13 @@
       // OR Make it move more slowly, longer than Cypress timeout, then stop animating, then
       // carry on and block the door
 
+      let enter = false;
       let right = true;
       let maxRotationDeg = 12;
       let rotationReductionStep = 3;
       let rightRotationDeg = -maxRotationDeg;
       let leftRotationDeg = maxRotationDeg;
-      function reduceWheelAnimation() {
+      function reduceWheelSwing() {
         var kf = document.getElementById('keyframesRoll');
         if (right) {
           rightRotationDeg += rotationReductionStep;
@@ -100,22 +101,33 @@
       };
 
       function getRollKeyframes(rightRotationDeg, leftRotationDeg) {
-        return `@keyframes swingRightToLeft { 0% { rotate: ${rightRotationDeg}deg; } 100% { rotate: ${leftRotationDeg}deg; } }`;
+        return `@keyframes swing { 0% { rotate: ${rightRotationDeg}deg; } 100% { rotate: ${leftRotationDeg}deg; } }`;
       }
 
-      function endOfWheelAnimation() {
-        setTimeout(startFallAnimation, 2000);
+      function endOfWheelSwing(event) {
+        if (event.animationName == 'swing') {
+          showPortalButton();
+          enter = true;
+          setTimeout(startFall, 2000);
+        }
       }
 
-      function startFallAnimation() {
+      function showPortalButton() {
+        const container = document.querySelector('.image-container');
+        const button = document.createElement('button');
+        container.appendChild(button);
+      }
+
+      function startFall() {
+        enter = false;
         const wheel = document.querySelector('.wheel');
         wheel.setAttribute('class', 'wheel fallingWheel');
       }
 
       function addListeners() {
         const wheel = document.querySelector('.wheel');
-        wheel.addEventListener("animationiteration", reduceWheelAnimation);
-        wheel.addEventListener("animationend", endOfWheelAnimation);
+        wheel.addEventListener("animationiteration", reduceWheelSwing);
+        wheel.addEventListener("animationend", endOfWheelSwing);
       }
 
       let hoverTempleCount = 0;
