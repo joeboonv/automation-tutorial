@@ -83,7 +83,7 @@ button.door {
   border-radius: 10px;
   box-shadow: 0px 0px 10px 10px wheat;
   opacity: 0%;
-  animation-name: fadeinhalf;
+  animation-name: fadeIn90;
   animation-duration: 1s;
   animation-delay: 100ms;
   animation-iteration-count: 1;
@@ -94,17 +94,16 @@ button.door {
   transform-origin: center;
 }
 
-@keyframes fadeinhalf {
-  0%  { opacity: 0%; }
-  100% { opacity: 90%; }
-}
-
     </style>
 
-    <style id="keyframesRoll">
+    <style id="keyframes">
       @keyframes swing {
         0%   { rotate: -15deg; }
         100% { rotate: 12deg; }
+      }
+      @keyframes fadeIn90 {
+        0%  { opacity: 0%; }
+        100% { opacity: 90%; }
       }
     </style>
 
@@ -130,47 +129,25 @@ button.door {
       };
       
       function setSwingRotationLimits(rightRotationDeg, leftRotationDeg) {
-        const kf0pct = getCssKeyframe('keyframesRoll', 'swing', '0%');
-        const kf100pct = getCssKeyframe('keyframesRoll', 'swing', '100%');
+        const kf0pct = getCssKeyframe('keyframes', 'swing', '0%');
+        const kf100pct = getCssKeyframe('keyframes', 'swing', '100%');
         kf0pct.style.rotate = `${rightRotationDeg}deg`;
         kf100pct.style.rotate = `${leftRotationDeg}deg`;
       }
       
       function getStylesheetRules(styleId) {
-        const sheets = document.styleSheets;
-        if (!sheets) return null;
-        for (let i = 0; i < sheets.length; i++) {
-          const sheet = sheets[i];
-          if (sheet.ownerNode.id == styleId) {
-            return sheet.cssRules || sheet.rules;
-          }
-        }
-        return null;
+        const sheet = Array.prototype.find.call(document.styleSheets, s => s.ownerNode.id == styleId);
+        return sheet.cssRules || sheet.rules;
       }
 
       function getCssRule(styleId, ruleName) {
-        const rules = getStylesheetRules(styleId);
-        if (!rules) return null;
-        for (let i = 0; i < rules.length; i++) {
-          const rule = rules[i];
-          if (rule.name == ruleName) {
-            return rule;
-          }
-        }
-        return null;
+        return Array.prototype.find.call(getStylesheetRules(styleId), rule => rule.name == ruleName);
       }
 
       function getCssKeyframe(styleId, ruleName, keyText) {
         const rule = getCssRule(styleId, ruleName);
         const frames = rule.cssRules || rule.rules;
-        if (!frames) return null;
-        for (let i = 0; i < frames.length; i++) {
-          const frame = frames[i];
-          if (frame.keyText == keyText) {
-            return frame;
-          }
-        }
-        return null;
+        return Array.prototype.find.call(frames, frame => frame.keyText == keyText);
       }
 
       function endOfWheelSwing(event) {
