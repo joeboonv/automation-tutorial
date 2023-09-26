@@ -65,12 +65,6 @@
   rotate: 0deg;
 }
 
-@keyframes fall {
-  0%  { }
-  20% { top: 55px; }
-  100% { rotate: -25deg; top: 55px; left: -100px }
-}
-
 button.door {
   position: absolute;
   z-index: 2;
@@ -101,9 +95,16 @@ button.door {
         0%   { rotate: -15deg; }
         100% { rotate: 12deg; }
       }
+      
       @keyframes fadeIn90 {
         0%  { opacity: 0%; }
         100% { opacity: 90%; }
+      }
+      
+      @keyframes fall {
+        0%  { }
+        20% { top: 55px; }
+        100% { rotate: -25deg; top: 55px; left: -100px }
       }
     </style>
 
