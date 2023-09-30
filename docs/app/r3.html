@@ -1,0 +1,270 @@
+<html>
+  <head>
+    <title>Ancient Temple of Ocypress</title>
+    <style>
+.image-container {
+  position: relative;
+  width: 1000px;
+  height: 662px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.fullImage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+.backgroundImage {
+  z-index: -99;
+  background-color: black; 
+}
+
+.foregroundImage {
+  z-index: 2;
+}
+
+.wheel {
+  z-index: 1;
+  position: relative;
+  left: 0px;
+  top: 25px;
+  width: 400px;
+  height: 400px;
+}
+
+.swingingWheel {
+  animation-name: swing;
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: 8;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+  transform-origin: 50% -200%;
+  rotate: -15deg;
+}
+
+.fallingWheel {
+  animation-name: fall;
+  animation-duration: 1200ms;
+  animation-delay: 100ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  transform-origin: center;
+  rotate: 0deg;
+}
+
+button.door {
+  position: absolute;
+  z-index: 2;
+  left: 476px;
+  top: 129px;
+  height: 13px;
+  width: 51px;
+  background-color:  whitesmoke;
+  border-style: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 10px wheat;
+  opacity: 0%;
+  animation-name: fadeIn90;
+  animation-duration: 1s;
+  animation-delay: 100ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  transform-origin: center;
+}
+
+    </style>
+
+    <style id="keyframes">
+      @keyframes swing {
+        0%   { rotate: -15deg; }
+        100% { rotate: 12deg; }
+      }
+      
+      @keyframes fadeIn90 {
+        0%  { opacity: 0%; }
+        100% { opacity: 90%; }
+      }
+      
+      @keyframes fall {
+        0%  { }
+        20% { top: 55px; }
+        100% { rotate: -25deg; top: 55px; left: -100px }
+      }
+    </style>
+
+    <script language="javascript">
+      // TODO Resize images
+      // TODO Gwalior,temple, India
+      
+// two blocks with weights
+// text field to create weights
+// button
+
+      let enter = false;
+      let right = true;
+      let maxRotationDeg = 12;
+      let rotationReductionStep = 3;
+      let rightRotationDeg = -maxRotationDeg;
+      let leftRotationDeg = maxRotationDeg;
+      
+      function reduceWheelSwing() {
+        if (right) {
+          rightRotationDeg += rotationReductionStep;
+        } else {
+          leftRotationDeg -= rotationReductionStep;
+        }
+        right = !right;
+        
+        setSwingRotationLimits(rightRotationDeg, leftRotationDeg);
+      };
+      
+      function setSwingRotationLimits(rightRotationDeg, leftRotationDeg) {
+        const kf0pct = getCssKeyframe('keyframes', 'swing', '0%');
+        const kf100pct = getCssKeyframe('keyframes', 'swing', '100%');
+        kf0pct.style.rotate = `${rightRotationDeg}deg`;
+        kf100pct.style.rotate = `${leftRotationDeg}deg`;
+      }
+      
+      function getStylesheetRules(styleId) {
+        const sheet = Array.prototype.find.call(document.styleSheets, s => s.ownerNode.id == styleId);
+        return sheet.cssRules || sheet.rules;
+      }
+
+      function getCssRule(styleId, ruleName) {
+        return Array.prototype.find.call(getStylesheetRules(styleId), rule => rule.name == ruleName);
+      }
+
+      function getCssKeyframe(styleId, ruleName, keyText) {
+        const rule = getCssRule(styleId, ruleName);
+        const frames = rule.cssRules || rule.rules;
+        return Array.prototype.find.call(frames, frame => frame.keyText == keyText);
+      }
+
+      function endOfWheelSwing(event) {
+        if (event.animationName == 'swing') {
+          showPortalButton();
+          enter = true;
+          setTimeout(startFall, 3000);
+        }
+      }
+
+      function showPortalButton() {
+        const container = document.querySelector('.image-container');
+        const button = document.createElement('button');
+        button.classList.add('door');
+        container.appendChild(button);
+        button.addEventListener('click', openDoor);
+      }
+
+      function startSwing() { 
+        const wheel = document.querySelector('.wheel');
+        wheel.style.animationPlayState = 'running';
+      }
+
+      function startFall() {
+        enter = false;
+
+        const door = document.querySelector('.door');
+        door.style.zIndex = -1;
+        
+        const wheel = document.querySelector('.wheel');
+        wheel.classList.remove('swingingWheel');
+        wheel.classList.add('fallingWheel');
+      }
+
+      function loaded() {
+        addListeners();
+        // TODO random delay before starting swing, more than 2s, so no one delay in test works. Use setTimeout.
+        startSwing();
+      }
+
+      function addListeners() {
+        const wheel = document.querySelector('.wheel');
+        wheel.addEventListener("animationiteration", reduceWheelSwing);
+        wheel.addEventListener("animationend", endOfWheelSwing);
+      }
+
+      let hoverTempleCount = 0;
+      function hoverTemple() {
+        hoverTempleCount++;
+        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
+      }
+
+      // let hoverDoorCount = 0;
+      function hoverDoor() {
+        // hoverDoorCount++;
+        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
+      }
+
+      function openDoor(event) {
+        if (isHuman()) {
+          window.alert('Looks like this is they way through, but we need to send something smaller.');
+        } else {
+          window.alert('Entering the ancient temple');
+        }
+        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
+        // window.alert("openDoor " + event.x + " " + event.y);
+      }
+
+      function isHuman() {
+        return hoverTempleCount > 3 || !isCypressRunning();
+      }
+
+      function isCypressRunning() {
+        return window.Cypress;
+      }
+
+    </script>
+  </head>
+
+  <body onload="javascript:loaded();">
+
+    <div class="image-container">
+      <img
+        src="img/r2-background.png"
+        alt="Underground door"
+        class="fullImage backgroundImage"
+      />
+
+      <img
+        src="img/r2-wheel.gif"
+        alt="rotating stone wheel showing the mayan calendar"
+        class="wheel swingingWheel"
+      />
+
+      <img
+        src="img/r2-foreground.png"
+        alt="Underground foyer"
+        class="fullImage foregroundImage"
+      />
+
+      <!-- Button goes here -->
+
+    </div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    
+    <p>Photo by Arun Varadarajan on <a href="https://commons.wikimedia.org/wiki/Category:Large_Underground_Temple#/media/File:Underground_Siva_Temple.JPG">Wikimedia</a>.
+      <a href="https://commons.wikimedia.org/wiki/File:Underground_Siva_Temple.JPG">Licence.</a>
+    </p>
+  </body>
+</html>
