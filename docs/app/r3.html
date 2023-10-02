@@ -26,71 +26,82 @@
   background-color: black; 
 }
 
-.small-pedestal-1 {
+.layer1 {
   z-index: 1;
-  position: relative;
-  left: 90px;
-  top: 450px;
-  width: 200px;
-  width: 50%;
-  height: 50%;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer2 {
+  z-index: 2;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer3 {
+  z-index: 3;
+  position: absolute;
+  object-fit: contain;
+}
+
+.small-pedestal-1 {
+  left: 105px;
+  top: 550px;
+  height: 110px;
 }
 
 .small-pedestal-2 {
-  z-index: 1;
-  position: relative;
-  left: 290px;
-  top: 500px;
-  width: 50%;
-  height: 50%;
+  left: 220px;
+  top: 530px;
+  height: 110px;
 }
 
-.pot-1 {
-  z-index: 2;
-  position: relative;
-  left: 100px;
-  top: 450px;
-  width: 50%;
-  height: 50%;
-}
-
-.pot-2 {
-  z-index: 2;
-  position: relative;
-  left: 300px;
-  top: 400px;
-  width: 100px;
-}
-
-.pot-3 {
-  z-index: 2;
-  position: relative;
-  left: 700px;
-  top: 333px;
-  width: 50%;
-  height: 50%;
+.large-pedestal {
+  left: 710px;
+  top: 465px;
+  height: 200px;
 }
 
 .column {
-  z-index: 3;
-  position: relative;
-  left: 400px;
-  top: 300px;
-  width: 50%;
-  height: 50%;
-}
-
-.fallingWheel {
-  animation-name: fall;
-  animation-duration: 1200ms;
-  animation-delay: 100ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
+  left: 380px;
+  top: 360px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: wobble;
+  animation-duration: 400ms;
+  animation-delay: 1s;
+  animation-iteration-count: 3;
+  animation-timing-function: linear;
   animation-direction: normal;
   animation-fill-mode: forwards;
   animation-play-state: running;
-  transform-origin: center;
-  rotate: 0deg;
+}
+
+@keyframes wobble {
+        0%   { rotate: 0deg; top: 360px }
+        25%  { rotate: 2deg; top: 359px }
+        50%  { rotate: 0deg; top: 360px }
+        75%  { rotate: -2deg; top: 359px }
+        100% { rotate: 0deg; top: 360px }
+      }
+
+.pot-1 {
+  left: 106px;
+  top: 463px;
+  width: 110px;
+}
+
+.pot-2 {
+  left: 222px;
+  top: 443px;
+  width: 110px;
+}
+
+.pot-3 {
+  left: 694px;
+  top: 339px;
+  width: 145px;
 }
 
 button.door {
@@ -124,17 +135,7 @@ button.door {
         0%   { rotate: -15deg; }
         100% { rotate: 12deg; }
       }
-      
-      @keyframes fadeIn90 {
-        0%  { opacity: 0%; }
-        100% { opacity: 90%; }
-      }
-      
-      @keyframes fall {
-        0%  { }
-        20% { top: 55px; }
-        100% { rotate: -25deg; top: 55px; left: -100px }
-      }
+
     </style>
 
     <script language="javascript">
@@ -145,88 +146,12 @@ button.door {
 // text field to create weights
 // button
 
-      let enter = false;
-      let right = true;
-      let maxRotationDeg = 12;
-      let rotationReductionStep = 3;
-      let rightRotationDeg = -maxRotationDeg;
-      let leftRotationDeg = maxRotationDeg;
-      
-      function reduceWheelSwing() {
-        if (right) {
-          rightRotationDeg += rotationReductionStep;
-        } else {
-          leftRotationDeg -= rotationReductionStep;
-        }
-        right = !right;
-        
-        setSwingRotationLimits(rightRotationDeg, leftRotationDeg);
-      };
-      
-      function setSwingRotationLimits(rightRotationDeg, leftRotationDeg) {
-        const kf0pct = getCssKeyframe('keyframes', 'swing', '0%');
-        const kf100pct = getCssKeyframe('keyframes', 'swing', '100%');
-        kf0pct.style.rotate = `${rightRotationDeg}deg`;
-        kf100pct.style.rotate = `${leftRotationDeg}deg`;
-      }
-      
-      function getStylesheetRules(styleId) {
-        const sheet = Array.prototype.find.call(document.styleSheets, s => s.ownerNode.id == styleId);
-        return sheet.cssRules || sheet.rules;
-      }
-
-      function getCssRule(styleId, ruleName) {
-        return Array.prototype.find.call(getStylesheetRules(styleId), rule => rule.name == ruleName);
-      }
-
-      function getCssKeyframe(styleId, ruleName, keyText) {
-        const rule = getCssRule(styleId, ruleName);
-        const frames = rule.cssRules || rule.rules;
-        return Array.prototype.find.call(frames, frame => frame.keyText == keyText);
-      }
-
-      function endOfWheelSwing(event) {
-        if (event.animationName == 'swing') {
-          showPortalButton();
-          enter = true;
-          setTimeout(startFall, 3000);
-        }
-      }
-
       function showPortalButton() {
         const container = document.querySelector('.image-container');
         const button = document.createElement('button');
         button.classList.add('door');
         container.appendChild(button);
         button.addEventListener('click', openDoor);
-      }
-
-      function startSwing() { 
-        const wheel = document.querySelector('.wheel');
-        wheel.style.animationPlayState = 'running';
-      }
-
-      function startFall() {
-        enter = false;
-
-        const door = document.querySelector('.door');
-        door.style.zIndex = -1;
-        
-        const wheel = document.querySelector('.wheel');
-        wheel.classList.remove('swingingWheel');
-        wheel.classList.add('fallingWheel');
-      }
-
-      function loaded() {
-        addListeners();
-        // TODO random delay before starting swing, more than 2s, so no one delay in test works. Use setTimeout.
-        startSwing();
-      }
-
-      function addListeners() {
-        const wheel = document.querySelector('.wheel');
-        wheel.addEventListener("animationiteration", reduceWheelSwing);
-        wheel.addEventListener("animationend", endOfWheelSwing);
       }
 
       let hoverTempleCount = 0;
@@ -274,43 +199,43 @@ button.door {
       <img
         src="img/r3-small-pedestal.png"
         alt="Small stone pedestal"
-        class="small-pedestal-1"
+        class="layer2 small-pedestal-1"
       />
 
       <img
         src="img/r3-pot.png"
         alt="Clay pot on top of a small pedestal"
-        class="pot-1"
+        class="layer3 pot-1"
       />
 
       <img
         src="img/r3-small-pedestal.png"
         alt="Another small stone pedestal"
-        class="small-pedestal-2"
+        class="layer2 small-pedestal-2"
       />
 
       <img
         src="img/r3-pot.png"
         alt="Clay pot on top of a small pedestal"
-        class="pot-2"
+        class="layer3 pot-2"
       />
 
       <img
         src="img/r3-column.png"
         alt="Large stone column"
-        class="column"
+        class="layer1 column"
       />
 
       <img
         src="img/r3-large-pedestal.png"
         alt="Large stone pedestal"
-        class="large-pedestal"
+        class="layer2 large-pedestal"
       />
 
       <img
         src="img/r3-pot.png"
         alt="Clay pot on top of a large pedestal"
-        class="pot-3"
+        class="layer3 pot-3"
       />
 
     </div>
