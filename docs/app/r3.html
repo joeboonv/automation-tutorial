@@ -26,20 +26,30 @@
   background-color: black; 
 }
 
-.layer1 {
+.foregroundImage {
+  z-index: 2;
+}
+
+.behindForeground {
   z-index: 1;
   position: absolute;
   object-fit: contain;
 }
 
+.layer1 {
+  z-index: 3;
+  position: absolute;
+  object-fit: contain;
+}
+
 .layer2 {
-  z-index: 2;
+  z-index: 4;
   position: absolute;
   object-fit: contain;
 }
 
 .layer3 {
-  z-index: 3;
+  z-index: 5;
   position: absolute;
   object-fit: contain;
 }
@@ -64,7 +74,7 @@
 
 .column {
   left: 380px;
-  top: 360px;
+  top: 350px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -78,13 +88,61 @@
   animation-play-state: running;
 }
 
+.fallingColumn {
+  left: 380px;
+  top: 350px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: fall;
+  animation-duration: 1400ms;
+  animation-delay: 250ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
 @keyframes wobble {
-        0%   { rotate: 0deg; top: 360px }
-        25%  { rotate: 2deg; top: 359px }
-        50%  { rotate: 0deg; top: 360px }
-        75%  { rotate: -2deg; top: 359px }
-        100% { rotate: 0deg; top: 360px }
-      }
+  0%   { rotate: 0deg; top: 350px }
+  25%  { rotate: 2deg; top: 349px }
+  50%  { rotate: 0deg; top: 350px }
+  75%  { rotate: -2deg; top: 349px }
+  100% { rotate: 0deg; top: 350px }
+}
+
+@keyframes fall {
+  0%   { rotate: 0deg }
+  100% { rotate: 95deg; top: 310px; left: 400px; }
+}
+
+.weight {
+  z-index: 9;
+  position: absolute;
+  font-family: Garamond, serif; 
+  font-weight: bold;
+  font-size: 30px;
+  color: #303030;
+}
+
+#a {
+  left: 149px;
+  top: 480px;
+}
+
+#b {
+  left: 265px;
+  top: 460px;
+}
+
+#c {
+  left: 746px;
+  top: 364px;
+  width: 50px;
+  background-color: wheat;
+  text-align: center;
+}
 
 .pot-1 {
   left: 106px;
@@ -141,10 +199,17 @@ button.door {
     <script language="javascript">
       // TODO Resize images
       // TODO Gwalior,temple, India
-      
+      // TODO roman numerals???
+
 // two blocks with weights
 // text field to create weights
 // button
+
+      function fall() {
+        const column = document.querySelector('.column');
+        column.classList.remove('column');
+        column.classList.add('fallingColumn');
+      }
 
       function showPortalButton() {
         const container = document.querySelector('.image-container');
@@ -152,6 +217,10 @@ button.door {
         button.classList.add('door');
         container.appendChild(button);
         button.addEventListener('click', openDoor);
+      }
+
+      function loaded() { 
+        //const a = 
       }
 
       let hoverTempleCount = 0;
@@ -187,57 +256,91 @@ button.door {
     </script>
   </head>
 
-  <body>
+  <body onload="loaded();">
 
     <div class="image-container">
       <img
         src="img/r3-background.jpg"
-        alt="Temple courtyard"
+        alt="Temple"
         class="fullImage backgroundImage"
-      />
-
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Small stone pedestal"
-        class="layer2 small-pedestal-1"
-      />
-
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer3 pot-1"
-      />
-
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Another small stone pedestal"
-        class="layer2 small-pedestal-2"
-      />
-
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer3 pot-2"
       />
 
       <img
         src="img/r3-column.png"
         alt="Large stone column"
-        class="layer1 column"
+        class="behindForeground column"
       />
+
+      <img
+        src="img/r3-foreground.png"
+        alt="Temple courtyard"
+        class="fullImage foregroundImage"
+      />
+
+      <img
+        src="img/r3-small-pedestal.png"
+        alt="Small stone pedestal"
+        class="layer1 small-pedestal-1"
+      />
+
+      <img
+        src="img/r3-pot.png"
+        alt="Clay pot on top of a small pedestal"
+        class="layer2 pot-1"
+      />
+
+      <span
+        id='a'
+        class='weight'>
+        12
+      </span>
+
+      <img
+        src="img/r3-small-pedestal.png"
+        alt="Another small stone pedestal"
+        class="layer1 small-pedestal-2"
+      />
+
+      <img
+        src="img/r3-pot.png"
+        alt="Clay pot on top of a small pedestal"
+        class="layer2 pot-2"
+      />
+
+      <span
+        id='b'
+        class='weight'>
+        98
+      </span>
 
       <img
         src="img/r3-large-pedestal.png"
         alt="Large stone pedestal"
-        class="layer2 large-pedestal"
+        class="layer1 large-pedestal"
       />
 
       <img
         src="img/r3-pot.png"
         alt="Clay pot on top of a large pedestal"
-        class="layer3 pot-3"
+        class="layer2 pot-3"
       />
 
+      <from
+        action="">
+
+      <input
+        id='c'
+        class='weight'
+        type="text"
+        size="3"
+        required="true"
+        placeholder="???"
+        autofocus
+        autocomplete="off"
+       />
+
+      </form>
+      
     </div>
     
     <br/>
