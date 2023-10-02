@@ -224,22 +224,17 @@ button.door {
         // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
       }
 
-      // let hoverDoorCount = 0;
-      function hoverDoor() {
-        // hoverDoorCount++;
-        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
-      }
-
       function openDoor(event) {
         if (!enter) {
-          window.alert('The stone is blocking the door');
+          window.alert('The stone is blocking the door.');
           return;
         }
 
         if (isHuman()) {
           window.alert('Looks like this is they way through, but we need to send something smaller.');
         } else {
-          window.alert('Entering the ancient temple');
+          window.alert('Going through the door.');
+          window.location.href = 'r3.html';
         }
         // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
         // window.alert("openDoor " + event.x + " " + event.y);
@@ -261,18 +256,21 @@ button.door {
     <div class="image-container">
       <img
         src="img/r2-background.png"
+        onmousemove="hoverTemple();"
         alt="Underground door"
         class="fullImage backgroundImage"
       />
 
       <img
         src="img/r2b-wheel.gif"
+        onmousemove="hoverTemple();"
         alt="rotating stone wheel showing the mayan calendar"
         class="wheel swingingWheel"
       />
 
       <img
         src="img/r2-foreground.png"
+        onmousemove="hoverTemple();"
         alt="Underground foyer"
         class="fullImage foregroundImage"
       />
