@@ -9,7 +9,6 @@
   display: flex;
   justify-content: center;
   margin: auto;
-  overflow: hidden;
 }
 
 .fullImage {
@@ -20,57 +19,21 @@
   padding: 0px;
   margin: 0px;
   border: none;
-  object-fit: cover;
-}
-
-#sun {
-  z-index: -101;
-  height: 563px;
-}
-
-.sunrise {
-  animation-name: sunrise;
-  animation-duration: 3500ms;
-  animation-delay: 2250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: 0% 100%;
-}
-
-@keyframes sunrise {
-  100% { top: -120; rotate: -8deg}
 }
 
 .backgroundImage {
   z-index: -99;
-  opacity: 0;
-}
-
-#firmament {
-  z-index: -98;
-  height: 563px;
-}
-
-.skyfall {
-  animation-name: fadeAway;
-  animation-duration: 3000ms;
-  animation-delay: 250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-}
-
-@keyframes fadeAway {
-  100% { opacity: 0; }
+  background-color: black; 
 }
 
 .foregroundImage {
   z-index: 2;
+}
+
+.behindForeground {
+  z-index: 1;
+  position: absolute;
+  object-fit: contain;
 }
 
 .layer1 {
@@ -109,6 +72,51 @@
   height: 200px;
 }
 
+.column {
+  left: 380px;
+  top: 350px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: wobble;
+  animation-duration: 400ms;
+  animation-delay: 1s;
+  animation-iteration-count: 3;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.fallingColumn {
+  left: 380px;
+  top: 350px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: fall;
+  animation-duration: 1400ms;
+  animation-delay: 250ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes wobble {
+  0%   { rotate: 0deg; top: 350px }
+  25%  { rotate: 2deg; top: 349px }
+  50%  { rotate: 0deg; top: 350px }
+  75%  { rotate: -2deg; top: 349px }
+  100% { rotate: 0deg; top: 350px }
+}
+
+@keyframes fall {
+  0%   { rotate: 0deg }
+  100% { rotate: 95deg; top: 310px; left: 400px; }
+}
+
 .weight {
   z-index: 9;
   position: absolute;
@@ -129,7 +137,7 @@
 }
 
 #c {
-  left: 743px;
+  left: 746px;
   top: 364px;
   width: 50px;
   background-color: wheat;
@@ -184,15 +192,15 @@ button.door {
       // TODO Resize images
       // TODO Gwalior,temple, India
       // TODO roman numerals???
-      // TODO: make them submit the form?
-      // TODO: two blocks with weights, and they shift down or align, or on scales, or shift and two semi-circle holes align??
 
-      function reveal() {
-        const sky = document.querySelector('#firmament');
-        sky.classList.add('skyfall');
+// two blocks with weights
+// text field to create weights
+// button
 
-        const sun = document.querySelector('#sun');
-        sun.classList.add('sunrise');
+      function fall() {
+        const column = document.querySelector('.column');
+        column.classList.remove('column');
+        column.classList.add('fallingColumn');
       }
 
       function showPortalButton() {
@@ -203,33 +211,8 @@ button.door {
         button.addEventListener('click', openDoor);
       }
 
-      function showTemple() {
-        // Only show temple when everything else is loaded to there is no spoiler
-        const temple = document.querySelector('.backgroundImage');
-        temple.style.opacity = 1;
-      }
-
-      let a = 0;
-      let b = 0;
-      let c = 999;
-
       function loaded() { 
-        showTemple();
-        a = Math.round(Math.random() * 89) + 10;
-        b = Math.round(Math.random() * 89) + 10;
-        spanA = document.querySelector('#a');
-        spanB = document.querySelector('#b');
-        spanA.textContent = a;
-        spanB.textContent = b;
-      }
-
-      function checkAnswer(el) {
-        const c = Number(el.value);
-        const expectedAnswer = a + b;
-        if (c == expectedAnswer) {
-          el.style.visibility = "hidden";
-          reveal();
-        }
+        //const a = 
       }
 
       let hoverTempleCount = 0;
@@ -270,23 +253,22 @@ button.door {
     <div class="image-container">
       <!-- TODO Merge sky into background when the game size is decided, and remove this separate element -->
       <img
-        id="sun"
-        src="img/r3-sky.png"
+        src="img/r3-sky-todo-merge-with-background.png"
         alt="Blue sky with sun"
-        class="fullImage"
+        class="fullImage backgroundImage"
+        style="z-index: -10;"
       />
 
       <img
-        src="img/r3-background.png"
+        src="img/r3-background.jpg"
         alt="Temple"
         class="fullImage backgroundImage"
       />
 
       <img
-        id="firmament"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
+        src="img/r3-column.png"
+        alt="Large stone column"
+        class="behindForeground column"
       />
 
       <img
@@ -317,7 +299,6 @@ button.door {
         src="img/r3-small-pedestal.png"
         alt="Another small stone pedestal"
         class="layer1 small-pedestal-2"
-        onclick="reveal();"
       />
 
       <img
@@ -356,7 +337,6 @@ button.door {
         placeholder="??"
         autofocus
         autocomplete="off"
-        oninput="checkAnswer(this)"
        />
 
       </form>
