@@ -134,7 +134,7 @@
   transform-origin: 50% 90%;
   rotate: 0deg;
   animation-name: swayRight, swayAcross, swayCentre;
-  animation-duration: 900ms, 1000ms, 500ms;
+  animation-duration: 900ms, 1000ms, 300ms;
   animation-delay: 5ms, 905ms, 5905ms;
   animation-iteration-count: 1, 5, 1;
   animation-direction: normal, alternate, normal;
@@ -142,8 +142,10 @@
   animation-play-state: running, running, running;
 }
 
+/* This is very useful: https://cubic-bezier.com/ */
+
 @keyframes swayRight {
-  0% { rotate: 0deg; top: 350px; left: 380px; animation-timing-function: cubic-bezier(.18,.53,.79,.91) }
+  0% { rotate: 0deg; top: 350px; left: 380px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
   100% { rotate: 20deg; top: 340px; left: 382px; }
 }
 
@@ -284,7 +286,6 @@ button.door {
       }
 
       function loaded() { 
-        //const a = 
       }
 
       let hoverTempleCount = 0;
@@ -361,12 +362,6 @@ button.door {
         class="layer2 pot-1"
       />
 
-      <span
-        id='a'
-        class='weight'>
-        12
-      </span>
-
       <img
         src="img/r3-small-pedestal.png"
         alt="Another small stone pedestal"
@@ -378,12 +373,6 @@ button.door {
         alt="Clay pot on top of a small pedestal"
         class="layer2 pot-2"
       />
-
-      <span
-        id='b'
-        class='weight'>
-        98
-      </span>
 
       <img
         src="img/r3-large-pedestal.png"
