@@ -50,7 +50,9 @@
 }
     </style>
     <script language="javascript">
-      // TODO Fix scrollbars in Cypress
+      // TODO Fix scrollbars in Cypress - Cypress sets the width to 1000px and the height to 660px by default.
+      //        https://docs.cypress.io/api/commands/viewport
+      //        move the attribution to a welcome / launch page?
       // TODO Allow it to work in mobile
       // TODO Add sounds?
       // TODO resize photos
@@ -88,7 +90,9 @@
       }
 
       function bodyLoad() {
-        setTimeout(showtempleDoorButton, 3000);
+        // Don't appear immediately, but within the cypress default command timeout of 4000ms.
+        window.Cypress.stop();
+        setTimeout(showtempleDoorButton, 2000);
       }
 
       function showtempleDoorButton() {
