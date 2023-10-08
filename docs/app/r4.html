@@ -2,10 +2,14 @@
   <head>
     <title>Ancient Temple of Ocypress</title>
     <style>
+body {
+  margin: 0px;
+}
+
 .image-container {
   position: relative;
   width: 1000px;
-  height: 662px;
+  height: 660px;
   display: flex;
   justify-content: center;
   margin: auto;
@@ -230,8 +234,20 @@ button.door {
 }
 
     </style>
+    <!-- TODO remove one at a time and see which we don't need -->
+    <script src="https://cdn.jsdelivr.net/npm/d3-dispatch@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-quadtree@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-timer@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-shape@3"></script>
+    <script src= "https://d3js.org/d3.v4.min.js"></script>  
+    <script src= "https://d3js.org/d3-color.v1.min.js"></script>  
+    <script src= "https://d3js.org/d3-interpolate.v1.min.js"></script>  
+    <script src= "https://d3js.org/d3-scale-chromatic.v1.min.js"></script>  
+    <script lang="javascript">
 
-    <script language="javascript">
+
 // TODO image attribution
 
 
@@ -301,6 +317,7 @@ d3.select(document)
     cable.datum({ nodes, sim });
     i++;
   })
+
   .on("mousemove", (mouseEvent) => {
     if (cable) {
       const { nodes, sim } = cable.datum();
@@ -459,14 +476,5 @@ d3.select(document)
       />
       
     </div>
-    
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    
-    <p>Photo by Arun Varadarajan on <a href="https://commons.wikimedia.org/wiki/Category:Large_Underground_Temple#/media/File:Underground_Siva_Temple.JPG">Wikimedia</a>.
-      <a href="https://commons.wikimedia.org/wiki/File:Underground_Siva_Temple.JPG">Licence.</a>
-    </p>
   </body>
 </html>
