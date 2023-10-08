@@ -11,7 +11,7 @@ title: Welcome to the Temple of Ocypress
 
 ## Use Cypress to navigate temple courtyards and underground chambers
 
-:leaf: [Start here][r1.html]
+:flashlight: [Start here](r1.html)
 
 ____
 
