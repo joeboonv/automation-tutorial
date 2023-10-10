@@ -35,7 +35,7 @@ body {
 
 @keyframes zoom {
   0% { scale: 1.0; opacity: 1.0; }
-  100% { scale: 3.0; opacity: 0.5; }
+  100% { scale: 3.0; opacity: 0.2; }
 }
 
 .templeDoorButton {
@@ -57,16 +57,16 @@ body {
   color: #272626;
 }
 
-.animated-button-dark {
+.animatedButtonDark {
   background-color: #00000000;
   animation: darkToStone 8s infinite;
   animation-play-state: paused;
 }
 
 @keyframes darkToStone {
-  0% {background-color: #10111170;}
-  50% {background-color: #c8b48c33;}
-  100% {background-color: #10111170;}
+  0% { background-color: #10111170; }
+  50% { background-color: #c8b48c33; }
+  100% { background-color: #10111170; }
 }
     </style>
 
@@ -80,13 +80,6 @@ body {
       let hoverTempleCount = 0;
       function hoverTemple() {
         hoverTempleCount++;
-        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
-      }
-
-      // let hoverDoorCount = 0;
-      function hoverDoor() {
-        // hoverDoorCount++;
-        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
       }
 
       function openDoor(event) {
@@ -96,23 +89,19 @@ body {
           window.alert('Entering the ancient temple');
           zoomAndNavigate('r2.html');
         }
-        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
-        // window.alert("openDoor " + event.x + " " + event.y);
       }
 
       function zoomAndNavigate(href) {
-        let door = document.getElementById('templeDoor');
+        const door = document.getElementById('templeDoor');
+        door.classList.remove('animatedButtonDark');
         door.style.visibility = 'hidden';
 
-        let temple = document.getElementById('temple');
-        
+        const temple = document.getElementById('temple');
         temple.addEventListener("animationend", () => {
           window.location.href = href;
         });
-
         temple.classList.add('zoomBackground');
       }
-
 
       function isHuman() {
         return hoverTempleCount > 3 || !isCypressRunning();
@@ -136,8 +125,6 @@ body {
   </head>
 
   <body onload="bodyLoad();">
-    <!-- <p id="info">Info</p>   -->
-
     <div class="image-container">
       <img
         id="temple"
@@ -146,15 +133,14 @@ body {
         alt="Ancient template with an open door"
         class="fullImage"
       />
+
       <button
         id="templeDoor"
-        class="templeDoorButton animated-button-dark"
-        onmousemove="hoverDoor();"
+        class="templeDoorButton animatedButtonDark"
         onclick="openDoor(event);"
       >
         .
       </button>
     </div>
-
   </body>
 </html>

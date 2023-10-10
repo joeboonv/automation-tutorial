@@ -94,6 +94,15 @@ button.door {
   transform-origin: center;
 }
 
+.zoomBackground {
+  animation-name: zoom;
+  transform-origin: 50% 35%;
+  animation-duration: 2s;
+  animation-delay: 250ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
     </style>
 
     <style id="keyframes">
@@ -113,6 +122,11 @@ button.door {
         25% { top: 50px; }
         30% { top: 55px; }
         100% { rotate: -25deg; top: 55px; left: -100px }
+      }
+
+      @keyframes zoom {
+        0% { scale: 1.0; opacity: 1.0; }
+        100% { scale: 5.0; opacity: 0.2; }
       }
     </style>
 
@@ -165,20 +179,23 @@ button.door {
         return Array.prototype.find.call(frames, frame => frame.keyText == keyText);
       }
 
+      let fallTimer = null;
+
       function endOfWheelSwing(event) {
         if (event.animationName == 'swing') {
           showPortalButton();
+          fallTimer = setTimeout(startFall, DURATION_BUTTON_IS_AVAILABLE_MS);
           enter = true;
-          setTimeout(startFall, DURATION_BUTTON_IS_AVAILABLE_MS);
         }
       }
 
       function showPortalButton() {
-        const container = document.querySelector('.image-container');
+        const container = document.getElementById('temple');
         const button = document.createElement('button');
+        button.id = 'templeDoor';
         button.classList.add('door');
-        container.appendChild(button);
         button.addEventListener('click', openDoor);
+        container.appendChild(button);
       }
 
       function startSwing() { 
@@ -239,10 +256,27 @@ button.door {
           window.alert('Looks like this is the way through, but you need to send something smaller.');
         } else {
           window.alert('Going through the door.');
-          window.location.href = 'r3.html';
+          zoomAndNavigate('r3.html');
         }
-        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
-        // window.alert("openDoor " + event.x + " " + event.y);
+      }
+
+      function zoomAndNavigate(href) {
+        
+        // Cancel wheel fall
+        clearTimeout(fallTimer);
+
+        // Cancel any animations
+        const wheel = document.querySelector('.wheel');
+        wheel.style.animationPlayState = 'paused';    
+        
+        const door = document.getElementById('templeDoor');
+        door.style.visibility = 'hidden';
+
+        const temple = document.getElementById('temple');
+        temple.addEventListener("animationend", () => {
+          window.location.href = href;
+        });
+        temple.classList.add('zoomBackground');
       }
 
       function isHuman() {
@@ -259,29 +293,32 @@ button.door {
   <body onload="javascript:loaded();">
 
     <div class="image-container">
-      <img
-        src="img/r2-background.png"
-        onmousemove="hoverTemple();"
-        alt="Underground door"
-        class="fullImage backgroundImage"
-      />
+      <div id="temple" class="image-container">
+        
+        <img
+          src="img/r2-background.png"
+          onmousemove="hoverTemple();"
+          alt="Underground door"
+          class="fullImage backgroundImage"
+        />
 
-      <img
-        src="img/r2b-wheel.gif"
-        onmousemove="hoverTemple();"
-        alt="rotating stone wheel showing the mayan calendar"
-        class="wheel swingingWheel"
-      />
+        <img
+          src="img/r2b-wheel.gif"
+          onmousemove="hoverTemple();"
+          alt="rotating stone wheel showing the mayan calendar"
+          class="wheel swingingWheel"
+        />
 
-      <img
-        src="img/r2-foreground.png"
-        onmousemove="hoverTemple();"
-        alt="Underground foyer"
-        class="fullImage foregroundImage"
-      />
-
+        <img
+          src="img/r2-foreground.png"
+          onmousemove="hoverTemple();"
+          alt="Underground foyer"
+          class="fullImage foregroundImage"
+        />
+    </div>
+      
       <!-- Button goes here -->
-
+      
     </div>
   </body>
 </html>
