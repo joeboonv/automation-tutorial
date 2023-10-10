@@ -23,6 +23,21 @@ body {
   border: none;
 }
 
+.zoomBackground {
+  animation-name: zoom;
+  transform-origin: 90% 70%;
+  animation-duration: 2s;
+  animation-delay: 250ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes zoom {
+  0% { scale: 1.0; opacity: 1.0; }
+  100% { scale: 3.0; opacity: 0.5; }
+}
+
 .templeDoorButton {
   visibility: hidden;
   position: absolute;
@@ -54,14 +69,13 @@ body {
   100% {background-color: #10111170;}
 }
     </style>
+
     <script language="javascript">
-      // TODO Fix scrollbars in Cypress - Cypress sets the width to 1000px and the height to 660px by default.
-      //        https://docs.cypress.io/api/commands/viewport
-      //        move the attribution to a welcome / launch page?
       // TODO Allow it to work in mobile
       // TODO Add sounds?
-      // TODO resize photos
       // TODO Change from .html to r1/index.html, and add index.html to the top level
+      // TODO Add zoom to other levels
+      // TODO Add CyBot / Val moving around 
 
       let hoverTempleCount = 0;
       function hoverTemple() {
@@ -80,11 +94,25 @@ body {
           window.alert('You are too tall to fit into that small door. Please send CyBot in there.');
         } else {
           window.alert('Entering the ancient temple');
-          window.location.href = 'r2.html';
+          zoomAndNavigate('r2.html');
         }
         // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
         // window.alert("openDoor " + event.x + " " + event.y);
       }
+
+      function zoomAndNavigate(href) {
+        let door = document.getElementById('templeDoor');
+        door.style.visibility = 'hidden';
+
+        let temple = document.getElementById('temple');
+        
+        temple.addEventListener("animationend", () => {
+          window.location.href = href;
+        });
+
+        temple.classList.add('zoomBackground');
+      }
+
 
       function isHuman() {
         return hoverTempleCount > 3 || !isCypressRunning();
@@ -112,6 +140,7 @@ body {
 
     <div class="image-container">
       <img
+        id="temple"
         src="img/r1-background.png"
         onmousemove="hoverTemple();"
         alt="Ancient template with an open door"
