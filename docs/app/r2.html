@@ -273,10 +273,10 @@ button.door {
         door.style.visibility = 'hidden';
 
         const temple = document.getElementById('temple');
-        temple.addEventListener("animationend", () => {
-          window.location.href = href;
-        });
         temple.classList.add('zoomBackground');
+        temple.addEventListener("animationend", () => {
+          window.location.assign(href);
+        });
       }
 
       function isHuman() {

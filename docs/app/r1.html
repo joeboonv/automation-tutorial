@@ -98,7 +98,7 @@ body {
 
         const temple = document.getElementById('temple');
         temple.addEventListener("animationend", () => {
-          window.location.href = href;
+          window.location.assign(href);
         });
         temple.classList.add('zoomBackground');
       }
