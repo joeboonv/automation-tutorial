@@ -66,7 +66,7 @@ body {
   object-fit: contain;
 }
 
-.small-pedestal-1 {
+/* .small-pedestal-1 {
   left: 105px;
   top: 550px;
   height: 110px;
@@ -76,7 +76,7 @@ body {
   left: 220px;
   top: 530px;
   height: 110px;
-}
+} */
 
 .large-pedestal {
   left: 710px;
@@ -191,7 +191,7 @@ body {
   text-align: center;
 }
 
-.pot-1 {
+/* .pot-1 {
   left: 106px;
   top: 463px;
   width: 110px;
@@ -201,7 +201,7 @@ body {
   left: 222px;
   top: 443px;
   width: 110px;
-}
+} */
 
 .pot-3 {
   left: 694px;
@@ -209,7 +209,7 @@ body {
   width: 145px;
 }
 
-button.door {
+/* button.door {
   cursor: pointer;
   position: absolute;
   z-index: 2;
@@ -231,7 +231,7 @@ button.door {
   animation-fill-mode: forwards;
   animation-play-state: running;
   transform-origin: center;
-}
+} */
 
     </style>
     <!-- TODO remove one at a time and see which we don't need -->
@@ -386,13 +386,6 @@ d3.select(document)
       let hoverTempleCount = 0;
       function hoverTemple() {
         hoverTempleCount++;
-        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
-      }
-
-      // let hoverDoorCount = 0;
-      function hoverDoor() {
-        // hoverDoorCount++;
-        // document.getElementById('info').innerHTML = "hoverDoor " + hoverDoorCount;
       }
 
       function openDoor(event) {
@@ -401,8 +394,6 @@ d3.select(document)
         } else {
           window.alert('Entering the ancient temple');
         }
-        // document.getElementById('info').innerHTML = "openDoor " + event.x + " " + event.y;
-        // window.alert("openDoor " + event.x + " " + event.y);
       }
 
       function isHuman() {
@@ -434,17 +425,17 @@ d3.select(document)
       />
 
       <img
-        src="img/r3-column.png"
+        src="img/r4-column.png"
         alt="Large stone column"
         class="behindForeground column"
       />
 
       <img
-        src="img/r3-foreground.png"
+        src="img/r4-foreground.png"
         alt="Temple courtyard"
         class="fullImage foregroundImage"
       />
-
+<!-- 
       <img
         src="img/r3-small-pedestal.png"
         alt="Small stone pedestal"
@@ -467,7 +458,7 @@ d3.select(document)
         src="img/r3-pot.png"
         alt="Clay pot on top of a small pedestal"
         class="layer2 pot-2"
-      />
+      /> -->
 
       <img
         src="img/r3-large-pedestal.png"

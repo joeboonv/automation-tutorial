@@ -15,6 +15,17 @@ title: Welcome to the Temple of Ocypress
 
 ____
 
+## Shortcuts
+
+[r1](r1.html) - get + click
+[r2](r2.html)  .  [r2b](r2b.html) - get with longer timeout + click
+[r3](r3.html) - async calculations + text field - remove when replicated elsewhere?
+[r4](r4.html) - drag - in progress
+[r3](r5.html) - each - in progress
+
+
+____
+
 ## Acknowledgements
 
 ### Images
