@@ -73,6 +73,21 @@ body {
   100% { opacity: 0; }
 }
 
+.zoomBackground {
+  animation-name: zoom;
+  transform-origin: 50% 58%;
+  animation-duration: 2s;
+  animation-delay: 6000ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes zoom {
+  0% { scale: 1.0; opacity: 1.0; }
+  100% { scale: 5.0; opacity: 0.2; }
+}
+
 .foregroundImage {
   z-index: 2;
 }
@@ -116,51 +131,23 @@ body {
   100% { top: 400px; scale: 0.5; z-index: -70; left: -40; }
 }
 
-/* button.door {
-  cursor: pointer;
-  position: absolute;
-  z-index: 2;
-  left: 476px;
-  top: 129px;
-  height: 13px;
-  width: 51px;
-  background-color:  whitesmoke;
-  border-style: none;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 10px wheat;
-  opacity: 0%;
-  animation-name: fadeIn90;
-  animation-duration: 1s;
-  animation-delay: 100ms;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: center;
-} */
-
     </style>
 
     <script language="javascript">
       // TODO: *** Human protection ***- check wrongClicks == 0 + hover
-      // TODO Resize images
 
-      function reveal() {
+      function zoomAndNavigate(href) {
         const sky = document.querySelector('#firmament');
         sky.classList.add('skyfall');
 
         const sun = document.querySelector('#sun');
         sun.classList.add('sunrise');
-      }
 
-      // function showPortalButton() {
-      //   const container = document.querySelector('.image-container');
-      //   const button = document.createElement('button');
-      //   button.classList.add('door');
-      //   container.appendChild(button);
-      //   button.addEventListener('click', openDoor);
-      // }
+        const cropFrame = document.getElementById('cropFrame');
+        cropFrame.classList.add('zoomBackground');
+
+        setTimeout(() => window.location.assign(href), 8000);
+      }
 
       function showTemple() {
         // Only show temple when everything else is loaded to there is no spoiler
@@ -260,8 +247,8 @@ body {
         const countBeforeDelete = block.parentNode.childElementCount;
         block.parentNode.removeChild(block);
         if (countBeforeDelete == 1) { 
-          // Last block was removed
-          reveal();
+          // Last block was removed, puzzle solved
+          zoomAndNavigate();
         }
       }
 
@@ -271,10 +258,13 @@ body {
       }
 
       function openDoor(event) {
-        if (isHuman() || wrongClicks > 0) {
-          window.alert('Looks like this is they way through, but we need to send something smaller.');
+        if (isHuman()) {
+          window.alert('You pushed the blocks but it needs a machine to push them further.');
+        } else if (wrongClicks > 0) {
+          window.alert('The blocks were pushed in the wrong order.')
         } else {
-          window.alert('Entering the ancient temple');
+          window.alert('The adventure continues!');
+          zoomAndNavigate('r6.html');
         }
       }
 
@@ -292,37 +282,41 @@ body {
   <body onload="loaded();">
 
     <div class="image-container">
-      <!-- TODO Merge sky into background when the game size is decided, and remove this separate element -->
-      <img
-        id="sun"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
-      />
+      <div id="cropFrame" class="image-container">
 
-      <img
-        src="img/r3-background.png"
-        alt="Temple"
-        class="fullImage backgroundImage"
-      />
+        <img
+          id="sun"
+          src="img/r3-sky.png"
+          alt="Blue sky with sun"
+          class="fullImage"
+        />
 
-      <img
-        id="firmament"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
-      />
+        <img
+          src="img/r3-background.png"
+          alt="Temple"
+          onmousemove="hoverTemple();"
+          class="fullImage backgroundImage"
+        />
 
-      <img
-        src="img/r3-foreground.png"
-        alt="Temple courtyard"
-        class="fullImage foregroundImage"
-      />
+        <img
+          id="firmament"
+          src="img/r3-sky.png"
+          alt="Blue sky with sun"
+          class="fullImage"
+        />
 
-      <ol class="blocks">
+        <img
+          src="img/r3-foreground.png"
+          alt="Temple courtyard"
+          onmousemove="hoverTemple();"
+          class="fullImage foregroundImage"
+        />
 
-      </ol>
-      
+        <ol class="blocks">
+
+        </ol>
+        
+      </div>
     </div>
   </body>
 </html>

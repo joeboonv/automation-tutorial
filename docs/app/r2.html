@@ -131,11 +131,6 @@ button.door {
     </style>
 
     <script language="javascript">
-      // TODO Resize images
-      // TODO Random delay before swing, or random swing duration, so a flat delay can't hit the button
-      // TODO Add hover listeners from r1 so we know if human (test it by taking out Cypress check or creating window.Cypress)
-      // TODO recolour wheel?
-      // TODO Glowing Cybot moving around?
 
       const DURATION_BUTTON_IS_AVAILABLE_MS = 3000;
 
@@ -199,15 +194,16 @@ button.door {
       }
 
       function startSwing() { 
-        const wheel = document.querySelector('.wheel');
-        const animationSwings = window.getComputedStyle(wheel).animationIterationCount;
-        const cypressDefaultCommandTimeoutMs = 4000;
+        // Random swing duration, so a flat delay in the test can't hit the button every time
         // Cypress default defaultCommandTimeout is 4s - https://docs.cypress.io/guides/references/configuration#Options
         // Swing duration should be more than 4s, so a normal cy.get().click() won't work.
         // Swing duration should vary randomly by more than Cypress defaultCommandTimeout, 
         // so the test can't just wait a certain time and then click.
         // Slower looks better, but total time shouldn't be too long, otherwise it takes ages to 
         // replay the test to get to the next page.
+        const wheel = document.querySelector('.wheel');
+        const animationSwings = window.getComputedStyle(wheel).animationIterationCount;
+        const cypressDefaultCommandTimeoutMs = 4000;
         const maximumRandomSwingVariationMs = cypressDefaultCommandTimeoutMs * 2;
         const swingDurationMs = Math.random() * maximumRandomSwingVariationMs;
         const totalSwingDuration = cypressDefaultCommandTimeoutMs + swingDurationMs;
@@ -230,7 +226,6 @@ button.door {
 
       function loaded() {
         addListeners();
-        // TODO random delay before starting swing, more than 2s, so no one delay in test works. Use setTimeout.
         startSwing();
       }
 
@@ -243,7 +238,6 @@ button.door {
       let hoverTempleCount = 0;
       function hoverTemple() {
         hoverTempleCount++;
-        // document.getElementById('info').innerHTML = "hoverTemple " + hoverTempleCount;
       }
 
       function openDoor(event) {
@@ -261,7 +255,6 @@ button.door {
       }
 
       function zoomAndNavigate(href) {
-        
         // Cancel wheel fall
         clearTimeout(fallTimer);
 

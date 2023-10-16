@@ -172,36 +172,10 @@ body {
   top: 339px;
   width: 145px;
 }
-
-/* button.door {
-  cursor: pointer;
-  position: absolute;
-  z-index: 2;
-  left: 476px;
-  top: 129px;
-  height: 13px;
-  width: 51px;
-  background-color:  whitesmoke;
-  border-style: none;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 10px wheat;
-  opacity: 0%;
-  animation-name: fadeIn90;
-  animation-duration: 1s;
-  animation-delay: 100ms;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: center;
-} */
-
     </style>
 
     <script language="javascript">
-      // TODO: *** Human protection ***
-      // TODO Resize images
+      // TODO Change scene background and reveal so level 5 can use this one. Use Sand to reveal a door?
       // TODO roman numerals???
       // TODO: make them submit the form?
       // TODO: two blocks with weights, and they shift down or align, or on scales, or shift and two semi-circle holes align??
@@ -218,14 +192,6 @@ body {
 
         setTimeout(() => window.location.assign(href), 8000);
       }
-
-      // function showPortalButton() {
-      //   const container = document.querySelector('.image-container');
-      //   const button = document.createElement('button');
-      //   button.classList.add('door');
-      //   container.appendChild(button);
-      //   button.addEventListener('click', openDoor);
-      // }
 
       function showTemple() {
         // Only show temple when everything else is loaded to there is no spoiler
@@ -266,7 +232,7 @@ body {
           window.alert('Right answer. But you tripped a boobytrap. Try using a robot.');
         } else {
           window.alert('Entering the room.');
-          // TODO Navigate to r4 when ready
+          // TODO Navigate to r4 when that room is ready
           zoomAndNavigate('r5.html');
         }
       }
