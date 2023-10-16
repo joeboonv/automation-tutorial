@@ -135,6 +135,7 @@ body {
 
     <script language="javascript">
       // TODO: *** Human protection ***- check wrongClicks == 0 + hover
+      // TODO: ? Change to pushing blocks to one side by clicking on them, and if human, only move it a little way, and say "You are too puny to move thoe stones. Send a robot probe."
 
       function zoomAndNavigate(href) {
         const sky = document.querySelector('#firmament');
@@ -240,6 +241,11 @@ body {
           removeBlock(block);
         } else {
           wrongClicks++;
+          if (addingBlocks) {
+            console.log('Cannot move blocks while they are being built.');
+          } else {
+            console.log('Cannot move that block, it is too heavy with others on top of it. Try moving the top block.');
+          }
         }
       }
 
