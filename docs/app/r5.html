@@ -242,9 +242,9 @@ body {
         } else {
           wrongClicks++;
           if (addingBlocks) {
-            console.log('Cannot move blocks while they are being built.');
+            window.alert('Cannot move blocks while they are being built.');
           } else {
-            console.log('Cannot move that block, it is too heavy with others on top of it. Try moving the top block.');
+            window.alert('Cannot move that block, it is too heavy with others on top of it. Try moving the top block.');
           }
         }
       }
