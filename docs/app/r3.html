@@ -73,6 +73,21 @@ body {
   100% { opacity: 0; }
 }
 
+.zoomBackground {
+  animation-name: zoom;
+  transform-origin: 50% 58%;
+  animation-duration: 2s;
+  animation-delay: 6000ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes zoom {
+  0% { scale: 1.0; opacity: 1.0; }
+  100% { scale: 5.0; opacity: 0.2; }
+}
+
 .foregroundImage {
   z-index: 2;
 }
@@ -158,7 +173,7 @@ body {
   width: 145px;
 }
 
-button.door {
+/* button.door {
   cursor: pointer;
   position: absolute;
   z-index: 2;
@@ -180,7 +195,7 @@ button.door {
   animation-fill-mode: forwards;
   animation-play-state: running;
   transform-origin: center;
-}
+} */
 
     </style>
 
@@ -191,21 +206,26 @@ button.door {
       // TODO: make them submit the form?
       // TODO: two blocks with weights, and they shift down or align, or on scales, or shift and two semi-circle holes align??
 
-      function reveal() {
+      function zoomAndNavigate(href) {
         const sky = document.querySelector('#firmament');
         sky.classList.add('skyfall');
 
         const sun = document.querySelector('#sun');
         sun.classList.add('sunrise');
+
+        const cropFrame = document.getElementById('cropFrame');
+        cropFrame.classList.add('zoomBackground');
+
+        setTimeout(() => window.location.assign(href), 8000);
       }
 
-      function showPortalButton() {
-        const container = document.querySelector('.image-container');
-        const button = document.createElement('button');
-        button.classList.add('door');
-        container.appendChild(button);
-        button.addEventListener('click', openDoor);
-      }
+      // function showPortalButton() {
+      //   const container = document.querySelector('.image-container');
+      //   const button = document.createElement('button');
+      //   button.classList.add('door');
+      //   container.appendChild(button);
+      //   button.addEventListener('click', openDoor);
+      // }
 
       function showTemple() {
         // Only show temple when everything else is loaded to there is no spoiler
@@ -232,7 +252,7 @@ button.door {
         const expectedAnswer = a + b;
         if (c == expectedAnswer) {
           el.style.visibility = "hidden";
-          reveal();
+          setTimeout(openDoor, 500);
         }
       }
 
@@ -241,11 +261,13 @@ button.door {
         hoverTempleCount++;
       }
 
-      function openDoor(event) {
+      function openDoor() {
         if (isHuman()) {
-          window.alert('Looks like this is they way through, but we need to send something smaller.');
+          window.alert('Right answer. But you tripped a boobytrap. Try using a robot.');
         } else {
-          window.alert('Entering the ancient temple');
+          window.alert('Entering the room.');
+          // TODO Navigate to r4 when ready
+          zoomAndNavigate('r5.html');
         }
       }
 
@@ -263,97 +285,101 @@ button.door {
   <body onload="loaded();">
 
     <div class="image-container">
-      <!-- TODO Merge sky into background when the game size is decided, and remove this separate element -->
-      <img
-        id="sun"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
-      />
+      <div id="cropFrame" class="image-container">
 
-      <img
-        src="img/r3-background.png"
-        alt="Temple"
-        class="fullImage backgroundImage"
-      />
+        <img
+          id="sun"
+          src="img/r3-sky.png"
+          alt="Blue sky with sun"
+          class="fullImage"
+        />
 
-      <img
-        id="firmament"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
-      />
+        <img
+          src="img/r3-background.png"
+          alt="Temple"
+          onmousemove="hoverTemple();"
+          class="fullImage backgroundImage"
+        />
 
-      <img
-        src="img/r3-foreground.png"
-        alt="Temple courtyard"
-        class="fullImage foregroundImage"
-      />
+        <img
+          id="firmament"
+          src="img/r3-sky.png"
+          alt="Blue sky with sun"
+          class="fullImage"
+        />
 
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Small stone pedestal"
-        class="layer1 small-pedestal-1"
-      />
+        <img
+          src="img/r3-foreground.png"
+          alt="Temple courtyard"
+          onmousemove="hoverTemple();"
+          class="fullImage foregroundImage"
+        />
 
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer2 pot-1"
-      />
+        <img
+          src="img/r3-small-pedestal.png"
+          alt="Small stone pedestal"
+          class="layer1 small-pedestal-1"
+        />
 
-      <span
-        id='a'
-        class='weight'>
-      </span>
+        <img
+          src="img/r3-pot.png"
+          alt="Clay pot on top of a small pedestal"
+          class="layer2 pot-1"
+        />
 
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Another small stone pedestal"
-        class="layer1 small-pedestal-2"
-        onclick="reveal();"
-      />
+        <span
+          id='a'
+          class='weight'>
+        </span>
 
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer2 pot-2"
-      />
+        <img
+          src="img/r3-small-pedestal.png"
+          alt="Another small stone pedestal"
+          class="layer1 small-pedestal-2"
+          onclick="reveal();"
+        />
 
-      <span
-        id='b'
-        class='weight'>
-      </span>
+        <img
+          src="img/r3-pot.png"
+          alt="Clay pot on top of a small pedestal"
+          class="layer2 pot-2"
+        />
 
-      <img
-        src="img/r3-large-pedestal.png"
-        alt="Large stone pedestal"
-        class="layer1 large-pedestal"
-      />
+        <span
+          id='b'
+          class='weight'>
+        </span>
 
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a large pedestal"
-        class="layer2 pot-3"
-      />
+        <img
+          src="img/r3-large-pedestal.png"
+          alt="Large stone pedestal"
+          class="layer1 large-pedestal"
+        />
 
-      <from
-        action="">
+        <img
+          src="img/r3-pot.png"
+          alt="Clay pot on top of a large pedestal"
+          class="layer2 pot-3"
+        />
 
-      <input
-        id='c'
-        class='weight'
-        type="text"
-        size="3"
-        required="true"
-        placeholder="??"
-        autofocus
-        autocomplete="off"
-        oninput="checkAnswer(this)"
-       />
+        <from
+          action="">
 
-      </form>
-      
+        <input
+          id='c'
+          class='weight'
+          type="text"
+          size="3"
+          required="true"
+          placeholder="??"
+          autofocus
+          autocomplete="off"
+          oninput="checkAnswer(this)"
+        />
+
+        </form>
+
+      </div>
     </div>
   </body>
 </html>

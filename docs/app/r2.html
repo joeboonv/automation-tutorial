@@ -190,7 +190,7 @@ button.door {
       }
 
       function showPortalButton() {
-        const container = document.getElementById('temple');
+        const container = document.getElementById('cropFrame');
         const button = document.createElement('button');
         button.id = 'templeDoor';
         button.classList.add('door');
@@ -272,9 +272,9 @@ button.door {
         const door = document.getElementById('templeDoor');
         door.style.visibility = 'hidden';
 
-        const temple = document.getElementById('temple');
-        temple.classList.add('zoomBackground');
-        temple.addEventListener("animationend", () => {
+        const cropFrame = document.getElementById('cropFrame');
+        cropFrame.classList.add('zoomBackground');
+        cropFrame.addEventListener("animationend", () => {
           window.location.assign(href);
         });
       }
@@ -293,7 +293,7 @@ button.door {
   <body onload="javascript:loaded();">
 
     <div class="image-container">
-      <div id="temple" class="image-container">
+      <div id="cropFrame" class="image-container">
         
         <img
           src="img/r2-background.png"
