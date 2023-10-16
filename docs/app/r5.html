@@ -170,14 +170,17 @@ body {
         return min + delta;
       }
 
+      let addingBlocks = true;
       let lastBlock = null;
 
       function addBlocks(numberOfBlocks) {
-        const list = document.querySelector('.blocks');
+        addingBlocks = true;
         const bottom = 390;
         const height = 55;
         const overlap = 12;
-        const msdelay = 300;
+        const msdelay = 400;
+        const newBlockAnimationDurationMs = 400;
+        const list = document.querySelector('.blocks');
         for (i=0; i < numberOfBlocks; i++) {
           const top = bottom - ((i+1) * (height-overlap));
           const zorder = 50 + i;
@@ -186,6 +189,9 @@ body {
             lastBlock = addBlock(list, top, height, zorder, offset, lastBlock);
           }, msdelay * i);
         }
+        setTimeout(() => {
+          addingBlocks = false;
+        }, (msdelay * numberOfBlocks) + newBlockAnimationDurationMs);
       }
 
       function addBlock(list, top, height, zorder, hoffset, previousBlock) {
@@ -230,7 +236,7 @@ body {
 
       function tryToRemoveBlock(block) {
         const index = Array.prototype.indexOf.call(block.parentNode.children, block);
-        if (index == 0) { 
+        if (index == 0 && !addingBlocks) { 
           removeBlock(block);
         } else {
           wrongClicks++;
