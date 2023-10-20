@@ -26,20 +26,8 @@ body {
   border: none;
 }
 
-#sun {
-  z-index: -101;
-  height: 563px;
-  top: -120;
-  transform-origin: 0% 100%;
-  rotate: -8deg;
-}
-
 .backgroundImage {
   z-index: -99;
-}
-
-.foregroundImage {
-  z-index: 2;
 }
 
 .behindForeground {
@@ -60,33 +48,21 @@ body {
   object-fit: contain;
 }
 
-.layer3 {
-  z-index: 5;
-  position: absolute;
-  object-fit: contain;
-}
-
-/* .small-pedestal-1 {
-  left: 105px;
-  top: 550px;
-  height: 110px;
-}
-
-.small-pedestal-2 {
-  left: 220px;
-  top: 530px;
-  height: 110px;
-} */
-
 .large-pedestal {
   left: 710px;
-  top: 465px;
+  top: 430px;
   height: 200px;
 }
 
+.pot-3 {
+  left: 694px;
+  top: 304px;
+  width: 145px;
+}
+
 .column {
-  left: 380px;
-  top: 350px;
+  left: 180px;
+  top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -100,12 +76,26 @@ body {
   animation-play-state: running;
 }
 
+.key {
+  position: absolute;
+  left: 190px;
+  top: 550px;
+  object-fit: contain;
+  width: 100px;
+}
+
+svg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
 @keyframes wobble {
-  0%   { rotate: 0deg; top: 350px }
-  25%  { rotate: 2deg; top: 349px }
-  50%  { rotate: 0deg; top: 350px }
-  75%  { rotate: -2deg; top: 349px }
-  100% { rotate: 0deg; top: 350px }
+  0%   { rotate: 0deg; top: 400px }
+  25%  { rotate: 2deg; top: 399px }
+  50%  { rotate: 0deg; top: 400px }
+  75%  { rotate: -2deg; top: 399px }
+  100% { rotate: 0deg; top: 400px }
 }
 
 .fallingColumn {
@@ -164,264 +154,201 @@ body {
   100% { rotate: 0deg; top: 350px; left: 380px; }
 }
 
-.weight {
-  z-index: 9;
-  position: absolute;
-  font-family: Garamond, serif; 
-  font-weight: bold;
-  font-size: 30px;
-  color: #303030;
-}
-
-#a {
-  left: 149px;
-  top: 480px;
-}
-
-#b {
-  left: 265px;
-  top: 460px;
-}
-
-#c {
-  left: 746px;
-  top: 364px;
-  width: 50px;
-  background-color: wheat;
-  text-align: center;
-}
-
-/* .pot-1 {
-  left: 106px;
-  top: 463px;
-  width: 110px;
-}
-
-.pot-2 {
-  left: 222px;
-  top: 443px;
-  width: 110px;
-} */
-
-.pot-3 {
-  left: 694px;
-  top: 339px;
-  width: 145px;
-}
-
-/* button.door {
-  cursor: pointer;
-  position: absolute;
-  z-index: 2;
-  left: 476px;
-  top: 129px;
-  height: 13px;
-  width: 51px;
-  background-color:  whitesmoke;
-  border-style: none;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 10px wheat;
-  opacity: 0%;
-  animation-name: fadeIn90;
-  animation-duration: 1s;
-  animation-delay: 100ms;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: center;
-} */
-
     </style>
     <!-- TODO remove one at a time and see which we don't need -->
-    <script src="https://cdn.jsdelivr.net/npm/d3-dispatch@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-quadtree@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-timer@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-force@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-selection@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-shape@3"></script>
-    <script src= "https://d3js.org/d3.v4.min.js"></script>  
-    <script src= "https://d3js.org/d3-color.v1.min.js"></script>  
-    <script src= "https://d3js.org/d3-interpolate.v1.min.js"></script>  
-    <script src= "https://d3js.org/d3-scale-chromatic.v1.min.js"></script>  
-    <script lang="javascript">
-
-
-
-
-// open pages
-// rope
-// https://codepen.io/keetraxx/pen/oNzXKVN?editors=0010
-// https://github.com/d3
-//
-// drag
-// https://anseki.github.io/plain-draggable/
-// https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
-// https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
-// https://www.w3schools.com/html/html5_draganddrop.asp
-// 
-
-
-
-
-
-
-
-// TODO use https://www.flickr.com/photos/krishnacolor/37892625552 ? 
-// TODO use https://en.wikipedia.org/wiki/File:Preceptory_Tower_interior_(geograph_3578331).jpg ?
-// DRAG ball and release
-
-
-
-
-
-
-// How many simulation points a cable will have, more will take up more resources
-const CABLE_SEGMENTS = 5;
-
-// Append an SVG element
-const svg = d3.select("body").append("svg");
-svg.append('text').attr('y', 20).text('Click and drag to create a cable')
-
-// Save reference to the last added cable
-let cable;
-
-// Draws a line out of the simulation points
-const simulationNodeDrawer = d3
-  .line()
-  .x((d) => d.x)
-  .y((d) => d.y)
-  .curve(d3.curveBasis);
-
-let i = 0;
-
-d3.select(document)
-  .on("mousedown", (mouseEvent) => {
-    // Start a new cable
-    let c = svg.append("path").attr("stroke", d3.schemeCategory10[i % 10]);
-    cable = c;
-    // Create the nodes: o  o  o  o  o
-    const nodes = d3.range(CABLE_SEGMENTS).map(() => ({}));
-  
-    // Link the nodes:  o-->o-->o-->o-->o
-    const links = d3
-      .pairs(nodes)
-      .map(([source, target]) => ({ source, target }));
-  
-    // fix the position of the first node where you clicked
-    nodes[0].fx = mouseEvent.clientX;
-    nodes[0].fy = mouseEvent.clientY;
-
-    // use a force simulation to simulate the cable
-    const sim = d3
-      .forceSimulation(nodes)
-      .force("gravity", d3.forceY(2000).strength(0.005)) // simulate gravity
-      .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
-      .force("links", d3.forceLink(links).strength(0.9)) // string the cables nodes together
-      .on("tick", () => c.attr("d", (d) => simulationNodeDrawer(d.nodes))); // draw the path on each simulation tick
-  
-    // each cable has its own nodes and simulation
-    cable.datum({ nodes, sim });
-    i++;
-  })
-
-  .on("mousemove", (mouseEvent) => {
-    if (cable) {
-      const { nodes, sim } = cable.datum();
-      const start = nodes[0];
-      const end = nodes[nodes.length - 1];
-      
-      // set new position of the end of the cable
-      end.fx = mouseEvent.clientX;
-      end.fy = mouseEvent.clientY;
-      
-      // measure distance
-      const distance = Math.sqrt(
-        Math.pow(end.fx - start.fx, 2) + Math.pow(end.fy - start.fy, 2)
-      );
-      
-      // set the link distance
-      sim.force("links").distance(distance / CABLE_SEGMENTS);
-      sim.alpha(1);
-      sim.restart();
-    }
-  })
-  .on("mouseup", () => (cable = undefined));
-
-
-
-
-
-
-
-      // TODO Resize images
-
-      function fall() {
-        changeColumnClass('fallingColumn');
-      }
-      
-      function sway() {
-        changeColumnClass('swayingColumn');
-      }
-
-      // TODO Switch back to 'column' class after the animation completes, pr remove all classes and just set the attribute
-      function changeColumnClass(newClass) {
-        const column = document.querySelector('.column');
-        column.classList.remove('column');
-        column.classList.add(newClass);
-      }
-
-      function showPortalButton() {
-        const container = document.querySelector('.image-container');
-        const button = document.createElement('button');
-        button.classList.add('door');
-        container.appendChild(button);
-        button.addEventListener('click', openDoor);
-      }
-
-      function loaded() { 
-      }
-
-      let hoverTempleCount = 0;
-      function hoverTemple() {
-        hoverTempleCount++;
-      }
-
-      function openDoor(event) {
-        if (isHuman()) {
-          window.alert('Looks like this is they way through, but we need to send something smaller.');
-        } else {
-          window.alert('Entering the ancient temple');
-        }
-      }
-
-      function isHuman() {
-        return hoverTempleCount > 3 || !isCypressRunning();
-      }
-
-      function isCypressRunning() {
-        return window.Cypress;
-      }
-
-    </script>
+    <!-- <script src="https://d3js.org/d3-dispatch@3"></script>
+    <script src="https://d3js.org/d3-quadtree@3"></script>
+    <script src="https://d3js.org/d3-timer@3"></script>
+    <script src="https://d3js.org/d3-force@3"></script>
+    <script src="https://d3js.org/d3-selection@3"></script>
+    <script src="https://d3js.org/d3-shape@3"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>  
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>  
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>  
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>  
+     -->
   </head>
 
-  <body onload="loaded();">
+
+    
+    <script type="module" lang="javascript">
+
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+
+      // open pages
+      // rope
+      // https://codepen.io/keetraxx/pen/oNzXKVN?editors=0010
+      // https://github.com/d3
+      //
+      // drag
+      // https://anseki.github.io/plain-draggable/
+      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
+      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
+      // https://www.w3schools.com/html/html5_draganddrop.asp
+      // 
+      
+      
+      
+      
+      
+      
+      
+      // TODO use https://www.flickr.com/photos/krishnacolor/37892625552 ? 
+      // TODO use https://en.wikipedia.org/wiki/File:Preceptory_Tower_interior_(geograph_3578331).jpg ?
+      // DRAG ball and release
+      
+      
+      
+      
+      
+      
+      // How many simulation points a cable will have, more will take up more resources
+      const CABLE_SEGMENTS = 5;
+      
+      // Append an SVG element
+      const svg = d3.select("body")
+        .append("svg")
+        .attr("width", 1000)
+        .attr("height", 660);
+//      svg.append('text').attr('y', 20).text('Click and drag to create a cable')
+      
+      // Save reference to the last added cable
+      let cable;
+      
+      // Draws a line out of the simulation points
+      const simulationNodeDrawer = d3
+        .line()
+        .x((d) => d.x)
+        .y((d) => d.y)
+        .curve(d3.curveBasis);
+      
+      let i = 0;
+      
+      d3.select(document)
+        .on("mousedown", (mouseEvent) => {
+      
+          // Start a new cable
+          let c = svg.append("path").attr("stroke", d3.schemeCategory10[i % 10]);
+          cable = c;
+          // Create the nodes: o  o  o  o  o
+          const nodes = d3.range(CABLE_SEGMENTS).map(() => ({}));
+        
+          // Link the nodes:  o-->o-->o-->o-->o
+          const links = d3
+            .pairs(nodes)
+            .map(([source, target]) => ({ source, target }));
+        
+          // fix the position of the first node where you clicked
+          nodes[0].fx = mouseEvent.clientX;
+          nodes[0].fy = mouseEvent.clientY;
+      
+          // use a force simulation to simulate the cable
+          const sim = d3
+            .forceSimulation(nodes)
+            .force("gravity", d3.forceY(2000).strength(0.005)) // simulate gravity
+            .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
+            .force("links", d3.forceLink(links).strength(0.9)) // string the cables nodes together
+            .on("tick", () => c.attr("d", (d) => simulationNodeDrawer(d.nodes))); // draw the path on each simulation tick
+        
+          // each cable has its own nodes and simulation
+          cable.datum({ nodes, sim });
+          i++;
+        })
+      
+        .on("mousemove", (mouseEvent) => {
+          if (cable) {
+            const { nodes, sim } = cable.datum();
+            const start = nodes[0];
+            const end = nodes[nodes.length - 1];
+            
+            // set new position of the end of the cable
+            end.fx = mouseEvent.clientX;
+            end.fy = mouseEvent.clientY;
+            
+            // measure distance
+            const distance = Math.sqrt(
+              Math.pow(end.fx - start.fx, 2) + Math.pow(end.fy - start.fy, 2)
+            );
+            
+            // set the link distance
+            sim.force("links").distance(distance / CABLE_SEGMENTS);
+            sim.alpha(1);
+            sim.restart();
+          }
+        })
+        .on("mouseup", () => (cable = undefined));
+      
+      
+      </script>
+
+      <script lang="javascript">
+      
+      
+      
+      
+            // TODO Resize images
+      
+            function fall() {
+              changeColumnClass('fallingColumn');
+            }
+            
+            function sway() {
+              changeColumnClass('swayingColumn');
+            }
+      
+            // TODO Switch back to 'column' class after the animation completes, pr remove all classes and just set the attribute
+            function changeColumnClass(newClass) {
+              const column = document.querySelector('.column');
+              column.classList.remove('column');
+              column.classList.add(newClass);
+            }
+      
+            function showPortalButton() {
+              const container = document.querySelector('.image-container');
+              const button = document.createElement('button');
+              button.classList.add('door');
+              container.appendChild(button);
+              button.addEventListener('click', openDoor);
+            }
+      
+            let hoverTempleCount = 0;
+            function hoverTemple() {
+              hoverTempleCount++;
+            }
+      
+            function openDoor(event) {
+              if (isHuman()) {
+                window.alert('Looks like this is they way through, but we need to send something smaller.');
+              } else {
+                window.alert('Entering the ancient temple');
+              }
+            }
+      
+            function isHuman() {
+              return hoverTempleCount > 3 || !isCypressRunning();
+            }
+      
+            function isCypressRunning() {
+              return window.Cypress;
+            }
+      
+          </script>
+            <body onload="loaded();">
+
 
     <div class="image-container">
-      <!-- TODO Merge sky into background when the game size is decided, and remove this separate element -->
+
       <img
-        id="sun"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
+        src="img/r4-background.png"
+        alt="Temple"
+        class="fullImage backgroundImage"
       />
 
       <img
-        src="img/r3-background.png"
-        alt="Temple"
-        class="fullImage backgroundImage"
+        src="img/key.png"
+        alt="Old key"
+        class="key"
       />
 
       <img
@@ -429,36 +356,6 @@ d3.select(document)
         alt="Large stone column"
         class="behindForeground column"
       />
-
-      <img
-        src="img/r4-foreground.png"
-        alt="Temple courtyard"
-        class="fullImage foregroundImage"
-      />
-<!-- 
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Small stone pedestal"
-        class="layer1 small-pedestal-1"
-      />
-
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer2 pot-1"
-      />
-
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Another small stone pedestal"
-        class="layer1 small-pedestal-2"
-      />
-
-      <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a small pedestal"
-        class="layer2 pot-2"
-      /> -->
 
       <img
         src="img/r3-large-pedestal.png"
