@@ -86,8 +86,17 @@ body {
 
 svg {
   position: absolute;
+  z-index: 10;
   left: 0px;
   top: 0px;
+  width: 1000px;
+  height: 660px;
+  fill-opacity: 0;
+}
+
+svg #cable {
+  stroke: goldenrod;
+  stroke-width: 10px;
 }
 
 @keyframes wobble {
@@ -167,174 +176,77 @@ svg {
     <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>  
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>  
      -->
+
+
+     <script lang="javascript">
+      
+      
+      
+      
+      // TODO Resize images
+
+      function fall() {
+        changeColumnClass('fallingColumn');
+      }
+      
+      function sway() {
+        changeColumnClass('swayingColumn');
+      }
+
+      // TODO Switch back to 'column' class after the animation completes, pr remove all classes and just set the attribute
+      function changeColumnClass(newClass) {
+        const column = document.querySelector('.column');
+        column.classList.remove('column');
+        column.classList.add(newClass);
+      }
+
+      function showPortalButton() {
+        const container = document.querySelector('.image-container');
+        const button = document.createElement('button');
+        button.classList.add('door');
+        container.appendChild(button);
+        button.addEventListener('click', openDoor);
+      }
+
+      let hoverTempleCount = 0;
+      function hoverTemple() {
+        hoverTempleCount++;
+      }
+
+      function openDoor(event) {
+        if (isHuman()) {
+          window.alert('Looks like this is they way through, but we need to send something smaller.');
+        } else {
+          window.alert('Entering the ancient temple');
+        }
+      }
+
+      function isHuman() {
+        return hoverTempleCount > 3 || !isCypressRunning();
+      }
+
+      function isCypressRunning() {
+        return window.Cypress;
+      }
+
+    </script>
+
+    <script lang="javascript" id="ropeRendering">
+      // Thanks to https://muffinman.io/blog/draw-svg-rope-using-javascript/
+      // Code from https://codepen.io/stanko/pen/vYaEMKX
+      // TODO Add acknowledgement on home page if we use this
+
+
+
+    </script>
+
+
   </head>
 
 
-    
-    <script type="module" lang="javascript">
+   
 
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-
-
-      // open pages
-      // rope
-      // https://codepen.io/keetraxx/pen/oNzXKVN?editors=0010
-      // https://github.com/d3
-      //
-      // drag
-      // https://anseki.github.io/plain-draggable/
-      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
-      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
-      // https://www.w3schools.com/html/html5_draganddrop.asp
-      // 
-      
-      
-      
-      
-      
-      
-      
-      // TODO use https://www.flickr.com/photos/krishnacolor/37892625552 ? 
-      // TODO use https://en.wikipedia.org/wiki/File:Preceptory_Tower_interior_(geograph_3578331).jpg ?
-      // DRAG ball and release
-      
-      
-      
-      
-      
-      
-      // How many simulation points a cable will have, more will take up more resources
-      const CABLE_SEGMENTS = 5;
-      
-      // Append an SVG element
-      const svg = d3.select("body")
-        .append("svg")
-        .attr("width", 1000)
-        .attr("height", 660);
-//      svg.append('text').attr('y', 20).text('Click and drag to create a cable')
-      
-      // Save reference to the last added cable
-      let cable;
-      
-      // Draws a line out of the simulation points
-      const simulationNodeDrawer = d3
-        .line()
-        .x((d) => d.x)
-        .y((d) => d.y)
-        .curve(d3.curveBasis);
-      
-      let i = 0;
-      
-      d3.select(document)
-        .on("mousedown", (mouseEvent) => {
-      
-          // Start a new cable
-          let c = svg.append("path").attr("stroke", d3.schemeCategory10[i % 10]);
-          cable = c;
-          // Create the nodes: o  o  o  o  o
-          const nodes = d3.range(CABLE_SEGMENTS).map(() => ({}));
-        
-          // Link the nodes:  o-->o-->o-->o-->o
-          const links = d3
-            .pairs(nodes)
-            .map(([source, target]) => ({ source, target }));
-        
-          // fix the position of the first node where you clicked
-          nodes[0].fx = mouseEvent.clientX;
-          nodes[0].fy = mouseEvent.clientY;
-      
-          // use a force simulation to simulate the cable
-          const sim = d3
-            .forceSimulation(nodes)
-            .force("gravity", d3.forceY(2000).strength(0.005)) // simulate gravity
-            .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
-            .force("links", d3.forceLink(links).strength(0.9)) // string the cables nodes together
-            .on("tick", () => c.attr("d", (d) => simulationNodeDrawer(d.nodes))); // draw the path on each simulation tick
-        
-          // each cable has its own nodes and simulation
-          cable.datum({ nodes, sim });
-          i++;
-        })
-      
-        .on("mousemove", (mouseEvent) => {
-          if (cable) {
-            const { nodes, sim } = cable.datum();
-            const start = nodes[0];
-            const end = nodes[nodes.length - 1];
-            
-            // set new position of the end of the cable
-            end.fx = mouseEvent.clientX;
-            end.fy = mouseEvent.clientY;
-            
-            // measure distance
-            const distance = Math.sqrt(
-              Math.pow(end.fx - start.fx, 2) + Math.pow(end.fy - start.fy, 2)
-            );
-            
-            // set the link distance
-            sim.force("links").distance(distance / CABLE_SEGMENTS);
-            sim.alpha(1);
-            sim.restart();
-          }
-        })
-        .on("mouseup", () => (cable = undefined));
-      
-      
-      </script>
-
-      <script lang="javascript">
-      
-      
-      
-      
-            // TODO Resize images
-      
-            function fall() {
-              changeColumnClass('fallingColumn');
-            }
-            
-            function sway() {
-              changeColumnClass('swayingColumn');
-            }
-      
-            // TODO Switch back to 'column' class after the animation completes, pr remove all classes and just set the attribute
-            function changeColumnClass(newClass) {
-              const column = document.querySelector('.column');
-              column.classList.remove('column');
-              column.classList.add(newClass);
-            }
-      
-            function showPortalButton() {
-              const container = document.querySelector('.image-container');
-              const button = document.createElement('button');
-              button.classList.add('door');
-              container.appendChild(button);
-              button.addEventListener('click', openDoor);
-            }
-      
-            let hoverTempleCount = 0;
-            function hoverTemple() {
-              hoverTempleCount++;
-            }
-      
-            function openDoor(event) {
-              if (isHuman()) {
-                window.alert('Looks like this is they way through, but we need to send something smaller.');
-              } else {
-                window.alert('Entering the ancient temple');
-              }
-            }
-      
-            function isHuman() {
-              return hoverTempleCount > 3 || !isCypressRunning();
-            }
-      
-            function isCypressRunning() {
-              return window.Cypress;
-            }
-      
-          </script>
-            <body onload="loaded();">
+<body>
 
 
     <div class="image-container">
@@ -372,5 +284,121 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       />
       
     </div>
+
+ 
+    <script type="module" lang="javascript" id="cablePhysics">
+      // Thanks https://codepen.io/keetraxx/pen/oNzXKVN
+      // TODO Add acknowledgement on home page if we use this
+
+      import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+      
+      
+            // open pages
+            // rope
+            // https://codepen.io/keetraxx/pen/oNzXKVN?editors=0010
+            // https://github.com/d3
+            //
+            // drag
+            // https://anseki.github.io/plain-draggable/
+            // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
+            // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
+            // https://www.w3schools.com/html/html5_draganddrop.asp
+            // 
+            
+            
+            
+            
+            
+            
+            
+            // TODO use https://www.flickr.com/photos/krishnacolor/37892625552 ? 
+            // TODO use https://en.wikipedia.org/wiki/File:Preceptory_Tower_interior_(geograph_3578331).jpg ?
+            // DRAG ball and release
+            
+            
+            
+            
+            
+            
+            // How many simulation points a cable will have, more will take up more resources
+            const CABLE_SEGMENTS = 5;
+            
+            // Append an SVG element
+            const svg = d3.select("body").append("svg");
+      //      svg.append('text').attr('y', 20).text('Click and drag to create a cable')
+            
+            const cableAnchorX = 700;
+            const cableAnchorY = -100;
+      
+            // Save reference to the last added cable
+            let cable;
+            
+            // Draws a line out of the simulation points
+            const simulationNodeDrawer = d3
+              .line()
+              .x((d) => d.x)
+              .y((d) => d.y)
+              .curve(d3.curveBasis);
+            
+            let i = 0;
+
+               {
+            
+                // Start a new cable
+                let c = svg.append("path").attr('id', 'cable'); // .attr("stroke", d3.schemeCategory10[i % 10]);
+                cable = c;
+                // Create the nodes: o  o  o  o  o
+                const nodes = d3.range(CABLE_SEGMENTS).map(() => ({}));
+              
+                // Link the nodes:  o-->o-->o-->o-->o
+                const links = d3
+                  .pairs(nodes)
+                  .map(([source, target]) => ({ source, target }));
+              
+                // fix the position of the first node where you clicked
+                nodes[0].fx = cableAnchorX;
+                nodes[0].fy = cableAnchorY;
+            
+                // use a force simulation to simulate the cable
+                const sim = d3
+                  .forceSimulation(nodes)
+                  .force("gravity", d3.forceY(2000).strength(0.005)) // simulate gravity
+                  .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
+                  .force("links", d3.forceLink(links).strength(0.9)) // string the cables nodes together
+                  .on("tick", () => c.attr("d", (d) => simulationNodeDrawer(d.nodes))); // draw the path on each simulation tick
+              
+                // each cable has its own nodes and simulation
+                cable.datum({ nodes, sim });
+                i++;
+              }
+            
+            
+            d3.select(document)
+              .on("mousemove", (mouseEvent) => {
+                if (cable) {
+                  const { nodes, sim } = cable.datum();
+                  const start = nodes[0];
+                  const end = nodes[nodes.length - 1];
+                  
+                  // set new position of the end of the cable
+                  end.fx = mouseEvent.clientX;
+                  end.fy = mouseEvent.clientY;
+                  
+                  // measure distance
+                  const distance = Math.sqrt(
+                    Math.pow(end.fx - start.fx, 2) + Math.pow(end.fy - start.fy, 2)
+                  );
+                  
+                  // set the link distance
+                  sim.force("links").distance(distance / CABLE_SEGMENTS);
+                  sim.alpha(1);
+                  sim.restart();
+                }
+              });
+              // .on("mouseup", () => (cable = undefined));
+            
+            
+            </script>
+
   </body>
 </html>
