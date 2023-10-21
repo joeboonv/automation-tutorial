@@ -91,18 +91,11 @@ svg {
   top: 0px;
   width: 1000px;
   height: 660px;
-  fill-opacity: 0;
 }
 
 svg #cable {
-  stroke: goldenrod;
-  stroke-width: 10px;
-}
-
-svg#rope g {
-  stroke: darkslategray;
-  stroke-width: 3px;
-  fill: brown;
+  stroke-width: 0px;
+  fill: none;
 }
 
 @keyframes wobble {
@@ -546,54 +539,54 @@ function renderRope(
               }" />`
           )
           .join("\n")}
-      </g>
-      <g opacity="${render.normals}" class="normals">
-        ${normals.map(
-          (line) =>
-            `<path d="M ${line[0].x} ${line[0].y} L ${line[1].x} ${line[1].y}" />`
-        )}
-      </g>
-      <g opacity="${render.polygons}" class="polygons">
-      ${segments
-        .map(
-          (segment) =>
-            `<path d="M ${segment.path
-              .map((p) => `${p.x} ${p.y}`)
-              .join(" L ")} Z"/>`
-        )
-        .join("\n")}
-      </g>
-      <g opacity="${render.polygonsRounded}" class="polygons-rounded">
-      ${segments
-        .map(
-          (segment) =>
-            `<path d="M ${chaikin(segment.path, 3, true, 0.15)
-              .map((p) => `${p.x} ${p.y}`)
-              .join(" L ")} Z"/>`
-        )
-        .join("\n")}
-      </g>
-      <g opacity="${render.segments}" class="segments">
-      ${segments
-        .map(
-          (segment) =>
-            `<g class="segment">
-              <path d="M ${segment.line1
-                .map((p) => `${p.x} ${p.y}`)
-                .join(" L ")}"/>
-              <path d="M ${segment.line2
-                .map((p) => `${p.x} ${p.y}`)
-                .join(" L ")}"/>
-            </g>`
-        )
-        .join("\n")}
-      </g>
-      <path class="path" d="${path}" opacity="${render.path}" />
-      <g opacity="${render.points}" class="points">
-      ${points.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="3" />`).join("")}
-      </g>
     </g>
   `;
+    //   <g opacity="${render.normals}" class="normals">
+    //     ${normals.map(
+    //       (line) =>
+    //         `<path d="M ${line[0].x} ${line[0].y} L ${line[1].x} ${line[1].y}" />`
+    //     )}
+    //   </g>
+    //   <g opacity="${render.polygons}" class="polygons">
+    //   ${segments
+    //     .map(
+    //       (segment) =>
+    //         `<path d="M ${segment.path
+    //           .map((p) => `${p.x} ${p.y}`)
+    //           .join(" L ")} Z"/>`
+    //     )
+    //     .join("\n")}
+    //   </g>
+    //   <g opacity="${render.polygonsRounded}" class="polygons-rounded">
+    //   ${segments
+    //     .map(
+    //       (segment) =>
+    //         `<path d="M ${chaikin(segment.path, 3, true, 0.15)
+    //           .map((p) => `${p.x} ${p.y}`)
+    //           .join(" L ")} Z"/>`
+    //     )
+    //     .join("\n")}
+    //   </g>
+    //   <g opacity="${render.segments}" class="segments">
+    //   ${segments
+    //     .map(
+    //       (segment) =>
+    //         `<g class="segment">
+    //           <path d="M ${segment.line1
+    //             .map((p) => `${p.x} ${p.y}`)
+    //             .join(" L ")}"/>
+    //           <path d="M ${segment.line2
+    //             .map((p) => `${p.x} ${p.y}`)
+    //             .join(" L ")}"/>
+    //         </g>`
+    //     )
+    //     .join("\n")}
+    //   </g>
+    //   <path class="path" d="${path}" opacity="${render.path}" />
+    //   <g opacity="${render.points}" class="points">
+    //   ${points.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="3" />`).join("")}
+    //   </g>
+    // </g>
 
   svg.innerHTML = paths;
 }
@@ -702,7 +695,7 @@ function renderRope(
               .y((d) => d.y)
               .curve(d3.curveBasis);
             
-            let i = 0;
+            // let i = 0;
 
                {
             
@@ -727,14 +720,28 @@ function renderRope(
                   .forceSimulation(nodes)
                   .force("gravity", d3.forceY(2000).strength(0.005)) // simulate gravity
                   .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
-                  .force("links", d3.forceLink(links).strength(0.9)) // string the cables nodes together
-                  .on("tick", () => c.attr("d", (d) => simulationNodeDrawer(d.nodes))); // draw the path on each simulation tick
-              
-                // each cable has its own nodes and simulation
-                cable.datum({ nodes, sim });
-                i++;
-              }
+                  .force("links", d3.forceLink(links).strength(1.7)) // string the cables nodes together
+                  .on("tick", () => tickSim(c));// draw the path on each simulation tick
+                  
+                  // each cable has its own nodes and simulation
+                  cable.datum({ nodes, sim });
+                  // i++;
+                }
             
+                function tickSim(c) {
+                  // TODO calculate elements and colours once
+                  const ret = c.attr("d", (d) => simulationNodeDrawer(d.nodes)); 
+                  const cablePath = document.getElementById('cable').getAttribute('d');
+                  const ropeSvg = document.getElementById('rope');
+                  const options = {
+                    step: 20,
+                    thickness: 20,
+                    angle: Math.PI * 0.15,
+                    colors: ["#e4cdad", "#dcbf99", "#d6b88e", "#dcbf99"]
+                  };
+                  renderRope(cablePath, ropeSvg, options);
+                  return ret;
+                }
             
             d3.select(document)
               .on("mousemove", (mouseEvent) => {
@@ -744,8 +751,8 @@ function renderRope(
                   const end = nodes[nodes.length - 1];
                   
                   // set new position of the end of the cable
-                  end.fx = mouseEvent.clientX;
-                  end.fy = mouseEvent.clientY;
+                  end.fx = mouseEvent.pageX;
+                  end.fy = mouseEvent.pageY;
                   
                   // measure distance
                   const distance = Math.sqrt(
@@ -757,9 +764,7 @@ function renderRope(
                   sim.alpha(1);
                   sim.restart();
 
-                  const cablePath = document.getElementById('cable').getAttribute('d');
-                  const ropeSvg = document.getElementById('rope');
-                  renderRope(cablePath, ropeSvg);
+ 
                 }
               });
               // .on("mouseup", () => (cable = undefined));
