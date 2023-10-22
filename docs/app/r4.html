@@ -66,14 +66,14 @@ body {
 
 .large-pedestal {
   left: 710px;
-  top: 450px;
+  top: 410px;
   height: 200px;
 }
 
-.pot-3 {
-  left: 694px;
-  top: 324px;
-  width: 145px;
+.ball {
+  left: 717px;
+  top: 318px;
+  width: 100px;
 }
 
 .column {
@@ -618,26 +618,25 @@ svg {
       <img
         src="img/r3-large-pedestal.png"
         alt="Large stone pedestal"
-        class="layer4 large-pedestal"
-        onclick="sway();"
+        class="layer2 large-pedestal"
       />
 
       <img
-        src="img/r3-pot.png"
-        alt="Clay pot on top of a large pedestal"
-        class="layer5 pot-3"
-        onclick="fall();"
+        src="img/ball.png"
+        alt="Large iron cannon ball"
+        class="layer5 ball"
       />
 
       <svg id="cable" class="behindBackground"><path id="cablePath"></path></svg>
       <svg id="rope" class="layer3"></svg>
       
     </div>
-
  
     <script type="module" lang="javascript" id="cablePhysics">
       // Thanks https://codepen.io/keetraxx/pen/oNzXKVN
       // TODO Add acknowledgement on home page if we use this
+
+      // Script and end of body so elements have been created 
 
       import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
       
@@ -672,7 +671,7 @@ svg {
       const CABLE_GRAVITY = 0.005;
       const CABLE_STRENGTH = 1.7;
       
-      const cableAnchorX = 700;
+      const cableAnchorX = 550;
       const cableAnchorY = -100;
       
       // Draws a line out of the simulation points
