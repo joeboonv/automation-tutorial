@@ -255,7 +255,7 @@ svg {
         
         const ballRect = ball.getBoundingClientRect();
         const ballCentreX = (ballRect.left + ballRect.right) / 2;
-        const ballCentreY = (ballRect.top + ballRect.bottom) / 2;
+        const ballCentreY = ballRect.top + 10; // (ballRect.top + ballRect.bottom) / 2;
 
         dragStartOffsetFromBallCentreX = ballCentreX - mouseX;
         dragStartOffsetFromBallCentreY = ballCentreY - mouseY;
@@ -277,7 +277,8 @@ svg {
         const x = ev.pageX;
         const y = ev.pageY;
 
-        //console.log('Drag over ' + label + ' ' + x + ' ' + y);
+        // TODO Remove label parameter
+        // console.log('Drag over ' + label);
 
         const ballCentreX = x + dragStartOffsetFromBallCentreX;
         const ballCentreY = y + dragStartOffsetFromBallCentreY;
@@ -688,43 +689,41 @@ svg {
         src="img/r4-column.png"
         alt="Large stone column"
         class="layer5 column"
-        ondragover="allowDrop(event)"
-        ondrop="drop(event, false)"
-        ondragover="dragOver(event, 'dragCOL')"
+        ondragover="dragOver(event, 'dragCOL');allowDrop(event);"
+        ondrop="drop(event, false);"
       />
 
       <img
         src="img/r3-small-pedestal.png"
         alt="Small stone pedestal"
-        class="layer2 small-pedestal"
-        ondragover="allowDrop(event)"
-        ondrop="drop(event, false)"
+        class="layer5 small-pedestal"
+        ondragover="dragOver(event, 'dragSMALL');allowDrop(event);"
+        ondrop="drop(event, false);"
       />
       
       <img
         src="img/r3-large-pedestal.png"
         alt="Large stone pedestal"
         class="layer5 large-pedestal"
-        ondragover="allowDrop(event)"
-        ondrop="drop(event, true)"
-        ondragover="dragOver(event, 'dragPedestal')"
+        ondragover="dragOver(event, 'dragPedestal');allowDrop(event);"
+        ondrop="drop(event, true);"
         />
 
       <div
         class="layer4 fullImage"
         id="transparentDragDivBehindTargets"
-        ondragover="dragOver(event, 'dragdiv')"
+        ondragover="dragOver(event, 'dragdiv');"
       ></div>
 
       <img
         id="ball"
         src="img/ball.png"
         alt="Large iron cannon ball"
-        class="layer4 ball"
+        class="layer5 ball"
         draggable="true"
-        ondragstart="drag(event)"
-        ondragend="dragEnd(event)"
-        ondragover="dragOver(event, 'dragBALL')"
+        ondragstart="drag(event);"
+        ondragend="dragEnd(event);"
+        ondragover="dragOver(event, 'dragBALL');"
       />
 
       <svg id="cable" class="behindBackground"><path id="cablePath"></path></svg>
