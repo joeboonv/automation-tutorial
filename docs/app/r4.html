@@ -101,10 +101,10 @@ body {
 
 .key {
   position: absolute;
-  left: 190px;
+  left: 220px;
   top: 550px;
   object-fit: contain;
-  width: 100px;
+  width: 80px;
 }
 
 svg {
@@ -130,8 +130,8 @@ svg {
 }
 
 .fallingColumn {
-  left: 380px;
-  top: 350px;
+  left: 180px;
+  top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -146,19 +146,19 @@ svg {
 }
 
 @keyframes fall {
-  0%   { rotate: 0deg }
-  93% { rotate: 95deg; top: 310px; left: 400px; }
-  96% { rotate: 90deg; top: 310px; left: 400px; }
-  100% { rotate: 95deg; top: 310px; left: 400px; }
+  0% { rotate: 0deg; }
+  93% { rotate: -95deg; top: 370px; left: 150px; }
+  96% { rotate: -90deg; top: 370px; left: 150px; }
+  100% { rotate: -95deg; top: 370px; left: 150px; }
 }
 
 .swayingColumn {
-  left: 380px;
-  top: 350px;
+  left: 180px;
+  top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
-  animation-name: swayRight, swayAcross, swayAcross, swayAcross, swayCentre;
+  animation-name: swayLeft, swayAcross, swayAcross, swayAcross, swayCentre;
   animation-duration: 900ms, 1000ms, 800ms, 400ms, 250ms;
   animation-delay: 100ms, 1000ms, 3000ms, 4600ms, 5400ms;
   animation-iteration-count: 1, 2, 2, 2, 1;
@@ -169,20 +169,20 @@ svg {
 
 /* This is very useful: https://cubic-bezier.com/ */
 
-@keyframes swayRight {
-  0% { rotate: 0deg; top: 350px; left: 380px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: 20deg; top: 340px; left: 382px; }
+@keyframes swayLeft {
+  0% { rotate: 0deg; top: 400px; left: 180px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: -20deg; top: 390px; left: 178px; }
 }
 
 @keyframes swayAcross {
-  0% { rotate: 20deg; top: 340px; left: 382px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
-  50% { rotate: 0deg; top: 350px; left: 380px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: -20deg; top: 340px; left: 378px;  }
+  0% { rotate: -20deg; top: 390px; left: 178px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
+  50% { rotate: 0deg; top: 400px; left: 180px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: 20deg; top: 390px; left: 182px;  }
 }
 
 @keyframes swayCentre {
-  0% { rotate: 20deg; top: 340px; left: 382px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
-  100% { rotate: 0deg; top: 350px; left: 380px; }
+  0% { rotate: -20deg; top: 390px; left: 178px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
+  100% { rotate: 0deg; top: 400px; left: 180px; }
 }
 
     </style>
@@ -261,13 +261,39 @@ svg {
         dragStartOffsetFromBallCentreY = ballCentreY - mouseY;
       }
 
-      function drop(ev, success) {
+      const dropLocations = {
+        small: { left: 717, top: 414 },
+        large: { left: 877, top: 337 }
+        //column: { left: 179, top: 303 }
+      }
+
+      let previousLocation = 'small';
+
+      function drop(ev, targetLocation) {
         // TODO Check subject is the ball - maybe store ev.target.id? 
         ev.preventDefault();
         const subject = ev.dataTransfer.getData("subject");
-        // ev.target.appendChild(document.getElementById(data));
-        console.log("DROPPED, sucess=" +success);
-        console.log(subject);
+        // console.log("DROPPED, target=" + targetLocation);
+        // console.log(subject);
+
+        if (targetLocation == 'column') {
+          // TODO human protection? or allow them to discover this
+          if (previousLocation == 'small') {
+            sway();
+          } else {
+            fall();
+          }
+        } else {
+          if (!ball) ball = document.getElementById('ball');
+          
+          const dropLocation = dropLocations[targetLocation];
+          ball.style.left = dropLocation.left;
+          ball.style.top = dropLocation.top;  
+        }
+
+        previousLocation = targetLocation;
+
+        moveRopeToBall();
       }
 
       function dragOver(ev, label) {
@@ -717,7 +743,7 @@ svg {
         alt="Large stone column"
         class="layer5 column"
         ondragover="dragOver(event, 'dragCOL');allowDrop(event);"
-        ondrop="drop(event, false);"
+        ondrop="drop(event, 'column');"
       />
 
       <img
@@ -725,7 +751,7 @@ svg {
         alt="Small stone pedestal"
         class="layer5 small-pedestal"
         ondragover="dragOver(event, 'dragSMALL');allowDrop(event);"
-        ondrop="drop(event, false);"
+        ondrop="drop(event, 'small');"
       />
       
       <img
@@ -733,7 +759,7 @@ svg {
         alt="Large stone pedestal"
         class="layer5 large-pedestal"
         ondragover="dragOver(event, 'dragPedestal');allowDrop(event);"
-        ondrop="drop(event, true);"
+        ondrop="drop(event, 'large');"
         />
 
       <div
