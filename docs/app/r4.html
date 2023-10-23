@@ -27,8 +27,36 @@ body {
   border: none;
 }
 
+#sun {
+  z-index: -101;
+  height: 563px;
+}
+
 .backgroundImage {
   z-index: -99;
+}
+
+#doorLeft {
+  z-index: -100;
+  position: absolute;
+  object-fit: contain;
+  top: 284;
+  left: 470;
+}
+
+#doorRight {
+  z-index: -100;
+  position: absolute;
+  object-fit: contain;
+  top: 284;
+  left: 543;
+}
+
+#doorDropTarget {
+  top: 284;
+  left: 470;
+  height: 251;
+  width: 140;
 }
 
 .behindBackground {
@@ -77,7 +105,7 @@ body {
   height: 200px;
 }
 
-.ball {
+#ball {
   left: 717px;
   top: 414px;
   width: 100px;
@@ -85,10 +113,13 @@ body {
 
 .key {
   position: absolute;
-  left: 220px;
-  top: 550px;
   object-fit: contain;
   width: 80px;
+}
+
+#key {
+  left: 220px;
+  top: 550px;
 }
 
 svg {
@@ -104,7 +135,6 @@ svg {
   stroke-width: 0px;
   fill: none;
 }
-
 
 .column {
   left: 180px;
@@ -201,6 +231,20 @@ svg {
 
       function fall() {
         changeColumnClass('fallingColumn');
+        stopBallDragging();
+        allowKeyDragging();
+      }
+
+      function allowKeyDragging() {
+        const key = document.getElementById('key');
+        key.draggable = true;
+        key.classList.add('layer5');
+        key.classList.remove('layer1');
+      }
+
+      function stopBallDragging() {
+        const ball = document.getElementById('ball');
+        ball.draggable = false;
       }
       
       function sway() {
@@ -273,9 +317,12 @@ svg {
       let ball;
       let dragStartOffsetFromBallCentreX = 0;
       let dragStartOffsetFromBallCentreY = 0;
+
+      let draggingBall = false;
       
-      function drag(ev) {
+      function dragStartBall(ev) {
         ev.dataTransfer.setData("subject", ev.target);
+        draggingBall = true;
 
         const mouseX = ev.clientX;
         const mouseY = ev.clientY;
@@ -299,11 +346,11 @@ svg {
       let previousLocation = 'small';
 
       function drop(ev, targetLocation) {
-        // TODO Check subject is the ball - maybe store ev.target.id? 
+        // TODO Check subject is the ball or the door draggingBall, draggingKey - maybe store ev.target.id? 
         ev.preventDefault();
-        const subject = ev.dataTransfer.getData("subject");
+       // const subject = ev.dataTransfer.getData("subject");
         // console.log("DROPPED, target=" + targetLocation);
-        // console.log(subject);
+        //console.log(subject.getAttribute('id'));
 
         if (targetLocation == 'column') {
           // TODO human protection? or allow them to discover this
@@ -320,7 +367,7 @@ svg {
           const dropLocation = dropLocations[targetLocation];
           ball.style.left = dropLocation.left;
           ball.style.top = dropLocation.top;
-            
+
           previousLocation = targetLocation;
         }
 
@@ -328,24 +375,22 @@ svg {
         moveRopeToBall();
       }
 
-      function dragOver(ev, label) {
-        // TODO Check subject is the ball - maybe store ev.target.id? 
-        const subject = ev.dataTransfer.getData("subject");
+      function dragOver(ev) {
+        // Note that dataTransfer types can be seen here but not the values, by design.
 
-        const x = ev.pageX;
-        const y = ev.pageY;
+        if (draggingBall) {
+          const x = ev.pageX;
+          const y = ev.pageY;
 
-        // TODO Remove label parameter
-        // console.log('Drag over ' + label);
-
-        const ballCentreWindowX = x + dragStartOffsetFromBallCentreX;
-        const ballCentreWindowY = y + dragStartOffsetFromBallCentreY;
-
-        const containerOrigin = getContainerOrigin();
-        const ballCentreX = ballCentreWindowX - containerOrigin.x;
-        const ballCentreY = ballCentreWindowY - containerOrigin.y;
-
-        window.moveRopeEnd(ballCentreX, ballCentreY);
+          const ballCentreWindowX = x + dragStartOffsetFromBallCentreX;
+          const ballCentreWindowY = y + dragStartOffsetFromBallCentreY;
+          
+          const containerOrigin = getContainerOrigin();
+          const ballCentreX = ballCentreWindowX - containerOrigin.x;
+          const ballCentreY = ballCentreWindowY - containerOrigin.y;
+          
+          window.moveRopeEnd(ballCentreX, ballCentreY);
+        }
       }
       
       function moveRopeToBall() {
@@ -385,6 +430,7 @@ svg {
       }
 
       function dragEnd(ev) { 
+        draggingBall = false;
         moveRopeToBall();
       }
 
@@ -759,15 +805,45 @@ svg {
     <div id="container" class="image-container">
 
       <img
+        id="sun"
+        src="img/r3-sky.png"
+        alt="Blue sky with sun"
+        class="fullImage"
+      />
+
+      <img
         src="img/r4-background.png"
         alt="Temple"
         class="fullImage backgroundImage"
       />
 
       <img
+        id="doorLeft"
+        src="img/r4-door-left.png"
+        alt="Door"
+      />
+
+      <img
+        id="doorRight"
+        src="img/r4-door-right.png"
+        alt="Door"
+      />
+
+      <div
+        id="doorDropTarget"
+        class="layer5"
+        draggable="true"
+        ondragover="dragOver(event);allowDrop(event);"
+        ondrop="drop(event, 'door');"
+      ></div>
+
+      <img
+        id="key"
         src="img/key.png"
         alt="Old key"
         class="layer1 key"
+        draggable="false"
+        ondragstart="dragStartKey(event);"
       />
 
       <img
@@ -776,7 +852,7 @@ svg {
         alt="Large stone column"
         class="layer5 column"
         draggable="false"
-        ondragover="dragOver(event, 'dragCOL');allowDrop(event);"
+        ondragover="dragOver(event);allowDrop(event);"
         ondrop="drop(event, 'column');"
       />
 
@@ -785,7 +861,7 @@ svg {
         alt="Small stone pedestal"
         class="layer5 small-pedestal"
         draggable="false"
-        ondragover="dragOver(event, 'dragSMALL');allowDrop(event);"
+        ondragover="dragOver(event);allowDrop(event);"
         ondrop="drop(event, 'small');"
       />
       
@@ -794,7 +870,7 @@ svg {
         alt="Large stone pedestal"
         class="layer5 large-pedestal"
         draggable="false"
-        ondragover="dragOver(event, 'dragPedestal');allowDrop(event);"
+        ondragover="dragOver(event);allowDrop(event);"
         ondrop="drop(event, 'large');"
         />
 
@@ -802,22 +878,22 @@ svg {
         class="layer4 fullImage"
         id="transparentDragDivBehindTargets"
         draggable="false"
-        ondragover="dragOver(event, 'dragdiv');"
+        ondragover="dragOver(event);"
       ></div>
 
       <img
         id="ball"
         src="img/ball.png"
         alt="Large iron cannon ball"
-        class="layer5 ball"
+        class="layer5"
         draggable="true"
-        ondragstart="drag(event);"
+        ondragstart="dragStartBall(event);"
         ondragend="dragEnd(event);"
-        ondragover="dragOver(event, 'dragBALL');"
+        ondragover="dragOver(event);"
       />
 
       <svg id="cable" class="behindBackground"><path id="cablePath"></path></svg>
-      <svg id="rope" class="layer3"></svg>
+      <svg id="rope" class="layer3" draggable="false"></svg>
       
     </div>
  
