@@ -274,14 +274,6 @@ svg {
         column.classList.add('column');
       }
 
-      function showPortalButton() {
-        const container = document.querySelector('.image-container');
-        const button = document.createElement('button');
-        button.classList.add('door');
-        container.appendChild(button);
-        button.addEventListener('click', openDoor);
-      }
-
       function loaded() {
         setTimeout(wobble, 100);
       }
@@ -291,12 +283,18 @@ svg {
         hoverTempleCount++;
       }
 
+      function swingDoorsOpen() {
+        // TODO 
+      }
+
       function openDoor(event) {
+        swingDoorsOpen();
         if (isHuman()) {
           window.alert('Looks like this is they way through, but we need to send something smaller.');
         } else {
           window.alert('Entering the ancient temple');
         }
+        // TODO ZoomAndNavigate
       }
 
       function isHuman() {
@@ -352,27 +350,36 @@ svg {
         // console.log("DROPPED, target=" + targetLocation);
         //console.log(subject.getAttribute('id'));
 
-        if (targetLocation == 'column') {
-          // TODO human protection? or allow them to discover this
-          if (previousLocation == 'small') {
-            sway();
-          }
-          if (previousLocation == 'large')
-          {
-            fall();
-          }
-        } else {
-          if (!ball) ball = document.getElementById('ball');
-          
-          const dropLocation = dropLocations[targetLocation];
-          ball.style.left = dropLocation.left;
-          ball.style.top = dropLocation.top;
+        if (draggingBall) {
+          if (targetLocation == 'column') {
+            if (previousLocation == 'small') {
+              sway();
+            }
+            if (previousLocation == 'large')
+            {
+              fall();
+            }
+          } else {
+            if (!ball) ball = document.getElementById('ball');
+            
+            const dropLocation = dropLocations[targetLocation];
+            ball.style.left = dropLocation.left;
+            ball.style.top = dropLocation.top;
 
-          previousLocation = targetLocation;
+            previousLocation = targetLocation;
+          }
+
+          moveRopeToBall();
         }
 
-
-        moveRopeToBall();
+        if (draggingKey) {
+          // TODO Human protection - open and close door?
+          if (isHuman()) {
+            openCloseDoor();
+          } else {
+            openDoor();
+          }
+        }
       }
 
       function dragOver(ev) {
@@ -809,30 +816,34 @@ svg {
         src="img/r3-sky.png"
         alt="Blue sky with sun"
         class="fullImage"
+        draggable="false"
       />
 
       <img
         src="img/r4-background.png"
         alt="Temple"
         class="fullImage backgroundImage"
+        draggable="false"
       />
 
       <img
         id="doorLeft"
         src="img/r4-door-left.png"
         alt="Door"
+        draggable="false"
       />
 
       <img
         id="doorRight"
         src="img/r4-door-right.png"
         alt="Door"
+        draggable="false"
       />
 
       <div
         id="doorDropTarget"
         class="layer5"
-        draggable="true"
+        draggable="false"
         ondragover="dragOver(event);allowDrop(event);"
         ondrop="drop(event, 'door');"
       ></div>
@@ -892,7 +903,7 @@ svg {
         ondragover="dragOver(event);"
       />
 
-      <svg id="cable" class="behindBackground"><path id="cablePath"></path></svg>
+      <svg id="cable" class="behindBackground" draggable="false"><path id="cablePath"></path></svg>
       <svg id="rope" class="layer3" draggable="false"></svg>
       
     </div>
