@@ -34,10 +34,9 @@ body {
 
 .slideSky {
   animation-name: slideSky;
-  animation-duration: 3500ms;
-  animation-delay: 2250ms;
+  animation-duration: 2s;
   animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in;
   animation-direction: normal;
   animation-fill-mode: forwards;
   animation-play-state: running;
@@ -50,6 +49,18 @@ body {
 
 .backgroundImage {
   z-index: -99;
+}
+
+.zoomBackground {
+  animation-name: zoom;
+  transform-origin: 54% 65%;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes zoom {
+  0% { scale: 1.0; opacity: 1.0; }
+  100% { scale: 5.0; opacity: 0.2; }
 }
 
 #doorLeft {
@@ -320,7 +331,7 @@ svg {
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
-        setTimeout(() => window.location.assign(href), 8000);
+        setTimeout(() => window.location.assign(href), 2000);
       }
 
       function swingDoorsOpen() {
@@ -451,7 +462,7 @@ svg {
         if (draggingKey) {
           if (targetLocation == 'door') {
             swingDoorsOpen();
-            setTimeout(openDoor, 1000);
+            setTimeout(openDoor, 2000);
           }
         }
       }
@@ -890,103 +901,105 @@ svg {
   <body onload="loaded();">
 
     <div id="container" class="image-container">
+      <div id="cropFrame" class="image-container">
 
-      <img
-        id="sun"
-        src="img/r3-sky.png"
-        alt="Blue sky with sun"
-        class="fullImage"
-        draggable="false"
-      />
-
-      <img
-        src="img/r4-background.png"
-        alt="Temple"
-        class="fullImage backgroundImage"
-        draggable="false"
-      />
-
-      <img
-        id="doorLeft"
-        src="img/r4-door-left.png"
-        alt="Door"
-        draggable="false"
-      />
-
-      <img
-        id="doorRight"
-        src="img/r4-door-right.png"
-        alt="Door"
-        draggable="false"
-      />
-
-      <div
-        id="doorDropTarget"
-        class="layer5"
-        draggable="false"
-        ondragover="dragOver(event);allowDrop(event);"
-        ondrop="drop(event, 'door');"
-      ></div>
-
-      <img
-        id="key"
-        src="img/key.png"
-        alt="Old key"
-        class="layer1 key"
-        draggable="false"
-        ondragstart="dragStartKey(event);"
-        ondragend="dragEndKey(event);"
-      />
-
-      <img
-        id="column"
-        src="img/r4-column.png"
-        alt="Large stone column"
-        class="layer5 column"
-        draggable="false"
-        ondragover="dragOver(event);allowDrop(event);"
-        ondrop="drop(event, 'column');"
-      />
-
-      <img
-        src="img/r3-small-pedestal.png"
-        alt="Small stone pedestal"
-        class="layer5 small-pedestal"
-        draggable="false"
-        ondragover="dragOver(event);allowDrop(event);"
-        ondrop="drop(event, 'small');"
-      />
-      
-      <img
-        src="img/r3-large-pedestal.png"
-        alt="Large stone pedestal"
-        class="layer5 large-pedestal"
-        draggable="false"
-        ondragover="dragOver(event);allowDrop(event);"
-        ondrop="drop(event, 'large');"
+        <img
+          id="sun"
+          src="img/r3-sky.png"
+          alt="Blue sky with sun"
+          class="fullImage"
+          draggable="false"
         />
 
-      <div
-        class="layer4 fullImage"
-        id="transparentDragDivBehindTargets"
-        draggable="false"
-        ondragover="dragOver(event);"
-      ></div>
+        <img
+          src="img/r4-background.png"
+          alt="Temple"
+          class="fullImage backgroundImage"
+          draggable="false"
+        />
 
-      <img
-        id="ball"
-        src="img/ball.png"
-        alt="Large iron cannon ball"
-        class="layer5"
-        draggable="true"
-        ondragstart="dragStartBall(event);"
-        ondragend="dragEndBall(event);"
-        ondragover="dragOver(event);"
-      />
+        <img
+          id="doorLeft"
+          src="img/r4-door-left.png"
+          alt="Door"
+          draggable="false"
+        />
 
-      <svg id="cable" class="behindBackground" draggable="false"><path id="cablePath"></path></svg>
-      <svg id="rope" class="layer3" draggable="false"></svg>
-      
+        <img
+          id="doorRight"
+          src="img/r4-door-right.png"
+          alt="Door"
+          draggable="false"
+        />
+
+        <div
+          id="doorDropTarget"
+          class="layer5"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'door');"
+        ></div>
+
+        <img
+          id="key"
+          src="img/key.png"
+          alt="Old key"
+          class="layer1 key"
+          draggable="false"
+          ondragstart="dragStartKey(event);"
+          ondragend="dragEndKey(event);"
+        />
+
+        <img
+          id="column"
+          src="img/r4-column.png"
+          alt="Large stone column"
+          class="layer5 column"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'column');"
+        />
+
+        <img
+          src="img/r3-small-pedestal.png"
+          alt="Small stone pedestal"
+          class="layer5 small-pedestal"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'small');"
+        />
+        
+        <img
+          src="img/r3-large-pedestal.png"
+          alt="Large stone pedestal"
+          class="layer5 large-pedestal"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'large');"
+          />
+
+        <div
+          class="layer4 fullImage"
+          id="transparentDragDivBehindTargets"
+          draggable="false"
+          ondragover="dragOver(event);"
+        ></div>
+
+        <img
+          id="ball"
+          src="img/ball.png"
+          alt="Large iron cannon ball"
+          class="layer5"
+          draggable="true"
+          ondragstart="dragStartBall(event);"
+          ondragend="dragEndBall(event);"
+          ondragover="dragOver(event);"
+        />
+
+        <svg id="cable" class="behindBackground" draggable="false"><path id="cablePath"></path></svg>
+        <svg id="rope" class="layer3" draggable="false"></svg>
+
+      </div>
     </div>
  
     <script type="module" lang="javascript" id="cablePhysics">
