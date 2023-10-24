@@ -287,14 +287,19 @@ svg {
         // TODO 
       }
 
+      function openCloseDoor() {
+        console.log('open close');
+      }
+
       function openDoor(event) {
-        swingDoorsOpen();
-        if (isHuman()) {
-          window.alert('Looks like this is they way through, but we need to send something smaller.');
-        } else {
-          window.alert('Entering the ancient temple');
-        }
-        // TODO ZoomAndNavigate
+        console.log('open');
+        // TODO human protection
+      //  if (isHuman()) {
+      //    window.alert('The doors are jammed and won\'t open all the way. Something smaller could get through.');
+      //  } else {
+          window.alert('Moving through the door.');
+          zoomAndNavigate('r5.html');
+      //  }
       }
 
       function isHuman() {
@@ -313,14 +318,41 @@ svg {
       }
       
       let ball;
+      let key;
+
       let dragStartOffsetFromBallCentreX = 0;
       let dragStartOffsetFromBallCentreY = 0;
 
       let draggingBall = false;
+      let draggingKey = false;
+
+      // TODO replace "if (!ball) ball = document.getElementById('ball');" everywhere
+      // with getBall() and let it do the caching.
+
+      function hideBall() {
+        if (!ball) ball = document.getElementById('ball');
+        ball.style.opacity = 0.2;
+      }
+
+      function showBall() {
+        if (!ball) ball = document.getElementById('ball');
+        ball.style.opacity = 1;
+      }
+
+      function hideKey() {
+        if (!key) key = document.getElementById('key');
+        key.style.opacity = 0.2;
+      }
+
+      function showKey() {
+        if (!key) key = document.getElementById('key');
+        key.style.opacity = 1;
+      }
       
       function dragStartBall(ev) {
-        ev.dataTransfer.setData("subject", ev.target);
+        // ev.dataTransfer.setData("subject", ev.target);
         draggingBall = true;
+        hideBall();
 
         const mouseX = ev.clientX;
         const mouseY = ev.clientY;
@@ -335,6 +367,12 @@ svg {
         dragStartOffsetFromBallCentreY = ballCentreY - mouseY;
       }
 
+      function dragStartKey(ev) {
+        // ev.dataTransfer.setData("subject", ev.target);
+        draggingKey = true;
+        hideKey();
+      }
+
       const dropLocations = {
         small: { left: 717, top: 414 },
         large: { left: 877, top: 337 }
@@ -344,6 +382,7 @@ svg {
       let previousLocation = 'small';
 
       function drop(ev, targetLocation) {
+        // console.log("Drop " + targetLocation);
         // TODO Check subject is the ball or the door draggingBall, draggingKey - maybe store ev.target.id? 
         ev.preventDefault();
        // const subject = ev.dataTransfer.getData("subject");
@@ -359,7 +398,7 @@ svg {
             {
               fall();
             }
-          } else {
+          } else if (dropLocations[targetLocation]) {
             if (!ball) ball = document.getElementById('ball');
             
             const dropLocation = dropLocations[targetLocation];
@@ -373,11 +412,14 @@ svg {
         }
 
         if (draggingKey) {
-          // TODO Human protection - open and close door?
-          if (isHuman()) {
-            openCloseDoor();
-          } else {
-            openDoor();
+          if (targetLocation == 'door') {
+            // TODO Human protection - open and close door?
+         //   if (isHuman()) {
+         //     openCloseDoor();
+         //   } else {
+              swingDoorsOpen();
+              setTimeout(openDoor, 1000);
+         //   }
           }
         }
       }
@@ -436,9 +478,15 @@ svg {
         return calculateContainerOrigin();
       }
 
-      function dragEnd(ev) { 
+      function dragEndBall(ev) { 
         draggingBall = false;
         moveRopeToBall();
+        showBall();
+      }
+
+      function dragEndKey(ev) { 
+        draggingKey = false;
+        showKey();
       }
 
     </script>
@@ -855,6 +903,7 @@ svg {
         class="layer1 key"
         draggable="false"
         ondragstart="dragStartKey(event);"
+        ondragend="dragEndKey(event);"
       />
 
       <img
@@ -899,7 +948,7 @@ svg {
         class="layer5"
         draggable="true"
         ondragstart="dragStartBall(event);"
-        ondragend="dragEnd(event);"
+        ondragend="dragEndBall(event);"
         ondragover="dragOver(event);"
       />
 
