@@ -30,6 +30,7 @@ body {
 #sun {
   z-index: -101;
   height: 563px;
+  opacity: 0;
 }
 
 .slideSky {
@@ -269,6 +270,12 @@ svg {
     <script lang="javascript" id="gameLogic">
       // TODO Resize images
 
+      function showSky() {
+        // Only show sky when everything else is loaded to there is no spoiler
+        const sky = document.getElementById('sun');
+        sky.style.opacity = 1;
+      }
+
       function fall() {
         changeColumnClass('fallingColumn');
         stopBallDragging();
@@ -315,6 +322,7 @@ svg {
       }
 
       function loaded() {
+        showSky();
         setTimeout(wobble, 100);
       }
 
