@@ -267,9 +267,8 @@ button.door {
 
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
-        cropFrame.addEventListener("animationend", () => {
-          window.location.assign(href);
-        });
+
+        setTimeout(() => window.location.assign(href), 2300);
       }
 
       function isHuman() {
