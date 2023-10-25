@@ -465,12 +465,14 @@ svg {
           }
 
           moveRopeToBall();
+          dragEndBall(ev);
         }
 
         if (draggingKey) {
           if (targetLocation == 'door') {
             swingDoorsOpen();
             setTimeout(openDoor, 2000);
+            dragEndKey(ev);
           }
         }
       }
