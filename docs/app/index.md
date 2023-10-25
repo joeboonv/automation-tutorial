@@ -17,11 +17,11 @@ ____
 
 ## Shortcuts
 
-[r1](r1.html) - get + click
-[r2](r2.html)  .  [r2b](r2b.html) - get with longer timeout + click
-[r3](r3.html) - async calculations + text field - remove when replicated elsewhere?
-[r4](r4.html) - drag - in progress
-[r3](r5.html) - each - in progress
+- [r1](r1.html) - get + click
+- [r2](r2.html)  .  [r2b](r2b.html) - get with longer timeout + click
+- [r3](r3.html) - async calculations + text field - remove when replicated elsewhere?
+- [r4](r4.html) - drag
+- [r5](r5.html) - each
 
 
 ____
@@ -35,3 +35,4 @@ ____
 - [Prasanna Virupakshatemple  Hampi, Vijayanagara, Karnataka](https://commons.wikimedia.org/wiki/Category:Large_Underground_Temple#/media/File:Underground_Siva_Temple.JPG) by Arun Varadarajan under the [Creative Commons CC BY-SA 3.0 licence](https://commons.wikimedia.org/wiki/File:Underground_Siva_Temple.JPG).
 - [Sun Temple, Konark, Puri, Odisha](https://commons.wikimedia.org/wiki/File:Sun_Temple_Konark.jpg) by Deepak Nashine in the [Public domain on Wikimedia](https://commons.wikimedia.org/wiki/File:Sun_Temple_Konark.jpg)
 - [Mayan Calendar stone disc](https://todayinhistorydotblog.files.wordpress.com/2018/12/MayanCalendar.gif) freely available from many sources including [Today is History](https://todayinhistory.blog/2018/12/21/december-21-2012-apocalypse-postponed/)
+- [Church of Panagia Gorgoepikoos, Athens, Greece](https://pxhere.com/en/photo/387974) under the [Creative Commons CC0 1.0 DEED](https://creativecommons.org/publicdomain/zero/1.0/)
