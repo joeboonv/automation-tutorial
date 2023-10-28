@@ -120,21 +120,22 @@ body {
   animation-duration: 800ms;
   animation-name: blockDisappears;
   animation-composition: add;
-  animation-timing-function: ease-in;
+  animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
 @keyframes blockDisappears {
-  0% { top: 0px; }
-  20% { top: -80px; scale: 0.8; left: -8; }
-  21% { z-index: -70; }
+  0% { top: 0px; opacity: 0; }
+  20% { top: -140px; scale: 0.8; left: -8; opacity: 0; }
+  21% { top: -140px; scale: 0.8; z-index: -70; left: -8; opacity: 0; }
+  99% { top: 50px; scale: 0.5; z-index: -70; left: -40; opacity: 0; }
   100% { top: 50px; scale: 0.5; z-index: -70; left: -40; opacity: -1; }
 }
 
     </style>
 
     <script language="javascript">
-      // TODO: *** Human protection ***- check wrongClicks == 0 + hover
+      // TODO: *** Human protection ***- check wrongClicks == 0 and hover == 0
       // TODO: ? Change to pushing blocks to one side by clicking on them, and if human, only move it a little way, and say "You are too puny to move thoe stones. Send a robot probe."
       // TODO: ? Different images for each block so they look more realistic. Take our own photos.
 
