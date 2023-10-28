@@ -161,7 +161,7 @@ body {
 }
 
 #key {
-  left: 310px;
+  left: 266px;
   top: 560px;
 }
 
@@ -180,16 +180,15 @@ svg {
 }
 
 .column {
-  padding-top: 30px;
-  left: 280px;
-  top: 370px;
+  left: 230px;
+  top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
 }
 
 .wobblingColumn {
-  left: 280px;
+  left: 230px;
   top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
@@ -213,7 +212,7 @@ svg {
 }
 
 .fallingColumn {
-  left: 280px;
+  left: 230px;
   top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
@@ -230,13 +229,13 @@ svg {
 
 @keyframes fall {
   0% { rotate: 0deg; }
-  93% { rotate: -95deg; top: 370px; left: 250px; }
-  96% { rotate: -90deg; top: 370px; left: 250px; }
-  100% { rotate: -95deg; top: 370px; left: 250px; }
+  93% { rotate: -95deg; top: 370px; left: 200px; }
+  96% { rotate: -90deg; top: 370px; left: 200px; }
+  100% { rotate: -95deg; top: 370px; left: 200px; }
 }
 
 .swayingColumn {
-  left: 280px;
+  left: 230px;
   top: 400px;
   height: 220px;
   transform-origin: 50% 90%;
@@ -253,19 +252,19 @@ svg {
 /* This is very useful: https://cubic-bezier.com/ */
 
 @keyframes swayLeft {
-  0% { rotate: 0deg; top: 400px; left: 280px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: -20deg; top: 390px; left: 278px; }
+  0% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: -20deg; top: 390px; left: 228px; }
 }
 
 @keyframes swayAcross {
-  0% { rotate: -20deg; top: 390px; left: 278px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
-  50% { rotate: 0deg; top: 400px; left: 280px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: 20deg; top: 390px; left: 282px;  }
+  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
+  50% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: 20deg; top: 390px; left: 232px;  }
 }
 
 @keyframes swayCentre {
-  0% { rotate: -20deg; top: 390px; left: 278px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
-  100% { rotate: 0deg; top: 400px; left: 280px; }
+  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
+  100% { rotate: 0deg; top: 400px; left: 230px; }
 }
 
     </style>
