@@ -110,22 +110,109 @@ body {
   object-fit: contain;
 }
 
-.small-pedestal-1 {
-  left: 105px;
-  top: 550px;
-  height: 110px;
+.gear-c {
+  left: 215px;
+  top: 230px;
+  height: 60px;
+  rotate: 40deg;
 }
 
-.small-pedestal-2 {
-  left: 220px;
-  top: 530px;
-  height: 110px;
+.rotate-gear-c {
+  animation-name: rotate-gear-c;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
-.large-pedestal {
-  left: 710px;
-  top: 465px;
-  height: 200px;
+@keyframes rotate-gear-c {
+  0% { rotate: 40deg }
+  100% { rotate: -80deg }
+}
+
+.gear-abc {
+  left: 470px;
+  top: 130px;
+  height: 60px;
+  rotate: 60deg;
+}
+
+.rotate-gear-abc {
+  animation-name: rotate-gear-abc;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-abc {
+  0% { rotate: 60deg }
+  100% { rotate: -60deg }
+}
+
+.gear-ab {
+  left: 700px;
+  top: 230px;
+  height: 60px;
+  rotate: 80deg;
+}
+
+.rotate-gear-ab {
+  animation-name: rotate-gear-ab;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-ab {
+  0% { rotate: 80deg }
+  100% { rotate: -40deg }
+}
+
+.gear-a {
+  left: 600px;
+  top: 365px;
+  height: 60px;
+  rotate: 0deg;
+}
+
+.rotate-gear-a {
+  animation-name: rotate-gear-a;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-a {
+  0% { rotate: 0deg }
+  100% { rotate: 60deg }
+}
+
+.gear-b {
+  left: 800px;
+  top: 365px;
+  height: 60px;
+  rotate: 45deg;
+}
+
+.rotate-gear-b {
+  animation-name: rotate-gear-b;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-b {
+  0% { rotate: 45deg }
+  100% { rotate: -15deg }
 }
 
 .weight {
@@ -138,39 +225,78 @@ body {
 }
 
 #a {
-  left: 149px;
-  top: 480px;
+  left: 590px;
+  top: 550px;
 }
 
 #b {
-  left: 265px;
-  top: 460px;
+  left: 850px;
+  top: 550px;
 }
 
 #c {
-  left: 743px;
-  top: 364px;
+  left: 194px;
+  top: 361px;
   width: 50px;
   background-color: wheat;
   text-align: center;
 }
 
-.pot-1 {
-  left: 106px;
-  top: 463px;
+.pot-a {
+  left: 547px;
+  top: 533px;
   width: 110px;
 }
 
-.pot-2 {
-  left: 222px;
-  top: 443px;
+.move-pot-a {
+  animation-name: move-pot-a;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-pot-a {
+  100% { top: 450px; }
+}
+
+.pot-b {
+  left: 807px;
+  top: 533px;
   width: 110px;
 }
 
-.pot-3 {
-  left: 694px;
+.move-pot-b {
+  animation-name: move-pot-b;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-pot-b {
+  100% { top: 450px; }
+}
+
+.pot-c {
+  left: 145px;
   top: 339px;
   width: 145px;
+}
+
+.move-pot-c {
+  animation-name: move-pot-c;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-pot-c {
+  100% { top: 500px; }
 }
     </style>
 
@@ -217,9 +343,46 @@ body {
         const c = Number(el.value);
         const expectedAnswer = a + b;
         if (c == expectedAnswer) {
-          el.style.visibility = "hidden";
-          setTimeout(openDoor, 500);
+          emptyChamber();
         }
+      }
+
+      function emptyChamber() {
+        hideFields();
+        startMovingGears();
+        startMovingPots();
+        setTimeout(openDoor, 4000);
+      }
+
+      function startMovingPots() {
+        const a = document.querySelector('.pot-a');
+        const b = document.querySelector('.pot-b');
+        const c = document.querySelector('.pot-c');
+        a.classList.add('move-pot-a');
+        b.classList.add('move-pot-b');
+        c.classList.add('move-pot-c');
+      }
+
+      function startMovingGears() {
+        const ga = document.querySelector('.gear-a');
+        const gb = document.querySelector('.gear-b');
+        const gc = document.querySelector('.gear-c');
+        const gab = document.querySelector('.gear-ab');
+        const gabc = document.querySelector('.gear-abc');
+        ga.classList.add('rotate-gear-a');
+        gb.classList.add('rotate-gear-b');
+        gc.classList.add('rotate-gear-c');
+        gab.classList.add('rotate-gear-ab');
+        gabc.classList.add('rotate-gear-abc');
+      }
+
+      function hideFields() {
+        const a = document.querySelector('#a');
+        const b = document.querySelector('#b');
+        const c = document.querySelector('#c');
+        a.style.visibility = 'hidden';
+        b.style.visibility = 'hidden';
+        c.style.visibility = 'hidden';
       }
 
       let hoverTempleCount = 0;
@@ -281,53 +444,12 @@ body {
         />
 
         <img
-          src="img/r3-small-pedestal.png"
-          alt="Small stone pedestal"
-          class="layer1 small-pedestal-1"
-        />
-
-        <img
           src="img/r3-pot.png"
-          alt="Clay pot on top of a small pedestal"
-          class="layer2 pot-1"
+          alt="Large clay pot with a text field on it"
+          class="layer2 pot-c"
         />
 
-        <span
-          id='a'
-          class='weight'>
-        </span>
-
-        <img
-          src="img/r3-small-pedestal.png"
-          alt="Another small stone pedestal"
-          class="layer1 small-pedestal-2"
-          onclick="reveal();"
-        />
-
-        <img
-          src="img/r3-pot.png"
-          alt="Clay pot on top of a small pedestal"
-          class="layer2 pot-2"
-        />
-
-        <span
-          id='b'
-          class='weight'>
-        </span>
-
-        <img
-          src="img/r3-large-pedestal.png"
-          alt="Large stone pedestal"
-          class="layer1 large-pedestal"
-        />
-
-        <img
-          src="img/r3-pot.png"
-          alt="Clay pot on top of a large pedestal"
-          class="layer2 pot-3"
-        />
-
-        <from
+        <form
           action="">
 
         <input
@@ -343,6 +465,58 @@ body {
         />
 
         </form>
+
+        <img
+          src="img/r3-gear.png"
+          alt="gear for rope connecting to the large clay pot"
+          class="layer1 gear-c"
+        />
+
+        <img
+          src="img/r3-gear.png"
+          alt="gear for rope connecting all pots"
+          class="layer1 gear-abc"
+        />
+
+        <img
+          src="img/r3-gear.png"
+          alt="gear for rope connecting the two small pots"
+          class="layer1 gear-ab"
+        />
+        
+        <img
+          src="img/r3-gear.png"
+          alt="gear for rope connecting to a small pot"
+          class="layer1 gear-a"
+        />
+        
+        <img
+          src="img/r3-gear.png"
+          alt="gear for rope connecting to a small pot"
+          class="layer1 gear-b"
+        />
+
+        <img
+          src="img/r3-pot.png"
+          alt="Small clay pot"
+          class="layer2 pot-a"
+        />
+
+        <span
+          id='a'
+          class='weight'>
+        </span>
+
+        <img
+          src="img/r3-pot.png"
+          alt="Small clay pot"
+          class="layer2 pot-b"
+        />
+
+        <span
+          id='b'
+          class='weight'>
+        </span>
 
       </div>
     </div>
