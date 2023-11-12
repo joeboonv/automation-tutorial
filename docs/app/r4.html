@@ -352,7 +352,7 @@ svg {
       }
 
       function openDoor(event) {
-        // TODO human protection
+      // TODO human protection
       //  if (isHuman()) {
       //    window.alert('The doors are jammed and won\'t open all the way. Something smaller could get through.');
       //  } else {
@@ -384,9 +384,6 @@ svg {
 
       let draggingBall = false;
       let draggingKey = false;
-
-      // TODO replace "if (!ball) ball = document.getElementById('ball');" everywhere
-      // with getBall() and let it do the caching.
 
       function hideBall() {
         if (!ball) ball = document.getElementById('ball');
@@ -549,7 +546,6 @@ svg {
     <script lang="javascript" id="ropeRendering">
       // Thanks to https://muffinman.io/blog/draw-svg-rope-using-javascript/
       // Code from https://codepen.io/stanko/pen/vYaEMKX
-      // TODO Add acknowledgement on home page if we use this
 
       // ----- VECTORS ----- //
       function multiplyVector(v, scalar) {
@@ -1016,30 +1012,11 @@ svg {
  
     <script type="module" lang="javascript" id="cablePhysics">
       // Thanks https://codepen.io/keetraxx/pen/oNzXKVN
-      // TODO Add acknowledgement on home page if we use this
 
-      // Script and end of body so elements have been created 
+      // Script at end of body so elements have been created 
 
       import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-      
-      // open pages
-      // rope
-      // https://codepen.io/keetraxx/pen/oNzXKVN?editors=0010
-      // https://github.com/d3
-      //
-      // drag
-      // https://anseki.github.io/plain-draggable/
-      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop
-      // https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop2
-      // https://www.w3schools.com/html/html5_draganddrop.asp
-      // 
-      
-      
-      // TODO use https://www.flickr.com/photos/krishnacolor/37892625552 ? 
-      // TODO use https://en.wikipedia.org/wiki/File:Preceptory_Tower_interior_(geograph_3578331).jpg ?
-      // DRAG ball and release
-      
-      
+            
       // Rope drawing options
       const ropeRenderOptions = {
             step: 20,
@@ -1125,10 +1102,10 @@ svg {
 
       moveRopeToBall();
     
-      d3.select(document)
-      .on("mousemove", (mouseEvent) => {
-     //   moveRopeEnd(mouseEvent.pageX, mouseEvent.pageY);
-      });    
+    //   d3.select(document)
+    //   .on("mousemove", (mouseEvent) => {
+    //  //   moveRopeEnd(mouseEvent.pageX, mouseEvent.pageY);
+    //   });    
     
     </script>
 
