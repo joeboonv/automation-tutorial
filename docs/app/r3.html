@@ -53,26 +53,6 @@ body {
   opacity: 0;
 }
 
-#firmament {
-  z-index: -98;
-  height: 563px;
-}
-
-.skyfall {
-  animation-name: fadeAway;
-  animation-duration: 3000ms;
-  animation-delay: 250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-}
-
-@keyframes fadeAway {
-  100% { opacity: 0; }
-}
-
 .zoomBackground {
   animation-name: zoom;
   transform-origin: 50% 58%;
@@ -86,10 +66,6 @@ body {
 @keyframes zoom {
   0% { scale: 1.0; opacity: 1.0; }
   100% { scale: 5.0; opacity: 0.2; }
-}
-
-.foregroundImage {
-  z-index: 2;
 }
 
 .layer1 {
@@ -225,12 +201,12 @@ body {
 }
 
 #a {
-  left: 590px;
+  left: 594px;
   top: 550px;
 }
 
 #b {
-  left: 850px;
+  left: 844px;
   top: 550px;
 }
 
@@ -243,7 +219,7 @@ body {
 }
 
 .pot-a {
-  left: 547px;
+  left: 551px;
   top: 533px;
   width: 110px;
 }
@@ -262,7 +238,7 @@ body {
 }
 
 .pot-b {
-  left: 807px;
+  left: 801px;
   top: 533px;
   width: 110px;
 }
@@ -298,6 +274,39 @@ body {
 @keyframes move-pot-c {
   100% { top: 500px; }
 }
+
+svg {
+  position: absolute;
+  z-index: 10;
+  left: 0px;
+  top: 0px;
+  width: 1000px;
+  height: 660px;
+}
+
+line {
+  stroke: dimgrey;
+  stroke-width: 5;
+}
+
+#rope-c {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 160;
+}
+
+.extend-rope-c {
+  animation-name: dash;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes dash {
+  0% { stroke-dashoffset: 160; }
+  100% {  stroke-dashoffset: 0; }
+}
     </style>
 
     <script language="javascript">
@@ -307,8 +316,6 @@ body {
       // TODO: two blocks with weights, and they shift down or align, or on scales, or shift and two semi-circle holes align??
 
       function zoomAndNavigate(href) {
-        const sky = document.querySelector('#firmament');
-        sky.classList.add('skyfall');
 
         const sun = document.querySelector('#sun');
         sun.classList.add('sunrise');
@@ -321,8 +328,8 @@ body {
 
       function showTemple() {
         // Only show temple when everything else is loaded to there is no spoiler
-        const temple = document.querySelector('.backgroundImage');
-        temple.style.opacity = 1;
+        // const temple = document.querySelector('.backgroundImage');
+        // temple.style.opacity = 1;
       }
 
       let a = 0;
@@ -351,7 +358,13 @@ body {
         hideFields();
         startMovingGears();
         startMovingPots();
-        setTimeout(openDoor, 4000);
+        startExtendingRopes();
+        setTimeout(openDoor, 4200);
+      }
+
+      function startExtendingRopes() {
+        const rc = document.getElementById('rope-c');
+        rc.classList.add('extend-rope-c');
       }
 
       function startMovingPots() {
@@ -422,31 +435,17 @@ body {
           class="fullImage"
         />
 
-        <img
+        <!-- <img
           src="img/r3-background.png"
           alt="Temple"
           onmousemove="hoverTemple();"
           class="fullImage backgroundImage"
-        />
-
-        <img
-          id="firmament"
-          src="img/r3-sky.png"
-          alt="Blue sky with sun"
-          class="fullImage"
-        />
-
-        <img
-          src="img/r3-foreground.png"
-          alt="Temple courtyard"
-          onmousemove="hoverTemple();"
-          class="fullImage foregroundImage"
-        />
+        /> -->
 
         <img
           src="img/r3-pot.png"
           alt="Large clay pot with a text field on it"
-          class="layer2 pot-c"
+          class="layer1 pot-c"
         />
 
         <form
@@ -469,37 +468,37 @@ body {
         <img
           src="img/r3-gear.png"
           alt="gear for rope connecting to the large clay pot"
-          class="layer1 gear-c"
+          class="layer3 gear-c"
         />
 
         <img
           src="img/r3-gear.png"
           alt="gear for rope connecting all pots"
-          class="layer1 gear-abc"
+          class="layer3 gear-abc"
         />
 
         <img
           src="img/r3-gear.png"
           alt="gear for rope connecting the two small pots"
-          class="layer1 gear-ab"
+          class="layer3 gear-ab"
         />
         
         <img
           src="img/r3-gear.png"
           alt="gear for rope connecting to a small pot"
-          class="layer1 gear-a"
+          class="layer3 gear-a"
         />
         
         <img
           src="img/r3-gear.png"
           alt="gear for rope connecting to a small pot"
-          class="layer1 gear-b"
+          class="layer3 gear-b"
         />
 
         <img
           src="img/r3-pot.png"
           alt="Small clay pot"
-          class="layer2 pot-a"
+          class="layer3 pot-a"
         />
 
         <span
@@ -510,7 +509,7 @@ body {
         <img
           src="img/r3-pot.png"
           alt="Small clay pot"
-          class="layer2 pot-b"
+          class="layer3 pot-b"
         />
 
         <span
@@ -518,6 +517,13 @@ body {
           class='weight'>
         </span>
 
+        <svg class="layer2"><line id="rope-c" x1="220" y1="260" x2="220" y2="520"/></svg>
+        <svg class="layer2"><line id="rope-c-abc" x1="235" y1="236" x2="490" y2="135"/></svg>
+        <svg class="layer2"><line id="rope-abc-ab" x1="512" y1="135" x2="740" y2="235"/></svg>
+        <svg class="layer2"><line id="rope-ab-a" x1="747" y1="280" x2="620" y2="372"/></svg>
+        <svg class="layer2"><line id="rope-ab-b" x1="756" y1="252" x2="851" y2="379"/></svg>
+        <svg class="layer2"><line id="rope-a" x1="606" y1="390" x2="606" y2="549"/></svg>
+        <svg class="layer2"><line id="rope-b" x1="857" y1="390" x2="857" y2="549"/></svg>
       </div>
     </div>
   </body>
