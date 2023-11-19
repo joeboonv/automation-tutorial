@@ -107,6 +107,21 @@ body {
   100% { rotate: -80deg }
 }
 
+.rotate-gear-c-fail {
+  animation-name: rotate-gear-c-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-c-fail {
+  0% { rotate: 40deg }
+  90% { rotate: -20deg }
+  100% { rotate: 280deg }
+}
+
 .gear-abc {
   left: 470px;
   top: 130px;
@@ -126,6 +141,21 @@ body {
 @keyframes rotate-gear-abc {
   0% { rotate: 60deg }
   100% { rotate: -60deg }
+}
+
+.rotate-gear-abc-fail {
+  animation-name: rotate-gear-abc-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-abc-fail {
+  0% { rotate: 60deg }
+  90% { rotate: 0deg }
+  100% { rotate: 160deg }
 }
 
 .gear-ab {
@@ -149,6 +179,21 @@ body {
   100% { rotate: -40deg }
 }
 
+.rotate-gear-ab-fail {
+  animation-name: rotate-gear-ab-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-ab-fail {
+  0% { rotate: 80deg }
+  90% { rotate: 20deg }
+  100% { rotate: 120deg }
+}
+
 .gear-a {
   left: 600px;
   top: 365px;
@@ -168,6 +213,21 @@ body {
 @keyframes rotate-gear-a {
   0% { rotate: 0deg }
   100% { rotate: 85deg }
+}
+
+.rotate-gear-a-fail {
+  animation-name: rotate-gear-a-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-a-fail {
+  0% { rotate: 0deg }
+  90% { rotate: 42deg }
+  100% { rotate: 0deg }
 }
 
 .gear-b {
@@ -190,6 +250,22 @@ body {
   0% { rotate: 45deg }
   100% { rotate: -30deg }
 }
+
+.rotate-gear-b-fail {
+  animation-name: rotate-gear-b-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes rotate-gear-b-fail {
+  0% { rotate: 45deg }
+  90% { rotate: 7deg }
+  100% { rotate: 45deg }
+}
+
 
 .weight {
   z-index: 9;
@@ -224,36 +300,40 @@ body {
   width: 110px;
 }
 
-.move-pot-a {
-  animation-name: move-pot-a;
-  animation-duration: 4s;
-  animation-delay: 10ms;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
-
-@keyframes move-pot-a {
-  100% { top: 450px; }
-}
-
 .pot-b {
   left: 801px;
   top: 533px;
   width: 110px;
 }
 
-.move-pot-b {
-  animation-name: move-pot-b;
+.move-pot-ab {
+  animation-name: move-pot-ab;
   animation-duration: 4s;
   animation-delay: 10ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
+  animation-composition: add;
   animation-iteration-count: 1;
 }
 
-@keyframes move-pot-b {
-  100% { top: 450px; }
+@keyframes move-pot-ab {
+  100% { top: -83px; }
+}
+
+.move-pot-ab-fail {
+  animation-name: move-pot-ab-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-composition: add;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-pot-ab-fail {
+  0% { top: 0px; }
+  90% { top: -42px; }
+  100% { top: 0px; }
 }
 
 .pot-c {
@@ -273,6 +353,22 @@ body {
 
 @keyframes move-pot-c {
   100% { top: 500px; }
+}
+
+.move-pot-c-fail {
+  animation-name: move-pot-c-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes move-pot-c-fail {
+  0% { top: 339px; rotate: 0deg; }
+  90% { top: 419px; rotate: 0deg; }
+  97% { top: 500px; rotate: 0deg; }
+  100% { top: 500px; rotate: 3deg;}
 }
 
 svg {
@@ -306,6 +402,38 @@ line {
 @keyframes dash {
   0% { stroke-dashoffset: 160; }
   100% {  stroke-dashoffset: 0; }
+}
+
+.extend-rope-c-fail {
+  animation-name: dash-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes dash-fail {
+  0% { stroke-dashoffset: 160; }
+  90% {  stroke-dashoffset: 80; }
+  100% { stroke-dashoffset: 200; }
+}
+
+.extend-rope-ab-fail {
+  animation-name: extend-rope-ab-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-composition: add;
+  animation-iteration-count: 1;
+  transform-origin: bottom;
+}
+
+@keyframes extend-rope-ab-fail {
+  0% { scale: 100% 100%; }
+  90% {  scale: 100% 100%; }
+  100% { scale: 100% 40%; }
 }
     </style>
 
@@ -350,43 +478,52 @@ line {
         const c = Number(el.value);
         const expectedAnswer = a + b;
         if (c == expectedAnswer) {
+          correctAnswerSupplied();
+        }
+      }
+
+      function correctAnswerSupplied() {
+        if (isHuman()) {
+          failToEmptyChamber();
+        } else {
           emptyChamber();
         }
       }
 
-      function emptyChamber() {
+      function failToEmptyChamber() {
         hideFields();
-        startMovingGears();
-        startMovingPots();
-        startExtendingRopes();
+        startMovingGears('-fail');
+        startMovingPots('-fail');
+        startExtendingRopes('-fail');
         setTimeout(openDoor, 4200);
       }
 
-      function startExtendingRopes() {
-        const rc = document.getElementById('rope-c');
-        rc.classList.add('extend-rope-c');
+      function emptyChamber() {
+        hideFields();
+        startMovingGears('');
+        startMovingPots('');
+        startExtendingRopes('');
+        setTimeout(openDoor, 4200);
       }
 
-      function startMovingPots() {
-        const a = document.querySelector('.pot-a');
-        const b = document.querySelector('.pot-b');
-        const c = document.querySelector('.pot-c');
-        a.classList.add('move-pot-a');
-        b.classList.add('move-pot-b');
-        c.classList.add('move-pot-c');
+      function startExtendingRopes(classSuffix) {
+        document.getElementById('rope-a').classList.add('extend-rope-ab' + classSuffix);
+        document.getElementById('rope-b').classList.add('extend-rope-ab' + classSuffix);
+        document.getElementById('rope-c').classList.add('extend-rope-c' + classSuffix);
       }
 
-      function startMovingGears() {
-        const ga = document.querySelector('.gear-a');
-        const gb = document.querySelector('.gear-b');
-        const gc = document.querySelector('.gear-c');
-        const gab = document.querySelector('.gear-ab');
-        const gabc = document.querySelector('.gear-abc');
-        ga.classList.add('rotate-gear-a');
-        gb.classList.add('rotate-gear-b');
-        gc.classList.add('rotate-gear-c');
-        gab.classList.add('rotate-gear-ab');
-        gabc.classList.add('rotate-gear-abc');
+      function startMovingPots(classSuffix) {
+        document.querySelector('.pot-a').classList.add('move-pot-ab' + classSuffix);
+        document.querySelector('.pot-b').classList.add('move-pot-ab' + classSuffix);
+        document.querySelector('.pot-c').classList.add('move-pot-c' + classSuffix);
+      }
+
+      function startMovingGears(classSuffix) {
+        document.querySelector('.gear-a').classList.add('rotate-gear-a' + classSuffix);
+        document.querySelector('.gear-b').classList.add('rotate-gear-b' + classSuffix);
+        document.querySelector('.gear-c').classList.add('rotate-gear-c' + classSuffix);
+        document.querySelector('.gear-ab').classList.add('rotate-gear-ab' + classSuffix);
+        document.querySelector('.gear-abc').classList.add('rotate-gear-abc' + classSuffix);
       }
 
       function hideFields() {
