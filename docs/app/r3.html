@@ -53,6 +53,82 @@ body {
   opacity: 0;
 }
 
+#waterLevel {
+  width: 1200px;
+  left: -100px;
+  top: 661px;
+  position: absolute;
+}
+
+#water {
+  opacity: 30%;
+  width: 1200px;
+  left: 0px;
+  top: 20px;
+  position: relative;
+}
+
+.fill-water {
+  animation-name: fill-water;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fill-water {
+  0% { top: 661px; }
+  100% { top: 470px; }
+}
+
+.slosh-water {
+  animation-name: slosh-water;
+  animation-duration: 12s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-composition: add;
+}
+
+@keyframes slosh-water {
+  0% { top: 0px; opacity: 0%; rotate: 0deg; }
+  25% { rotate: 1deg; }
+  50% { rotate: 0deg; }
+  75% { rotate: -1deg; }
+  100% { top: 20px; opacity: -10%; rotate: 0deg; }
+}
+
+.drain-water {
+  top: 470px;
+  animation-name: drain-water;
+  animation-duration: 4s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drain-water {
+  0% { top: 470px; }
+  30% { top: 470px; }
+  100% { top: 661px; }
+}
+
+.drain-water-fail {
+  top: 470px;
+  animation-name: drain-water-fail;
+  animation-duration: 3s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drain-water-fail {
+  0% { top: 470px; }
+  100% { top: 510px; }
+}
+
 .zoomBackground {
   animation-name: zoom;
   transform-origin: 50% 58%;
@@ -82,6 +158,12 @@ body {
 
 .layer3 {
   z-index: 5;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer4 {
+  z-index: 6;
   position: absolute;
   object-fit: contain;
 }
@@ -266,9 +348,8 @@ body {
   100% { rotate: 45deg }
 }
 
-
 .weight {
-  z-index: 9;
+  z-index: 20;
   position: absolute;
   font-family: Garamond, serif; 
   font-weight: bold;
@@ -287,8 +368,9 @@ body {
 }
 
 #c {
+  visibility: hidden;
   left: 194px;
-  top: 361px;
+  top: 365px;
   width: 50px;
   background-color: wheat;
   text-align: center;
@@ -438,10 +520,11 @@ line {
     </style>
 
     <script language="javascript">
+      // TODO Crop water instead of positioning it at the bottom? Does it make cypress scroll?
+
       // TODO Change scene background and reveal so level 5 can use this one. Use Sand to reveal a door?
       // TODO roman numerals???
       // TODO: make them submit the form?
-      // TODO: two blocks with weights, and they shift down or align, or on scales, or shift and two semi-circle holes align??
 
       function zoomAndNavigate(href) {
 
@@ -453,19 +536,31 @@ line {
 
         setTimeout(() => window.location.assign(href), 8000);
       }
+      
+      function loaded() { 
+        fillWater();
+        setTimeout(showWeights, 4010);
+      }
+      
+      function fillWater() {
+        document.getElementById('waterLevel').classList.add('fill-water');
+        setTimeout(() => document.getElementById('water').classList.add('slosh-water'), 4010);
+      }
 
-      function showTemple() {
-        // Only show temple when everything else is loaded to there is no spoiler
-        // const temple = document.querySelector('.backgroundImage');
-        // temple.style.opacity = 1;
+      function showWeights() {
+        assignWeightsToPots();
+        showC();
+      }
+      
+      function showC() {
+        document.querySelector('#c').style.visibility = 'visible';
       }
 
       let a = 0;
       let b = 0;
       let c = 999;
 
-      function loaded() { 
-        showTemple();
+      function assignWeightsToPots() {
         a = Math.round(Math.random() * 89) + 10;
         b = Math.round(Math.random() * 89) + 10;
         spanA = document.querySelector('#a');
@@ -495,6 +590,7 @@ line {
         startMovingGears('-fail');
         startMovingPots('-fail');
         startExtendingRopes('-fail');
+        startDrainingWater('-fail');
         setTimeout(openDoor, 4200);
       }
 
@@ -503,6 +599,7 @@ line {
         startMovingGears('');
         startMovingPots('');
         startExtendingRopes('');
+        startDrainingWater('');
         setTimeout(openDoor, 4200);
       }
 
@@ -524,6 +621,10 @@ line {
         document.querySelector('.gear-c').classList.add('rotate-gear-c' + classSuffix);
         document.querySelector('.gear-ab').classList.add('rotate-gear-ab' + classSuffix);
         document.querySelector('.gear-abc').classList.add('rotate-gear-abc' + classSuffix);
+      }
+
+      function startDrainingWater(classSuffix) {
+        document.getElementById('waterLevel').classList.add('drain-water' + classSuffix);        
       }
 
       function hideFields() {
@@ -550,6 +651,9 @@ line {
       }
 
       function isHuman() {
+        // TODO all pages - forget cypress, look at:
+        // -  mouse position just before clicking?? Was it close? = human (also allows tester to move mouse over test browser while test is running and still be treated as a machine running it)
+        // -  or just time taken to solve the puzzle? Was is slow? = human (handles mobile as well!)
         return hoverTempleCount > 3 || !isCypressRunning();
       }
 
@@ -661,6 +765,14 @@ line {
         <svg class="layer2"><line id="rope-ab-b" x1="756" y1="252" x2="851" y2="379"/></svg>
         <svg class="layer2"><line id="rope-a" x1="606" y1="390" x2="606" y2="549"/></svg>
         <svg class="layer2"><line id="rope-b" x1="857" y1="390" x2="857" y2="549"/></svg>
+
+        <div id="waterLevel" class="layer4">
+          <img
+            id="water"
+            src="img/r3-water.gif"
+            alt="water filling the room"
+          />
+        </div>
       </div>
     </div>
   </body>
