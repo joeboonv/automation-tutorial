@@ -28,6 +28,12 @@ ____
 
 ## Acknowledgements
 
+To add:
+
+Used https://ezgif.com/ to optimise and crop images
+
+https://giphy.com/gifs/trippy-abstract-pi-slices-OalJFGFBD4D2xn61qb
+
 ### Images
 
 - [Bateshwar temples, Gwalior, Madhya Pradesh](https://unsplash.com/photos/BZQslOwhW2I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) by [Ashutosh Dvivedi](https://unsplash.com/@old_wolf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
