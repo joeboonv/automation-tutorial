@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>Ancient Temple of Ocypress</title>
+    <style>
+body {
+  margin: 0px;
+}
+      
+.image-container {
+  position: relative;
+  width: 1000px;
+  height: 660px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  overflow: hidden;
+}
+
+.fullImage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  object-fit: cover;
+}
+
+.backgroundImage {
+  z-index: -99;
+  opacity: 0;
+}
+
+h1 {
+    text-align:center;
+}
+
+    </style>
+
+    <script language="javascript">
+
+      function zoomAndNavigate(href) {
+
+        const cropFrame = document.getElementById('cropFrame');
+        cropFrame.classList.add('zoomBackground');
+
+        setTimeout(() => window.location.assign(href), 8000);
+      }
+
+      function loaded() { 
+      }
+
+      let hoverTempleCount = 0;
+      function hoverTemple() {
+        hoverTempleCount++;
+      }
+
+      function openDoor(event) {
+        if (isHuman()) {
+          window.alert('???');
+        } else {
+          window.alert('The adventure continues!');
+          zoomAndNavigate('r7.html');
+        }
+      }
+
+      function isHuman() {
+        return hoverTempleCount > 3 || !isCypressRunning();
+      }
+
+      function isCypressRunning() {
+        return window.Cypress;
+      }
+
+    </script>
+  </head>
+
+  <body onload="loaded();">
+
+    <div class="image-container">
+      <div id="cropFrame" class="image-container">
+        <img
+          class="fullImage" 
+          src="img/r99.jpg" 
+          alt="temple doors open to a sunny water meadow surrounded by forest and mountains"
+        />
+
+
+      </div>
+    </div>
+
+
+
+  </body>
+</html>
