@@ -50,7 +50,6 @@ body {
 
 .backgroundImage {
   z-index: -99;
-  opacity: 0;
 }
 
 #waterLevel {
@@ -133,9 +132,9 @@ body {
 
 .zoomBackground {
   animation-name: zoom;
-  transform-origin: 50% 58%;
+  transform-origin: 50% 48%;
   animation-duration: 2s;
-  animation-delay: 6000ms;
+  animation-delay: 10ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
@@ -531,13 +530,13 @@ line {
 
       function zoomAndNavigate(href) {
 
-        const sun = document.querySelector('#sun');
-        sun.classList.add('sunrise');
+        // const sun = document.querySelector('#sun');
+        // sun.classList.add('sunrise');
 
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
-        setTimeout(() => window.location.assign(href), 8000);
+        setTimeout(() => window.location.assign(href), 2100);
       }
       
       function loaded() { 
@@ -672,19 +671,14 @@ line {
     <div class="image-container">
       <div id="cropFrame" class="image-container">
 
+        <!-- TODO Rename and Resize -->
         <img
-          id="sun"
-          src="img/r3-sky.png"
-          alt="Blue sky with sun"
-          class="fullImage"
-        />
-
-        <!-- <img
-          src="img/r3-background.png"
+          src="img/_5b26b4af-76a8-4ca5-9509-7a268622f8fb.jpg"
           alt="Temple"
           onmousemove="hoverTemple();"
           class="fullImage backgroundImage"
-        /> -->
+          style="top: -150px;"
+        />
 
         <img
           src="img/r3-pot.png"
