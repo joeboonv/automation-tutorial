@@ -31,12 +31,6 @@ ____
 
 ## Acknowledgements
 
-To add:
-
-Used https://ezgif.com/ to optimise and crop images
-
-https://giphy.com/gifs/trippy-abstract-pi-slices-OalJFGFBD4D2xn61qb
-
 ### Images
 
 - [Bateshwar temples, Gwalior, Madhya Pradesh](https://unsplash.com/photos/BZQslOwhW2I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) by [Ashutosh Dvivedi](https://unsplash.com/@old_wolf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
@@ -45,6 +39,7 @@ https://giphy.com/gifs/trippy-abstract-pi-slices-OalJFGFBD4D2xn61qb
 - [Sun Temple, Konark, Puri, Odisha](https://commons.wikimedia.org/wiki/File:Sun_Temple_Konark.jpg) by Deepak Nashine in the [Public domain on Wikimedia](https://commons.wikimedia.org/wiki/File:Sun_Temple_Konark.jpg)
 - [Mayan Calendar stone disc](https://todayinhistorydotblog.files.wordpress.com/2018/12/MayanCalendar.gif) freely available from many sources including [Today is History](https://todayinhistory.blog/2018/12/21/december-21-2012-apocalypse-postponed/)
 - [Church of Panagia Gorgoepikoos, Athens, Greece](https://pxhere.com/en/photo/387974) under the [Creative Commons CC0 1.0 DEED](https://creativecommons.org/publicdomain/zero/1.0/)
+- Water - https://giphy.com/gifs/trippy-abstract-pi-slices-OalJFGFBD4D2xn61qb
 
 ### Code
 
@@ -73,6 +68,10 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#### Offline image manipulation
+
+https://ezgif.com/ used to optimise and crop images
 
 ____
 
