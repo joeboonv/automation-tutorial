@@ -1,32 +1,31 @@
 ---
 layout: app
-title: Welcome to the Temple of Ocypress
+title: Unlock Automation - The Temple of Time
 ---
 
 <style>
   
 </style>
 
-# Can you discover the secrets of the temple?
+![Ancient temple in the middle of a lake](img/intro.jpg)
 
-## Use Cypress to navigate temple courtyards and underground chambers
+# Can you discover the secrets of the Temple of Time?
 
-:flashlight: [Start here](r1.html)
+## Use Cypress to navigate through the temple, avoiding traps, and unlocking doors
 
-____
+Be careful, the temple might change each time you visit!
 
-## Shortcuts
+## :flashlight: [Start here](r1.html)
 
-- [r1](r1.html) - get + click
-- [r2](r2.html) . [r2b](r2b.html) - get with longer timeout
-- [r3](r3.html) . [r3b](r3b.html) - async calculations
-- [r4](r4.html) - drag
-- [r5](r5.html) - each
-- 
-- 
-- [r8](r8.html) - slider
-- [r99](r99.html) . [r99a](r99a.html) . [r99b](r99b.html) . [r99c](r99c.html) . [r99d](r99d.html)
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 
 ____
 
@@ -50,6 +49,7 @@ https://giphy.com/gifs/trippy-abstract-pi-slices-OalJFGFBD4D2xn61qb
 ### Code
 
 #### Cable physics by Khôi Tran
+
 https://codepen.io/keetraxx/pen/oNzXKVN
 
 Copyright (c) 2023 by Khôi Tran https://codepen.io/keetraxx/pen/oNzXKVN
@@ -61,6 +61,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #### Rope rendering by Stanko Tadić
+
 https://codepen.io/stanko/pen/vYaEMKX
 
 See post https://muffinman.io/blog/draw-svg-rope-using-javascript/
@@ -72,3 +73,15 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+____
+
+## Shortcuts
+
+- [r1](r1.html) - get + click
+- [r2](r2.html) . [r2b](r2b.html) - get with longer timeout
+- [r3](r3.html) . [r3b](r3b.html) - async calculations
+- [r4](r4.html) - drag
+- [r5](r5.html) - each
+- [r8](r8.html) - slider
+- [r99](r99.html) . [r99a](r99a.html) . [r99b](r99b.html) . [r99c](r99c.html) . [r99d](r99d.html)
