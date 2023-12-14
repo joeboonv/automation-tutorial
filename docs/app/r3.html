@@ -27,27 +27,6 @@ body {
   object-fit: cover;
 }
 
-#sun {
-  z-index: -101;
-  height: 563px;
-}
-
-.sunrise {
-  animation-name: sunrise;
-  animation-duration: 3500ms;
-  animation-delay: 2250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: 0% 100%;
-}
-
-@keyframes sunrise {
-  100% { top: -120; rotate: -8deg}
-}
-
 .backgroundImage {
   z-index: -99;
 }
@@ -529,10 +508,6 @@ line {
       // TODO hide all foreground elements until they are loaded, will look better
 
       function zoomAndNavigate(href) {
-
-        // const sun = document.querySelector('#sun');
-        // sun.classList.add('sunrise');
-
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
@@ -671,13 +646,12 @@ line {
     <div class="image-container">
       <div id="cropFrame" class="image-container">
 
-        <!-- TODO Rename and Resize -->
+        <!-- TODO Rename background image file -->
         <img
           src="img/r3-background2.jpg"
           alt="Temple"
           onmousemove="hoverTemple();"
           class="fullImage backgroundImage"
-          style="top: -150px;"
         />
 
         <img
