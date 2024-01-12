@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+body {
+  margin: 5px, 100px;
+}
+
 details > summary:first-of-type {
   display: list-item;
 }
@@ -17,11 +21,20 @@ details > summary:first-of-type {
 }
 
 .project-name {
-  background-color: #3d1;
-  background-image: linear-gradient(270deg, #fff, #3d1);
+  background-color: #8a9fa1;
+  background-image: linear-gradient(270deg, #fff, #8a9fa1);
   margin-top: 0;
   margin-bottom: 0;
   padding: 0 20px;
+}
+
+.project-name::before {
+  content: "";
+  display: block;
+  background: url('img/small_PNG-Valtech_Micro_Unlock_Black.png') no-repeat;
+  width: 125px;
+  height: 125px;
+  float: left;
 }
 
 .project-tagline {

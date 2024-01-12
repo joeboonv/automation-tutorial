@@ -27,30 +27,8 @@ body {
   object-fit: cover;
 }
 
-#sun {
-  z-index: -101;
-  height: 563px;
-}
-
-.sunrise {
-  animation-name: sunrise;
-  animation-duration: 3500ms;
-  animation-delay: 2250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-  transform-origin: 0% 100%;
-}
-
-@keyframes sunrise {
-  100% { top: -120; rotate: -8deg}
-}
-
 .backgroundImage {
   z-index: -99;
-  opacity: 0;
 }
 
 #waterLevel {
@@ -133,9 +111,9 @@ body {
 
 .zoomBackground {
   animation-name: zoom;
-  transform-origin: 50% 58%;
+  transform-origin: 50% 48%;
   animation-duration: 2s;
-  animation-delay: 6000ms;
+  animation-delay: 10ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
@@ -530,14 +508,10 @@ line {
       // TODO hide all foreground elements until they are loaded, will look better
 
       function zoomAndNavigate(href) {
-
-        const sun = document.querySelector('#sun');
-        sun.classList.add('sunrise');
-
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
-        setTimeout(() => window.location.assign(href), 8000);
+        setTimeout(() => window.location.assign(href), 2100);
       }
       
       function loaded() { 
@@ -672,19 +646,13 @@ line {
     <div class="image-container">
       <div id="cropFrame" class="image-container">
 
+        <!-- TODO Rename background image file -->
         <img
-          id="sun"
-          src="img/r3-sky.png"
-          alt="Blue sky with sun"
-          class="fullImage"
-        />
-
-        <!-- <img
-          src="img/r3-background.png"
+          src="img/r3-background2.jpg"
           alt="Temple"
           onmousemove="hoverTemple();"
           class="fullImage backgroundImage"
-        /> -->
+        />
 
         <img
           src="img/r3-pot.png"

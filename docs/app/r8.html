@@ -80,7 +80,12 @@ body {
       }
 
       function loaded() { 
-
+        var slider = document.querySelector('input#slider');
+        var currentMax = Number(slider.getAttribute('max'));
+        var randomIncreaseRoundedToTen = Math.trunc(Math.random() * 5) * 10;
+        var newMax = currentMax + randomIncreaseRoundedToTen;
+        slider.setAttribute('max', newMax);
+        slider.style.visibility = 'visible';
       }
 
       let hoverTempleCount = 0;
@@ -92,8 +97,8 @@ body {
         if (isHuman()) {
           window.alert('Please send a robot to progress further.');
         } else {
-         // window.alert('You made it across the causeway.');
-          zoomAndNavigate('r99c.html');
+          // window.alert('You made it across the causeway.');
+          setTimeout(() => zoomAndNavigate('r99c.html'), 600);
         }
       }
 
@@ -122,6 +127,7 @@ body {
         />
 
         <input 
+          style="visibility: hidden;"
           id="slider"
           type="range" 
           class="slider" 
