@@ -29,26 +29,63 @@ body {
 
 .backgroundImage {
   z-index: -99;
-  opacity: 0;
 }
 
-h1 {
-    text-align:center;
+.zoomBackground {
+  animation-name: zoomBackground;
+  transform-origin: 50% 58%;
+  animation-duration: 2s;
+  animation-delay: 10ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
-    </style>
+@keyframes zoomBackground {
+  0% { scale: 1.0; opacity: 1.0; }
+  100% { scale: 7.0; opacity: 0.2; }
+}
+
+.slider {
+  position: absolute;
+  top: 600px;
+  left: 800px;
+  width: 150px;
+}
+
+</style>
 
     <script language="javascript">
+      // TODO: *** Human protection ***- check wrongClicks == 0 and hover == 0
 
       function zoomAndNavigate(href) {
 
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
-        setTimeout(() => window.location.assign(href), 8000);
+        setTimeout(() => window.location.assign(href), 2020);
+      }
+
+      var triggered = false;
+
+      function slide(scale, max) {
+        if (triggered) return;
+
+        var el = document.getElementById('temple');
+        el.style.scale = (scale / 100);
+        if (scale == max) {
+          triggered = true;
+          document.getElementById('slider').style.visibility = 'hidden';
+          openDoor(); 
+        }
       }
 
       function loaded() { 
+        var slider = document.querySelector('input#slider');
+        var currentMax = Number(slider.getAttribute('max'));
+        var randomIncreaseRoundedToTen = Math.trunc(Math.random() * 5) * 10;
+        var newMax = currentMax + randomIncreaseRoundedToTen;
+        slider.setAttribute('max', newMax);
+        slider.style.visibility = 'visible';
       }
 
       let hoverTempleCount = 0;
@@ -56,17 +93,17 @@ h1 {
         hoverTempleCount++;
       }
 
-      function openDoor(event) {
+      function openDoor() {
         if (isHuman()) {
-          window.alert('???');
+          window.alert('Please send a robot to progress further.');
         } else {
-          window.alert('The adventure continues!');
-          zoomAndNavigate('r7.html');
+          // window.alert('You made it across the causeway.');
+          setTimeout(() => zoomAndNavigate('r99c.html'), 600);
         }
       }
 
       function isHuman() {
-        return hoverTempleCount > 3 || !isCypressRunning();
+        return false; // hoverTempleCount > 3 || !isCypressRunning();
       }
 
       function isCypressRunning() {
@@ -78,29 +115,31 @@ h1 {
 
   <body onload="loaded();">
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <h1>The End ?</h1>        
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <!-- <div class="image-container">
+    <div class="image-container">
       <div id="cropFrame" class="image-container">
 
+        <img
+          id="temple"
+          src="img/r8.jpg"
+          alt="Temple surrounded by water with a stone path leading to it"
+          onmousemove="hoverTemple();"
+          class="fullImage backgroundImage"
+        />
 
+        <input 
+          style="visibility: hidden;"
+          id="slider"
+          type="range" 
+          class="slider" 
+          min="100" 
+          max="300" 
+          value="100"
+          oninput="slide(this.value, this.max);"
+          onchange="slide(this.value, this.max);"
+         />
+
+        
       </div>
-    </div> -->
-
-
-
+    </div>
   </body>
 </html>

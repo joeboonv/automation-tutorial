@@ -35,7 +35,7 @@ body {
 .sunrise {
   animation-name: sunrise;
   animation-duration: 3500ms;
-  animation-delay: 2250ms;
+  animation-delay: 250ms;
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
   animation-direction: normal;
@@ -50,34 +50,13 @@ body {
 
 .backgroundImage {
   z-index: -99;
-  opacity: 0;
-}
-
-#firmament {
-  z-index: -98;
-  height: 563px;
-}
-
-.skyfall {
-  animation-name: fadeAway;
-  animation-duration: 3000ms;
-  animation-delay: 250ms;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-}
-
-@keyframes fadeAway {
-  100% { opacity: 0; }
 }
 
 .zoomBackground {
   animation-name: zoom;
   transform-origin: 50% 58%;
   animation-duration: 2s;
-  animation-delay: 6000ms;
+  animation-delay: 4000ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
@@ -139,27 +118,16 @@ body {
       // TODO: ? Different images for each block so they look more realistic. Take our own photos.
 
       function zoomAndNavigate(href) {
-        const sky = document.querySelector('#firmament');
-        sky.classList.add('skyfall');
-
         const sun = document.querySelector('#sun');
         sun.classList.add('sunrise');
 
         const cropFrame = document.getElementById('cropFrame');
         cropFrame.classList.add('zoomBackground');
 
-        setTimeout(() => window.location.assign(href), 8000);
-      }
-
-      function showTemple() {
-        // Only show temple when everything else is loaded to there is no spoiler
-        const temple = document.querySelector('.backgroundImage');
-        temple.style.opacity = 1;
+        setTimeout(() => window.location.assign(href), 6000);
       }
 
       function loaded() { 
-        showTemple();
-
         const minBlocks = 4;
         const maxBlocks = 7;
         const numberOfBlocks = randomBetween(minBlocks, maxBlocks);
@@ -309,13 +277,6 @@ body {
           alt="Temple"
           onmousemove="hoverTemple();"
           class="fullImage backgroundImage"
-        />
-
-        <img
-          id="firmament"
-          src="img/r3-sky.png"
-          alt="Blue sky with sun"
-          class="fullImage"
         />
 
         <img
