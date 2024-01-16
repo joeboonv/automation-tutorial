@@ -30,11 +30,12 @@ details > summary:first-of-type {
 
 .project-name::before {
   content: "";
-  display: block;
   background: url('small_PNG-Valtech_Micro_Unlock_Black.png') no-repeat;
-  width: 125px;
-  height: 125px;
+  width: 80px;
+  height: 80px;
   float: left;
+  background-size: 60px;
+  background-position: center;
 }
 
 .project-tagline {
