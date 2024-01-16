@@ -177,6 +177,7 @@ body {
         block.style.height = height;
         block.style.zIndex = zorder;
         block.style.left = hoffset;
+        block.draggable = false;
         block.classList.add('block');
         block.classList.add('newBlock');
         block.addEventListener('click', clickBlock);
@@ -269,6 +270,7 @@ body {
           id="sun"
           src="img/r3-sky.png"
           alt="Blue sky with sun"
+          draggable="false"
           class="fullImage"
         />
 
@@ -276,6 +278,7 @@ body {
           src="img/r3-background.png"
           alt="Temple"
           onmousemove="hoverTemple();"
+          draggable="false"
           class="fullImage backgroundImage"
         />
 
@@ -283,6 +286,7 @@ body {
           src="img/r3-foreground.png"
           alt="Temple courtyard"
           onmousemove="hoverTemple();"
+          draggable="false"
           class="fullImage foregroundImage"
         />
 
