@@ -181,16 +181,18 @@ svg {
 }
 
 .column {
+  padding-top: 80px;
   left: 230px;
-  top: 400px;
+  top: 320px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
 }
 
 .wobblingColumn {
+  padding-top: 80px;
   left: 230px;
-  top: 400px;
+  top: 320px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -205,16 +207,17 @@ svg {
 }
 
 @keyframes wobble {
-  0%   { rotate: 0deg; top: 400px }
-  25%  { rotate: 2deg; top: 399px }
-  50%  { rotate: 0deg; top: 400px }
-  75%  { rotate: -2deg; top: 399px }
-  100% { rotate: 0deg; top: 400px }
+  0%   { rotate: 0deg; top: 320px }
+  25%  { rotate: 2deg; top: 319px }
+  50%  { rotate: 0deg; top: 320px }
+  75%  { rotate: -2deg; top: 319px }
+  100% { rotate: 0deg; top: 320px }
 }
 
 .fallingColumn {
+  padding-top: 80px;
   left: 230px;
-  top: 400px;
+  top: 320px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -230,14 +233,15 @@ svg {
 
 @keyframes fall {
   0% { rotate: 0deg; }
-  93% { rotate: -95deg; top: 370px; left: 200px; }
-  96% { rotate: -90deg; top: 370px; left: 200px; }
-  100% { rotate: -95deg; top: 370px; left: 200px; }
+  93% { rotate: -95deg; top: 290px; left: 200px; }
+  96% { rotate: -90deg; top: 290px; left: 200px; }
+  100% { rotate: -95deg; top: 290px; left: 200px; }
 }
 
 .swayingColumn {
+  padding-top: 80px;
   left: 230px;
-  top: 400px;
+  top: 320px;
   height: 220px;
   transform-origin: 50% 90%;
   rotate: 0deg;
@@ -253,19 +257,19 @@ svg {
 /* This is very useful: https://cubic-bezier.com/ */
 
 @keyframes swayLeft {
-  0% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: -20deg; top: 390px; left: 228px; }
+  0% { rotate: 0deg; top: 320px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: -20deg; top: 310px; left: 228px; }
 }
 
 @keyframes swayAcross {
-  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
-  50% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
-  100% { rotate: 20deg; top: 390px; left: 232px;  }
+  0% { rotate: -20deg; top: 310px; left: 228px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
+  50% { rotate: 0deg; top: 320px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: 20deg; top: 310px; left: 232px;  }
 }
 
 @keyframes swayCentre {
-  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
-  100% { rotate: 0deg; top: 400px; left: 230px; }
+  0% { rotate: -20deg; top: 310px; left: 228px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
+  100% { rotate: 0deg; top: 320px; left: 230px; }
 }
 
     </style>
@@ -389,6 +393,7 @@ svg {
 
       let draggingBall = false;
       let draggingKey = false;
+      let doorsOpen = false;
 
       function hideBall() {
         if (!ball) ball = document.getElementById('ball');
@@ -476,8 +481,8 @@ svg {
           if (targetLocation == 'door') {
             swingDoorsOpen();
             setTimeout(openDoor, 2000);
+            doorsOpen = true;
             dragEndKey(ev);
-            hideKey();
           }
         }
       }
@@ -544,7 +549,9 @@ svg {
 
       function dragEndKey(ev) { 
         draggingKey = false;
-        showKey();
+        if (!doorsOpen) {
+          showKey();
+        }
       }
 
     </script>
