@@ -5,7 +5,7 @@
 body {
   margin: 0px;
 }
-      
+
 .image-container {
   position: relative;
   width: 1000px;
@@ -21,31 +21,31 @@ body {
   top: 0px;
   left: 0px;
   width: 1000px;
+  height: 660px;
   padding: 0px;
   margin: 0px;
   border: none;
-  object-fit: cover;
 }
 
 #sun {
   z-index: -101;
   height: 563px;
+  opacity: 0;
 }
 
-.sunrise {
-  animation-name: sunrise;
-  animation-duration: 3500ms;
-  animation-delay: 250ms;
+.slideSky {
+  animation-name: slideSky;
+  animation-duration: 2s;
   animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in;
   animation-direction: normal;
   animation-fill-mode: forwards;
   animation-play-state: running;
   transform-origin: 0% 100%;
 }
 
-@keyframes sunrise {
-  100% { top: -120; rotate: -8deg}
+@keyframes slideSky {
+  100% { top: -90;}
 }
 
 .backgroundImage {
@@ -54,9 +54,8 @@ body {
 
 .zoomBackground {
   animation-name: zoom;
-  transform-origin: 50% 58%;
+  transform-origin: 54% 65%;
   animation-duration: 2s;
-  animation-delay: 4000ms;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
@@ -66,238 +65,1055 @@ body {
   100% { scale: 5.0; opacity: 0.2; }
 }
 
-.foregroundImage {
-  z-index: 200;
+#doorLeft {
+  z-index: -100;
+  position: absolute;
+  object-fit: contain;
+  top: 284;
+  left: 470;
+}
+
+#doorRight {
+  z-index: -100;
+  position: absolute;
+  object-fit: contain;
+  top: 284;
+  left: 543;
+  transform-origin: right;
+}
+
+.doorLeftAjar {
+  transform-origin: left;
+  transition: transform 2.5s;
+  transform: perspective(500px) rotateY(40deg);
+}
+
+.doorRightAjar {
+  transform-origin: right;
+  transition: transform 2.5s;
+  transform: perspective(500px) rotateY(-40deg);
+}
+
+#doorDropTarget {
+  top: 284;
+  left: 470;
+  height: 251;
+  width: 140;
+}
+
+.behindBackground {
+  z-index: -100;
+}
+
+.layer1 {
+  z-index: 1;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer2 {
+  z-index: 2;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer3 {
+  z-index: 3;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer4 {
+  z-index: 4;
+  position: absolute;
+  object-fit: contain;
+}
+
+.layer5 {
+  z-index: 5;
+  position: absolute;
+  object-fit: contain;
+}
+
+.small-pedestal {
+  padding-top: 80px;
+  left: 710px;
+  top: 420px;
+  height: 110px;
+}
+
+.large-pedestal {
+  padding-top: 80px;
+  left: 870px;
+  top: 350px;
+  height: 200px;
+}
+
+#ball {
+  left: 717px;
+  top: 414px;
+  width: 100px;
+}
+
+.key {
+  position: absolute;
+  object-fit: contain;
+  width: 80px;
+}
+
+#key {
+  left: 266px;
+  top: 560px;
+}
+
+svg {
+  position: absolute;
+  z-index: 10;
+  left: 0px;
+  top: 0px;
+  width: 1000px;
   height: 660px;
-  width: auto;
-  opacity: 0;
 }
 
-.blocks {
-  top: 200px;
-  left: 390px;
-  height: 400px;
-  position: absolute;
-  list-style-type: none;
-  cursor: pointer;
+#cablePath {
+  stroke-width: 0px;
+  fill: none;
 }
 
-.block {
-  position: absolute;
+.column {
+  left: 230px;
+  top: 400px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
 }
 
-.newBlock {
-  animation-duration: 400ms;
-  animation-name: blockAppears;
-  animation-composition: add;
-}
-
-@keyframes blockAppears {
-  0% { top: -1000px; }
-  100% { top: 0px; }
-}
-
-.removeBlock {
-  animation-duration:300ms;
-  animation-name: blockDisappears;
-  animation-composition: add;
+.wobblingColumn {
+  left: 230px;
+  top: 400px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: wobble;
+  animation-duration: 200ms;
+  animation-delay: 1s;
+  animation-iteration-count: 3;
   animation-timing-function: linear;
+  animation-direction: normal;
   animation-fill-mode: forwards;
+  animation-play-state: running;
 }
 
-@keyframes blockDisappears {
-  0% { left: 0px; }
-  100% { left: -250px; }
+@keyframes wobble {
+  0%   { rotate: 0deg; top: 400px }
+  25%  { rotate: 2deg; top: 399px }
+  50%  { rotate: 0deg; top: 400px }
+  75%  { rotate: -2deg; top: 399px }
+  100% { rotate: 0deg; top: 400px }
+}
+
+.fallingColumn {
+  left: 230px;
+  top: 400px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: fall;
+  animation-duration: 2100ms;
+  animation-delay: 250ms;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(.41,.25,1,-0.02);
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes fall {
+  0% { rotate: 0deg; }
+  93% { rotate: -95deg; top: 370px; left: 200px; }
+  96% { rotate: -90deg; top: 370px; left: 200px; }
+  100% { rotate: -95deg; top: 370px; left: 200px; }
+}
+
+.swayingColumn {
+  left: 230px;
+  top: 400px;
+  height: 220px;
+  transform-origin: 50% 90%;
+  rotate: 0deg;
+  animation-name: swayLeft, swayAcross, swayAcross, swayAcross, swayCentre;
+  animation-duration: 900ms, 1000ms, 800ms, 400ms, 250ms;
+  animation-delay: 100ms, 1000ms, 3000ms, 4600ms, 5400ms;
+  animation-iteration-count: 1, 2, 2, 2, 1;
+  animation-direction: normal, alternate, alternate, alternate, normal;
+  animation-fill-mode: forwards, forwards, forwards, forwards, forwards;
+  animation-play-state: running, running, running, running, running;
+}
+
+/* This is very useful: https://cubic-bezier.com/ */
+
+@keyframes swayLeft {
+  0% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: -20deg; top: 390px; left: 228px; }
+}
+
+@keyframes swayAcross {
+  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.5,0,1,.62) }
+  50% { rotate: 0deg; top: 400px; left: 230px; animation-timing-function: cubic-bezier(0,.5,.62,1) }
+  100% { rotate: 20deg; top: 390px; left: 232px;  }
+}
+
+@keyframes swayCentre {
+  0% { rotate: -20deg; top: 390px; left: 228px; animation-timing-function: cubic-bezier(.74,.44,1,1.36) }
+  100% { rotate: 0deg; top: 400px; left: 230px; }
 }
 
     </style>
+ 
+    <script lang="javascript" id="gameLogic">
+      // TODO Resize images
 
-    <script language="javascript">
-      // TODO: *** Human protection ***- check wrongClicks == 0 and hover == 0
-      // TODO: ? Change to pushing blocks to one side by clicking on them, and if human, only move it a little way, and say "You are too puny to move thoe stones. Send a robot probe."
-      // TODO: ? Different images for each block so they look more realistic. Take our own photos.
+      // TODO show key has been dragged
+      // TODO leave key where it was dropped, even by cypress - https://stackoverflow.com/a/57438497
+      // TODO or move it to the lock and animate it turning?? then make it disappear
 
-      function zoomAndNavigate(href) {
-        const sun = document.querySelector('#sun');
-        sun.classList.add('sunrise');
-
-        const cropFrame = document.getElementById('cropFrame');
-        cropFrame.classList.add('zoomBackground');
-
-        setTimeout(() => window.location.assign(href), 6000);
+      function showSky() {
+        // Only show sky when everything else is loaded to there is no spoiler
+        const sky = document.getElementById('sun');
+        sky.style.opacity = 1;
       }
 
-      function loaded() { 
-        const minBlocks = 4;
-        const maxBlocks = 7;
-        const numberOfBlocks = randomBetween(minBlocks, maxBlocks);
-        addBlocks(numberOfBlocks);
-        const foreground = document.getElementsByClassName('foregroundImage')[0];
-        foreground.style.opacity = 1.0;
+      function fall() {
+        changeColumnClass('fallingColumn');
+        stopBallDragging();
+        allowKeyDragging();
       }
 
-      function randomBetween(min, max) {
-        const diff = max - min;
-        const delta = Math.round(Math.random() * diff);
-        return min + delta;
+      function allowKeyDragging() {
+        const key = document.getElementById('key');
+        key.draggable = true;
+        key.classList.add('layer5');
+        key.classList.remove('layer1');
       }
 
-      let addingBlocks = true;
-      let lastBlock = null;
-
-      function addBlocks(numberOfBlocks) {
-        addingBlocks = true;
-        const bottom = 325;
-        const height = 45;
-        const overlap = 12;
-        const msdelay = 400;
-        const newBlockAnimationDurationMs = 400;
-        const list = document.querySelector('.blocks');
-        for (i=0; i < numberOfBlocks; i++) {
-          const top = bottom - ((i+1) * (height-overlap));
-          const zorder = 50 + i;
-          const offset = randomBetween(-20, 20);
-          setTimeout(() => { 
-            lastBlock = addBlock(list, top, height, zorder, offset, lastBlock);
-          }, msdelay * i);
-        }
-        setTimeout(() => {
-          addingBlocks = false;
-        }, (msdelay * numberOfBlocks) + newBlockAnimationDurationMs);
+      function stopBallDragging() {
+        const ball = document.getElementById('ball');
+        ball.draggable = false;
+      }
+      
+      function sway() {
+        flipColumnClass('swayingColumn', 6000);
       }
 
-      function addBlock(list, top, height, zorder, hoffset, previousBlock) {
-        const img = document.createElement('img');
-        img.src = 'img/block.png'
-        img.alt = 'block';
-        img.style.width = 200;
-        img.style.height = height;
-        img.draggable = false;
-        
-        const block = document.createElement('li');
-        block.appendChild(img);
-        block.style.top = top;
-        block.style.height = height;
-        block.style.zIndex = zorder;
-        block.style.left = hoffset;
-        block.draggable = false;
-        block.classList.add('block');
-        block.classList.add('newBlock');
-        block.addEventListener('click', clickBlock);
-        
-        if (previousBlock) {
-          list.insertBefore(block, previousBlock);
-        } else {
-          list.appendChild(block);
-        }
-
-        return block;
+      function wobble() {
+        flipColumnClass('wobblingColumn', 1800);
       }
 
-      let wrongClicks = 0;
-
-      function clickBlock(event) {
-        if (event.target.tagName.toUpperCase() == 'LI') {
-          tryToRemoveBlock(event.target);
-        }
-
-        if (event.target.tagName.toUpperCase() == 'IMG') {
-          if (event.target.parentElement.tagName.toUpperCase() == 'LI') {
-            tryToRemoveBlock(event.target.parentElement)
-          }
-        }
+      function changeColumnClass(newClass, durationMs) {
+        const column = document.getElementById('column');
+        column.classList.remove('column');
+        column.classList.add(newClass);
       }
 
-      function tryToRemoveBlock(block) {
-        const index = Array.prototype.indexOf.call(block.parentNode.children, block);
-        if (index == 0 && !addingBlocks) { 
-          removeBlock(block);
-        } else {
-          wrongClicks++;
-          if (addingBlocks) {
-            window.alert('Cannot move blocks while they are being built.');
-          } else {
-            window.alert('Cannot move that block, it is too heavy with others on top of it. Try moving the top block.');
-          }
-        }
+      function flipColumnClass(newClass, durationMs) {
+        const column = document.getElementById('column');
+        column.classList.remove('column');
+        column.classList.add(newClass);
+        setTimeout(() => restoreColumnClass(newClass), durationMs);
       }
 
-      function removeBlock(block) {
-        block.classList.remove('newBlock');
-        block.classList.add('removeBlock');
-        block.addEventListener("animationend", () => deleteBlock(block));
+      function restoreColumnClass(oldClass) {
+        const column = document.getElementById('column');
+        column.classList.remove(oldClass);
+        column.classList.add('column');
       }
 
-      function deleteBlock(block) {
-        const countBeforeDelete = block.parentNode.childElementCount;
-        block.parentNode.removeChild(block);
-        if (countBeforeDelete == 1) { 
-          // Last block was removed, puzzle solved
-          zoomAndNavigate('r6.html');
-        }
+      function loaded() {
+        showSky();
+        setTimeout(wobble, 100);
       }
 
       let hoverTempleCount = 0;
       function hoverTemple() {
+        // TODO Add to a listener
         hoverTempleCount++;
       }
 
+      function zoomAndNavigate(href) {
+        const sun = document.querySelector('#sun');
+        sun.classList.add('slideSky');
+
+        const cropFrame = document.getElementById('cropFrame');
+        cropFrame.classList.add('zoomBackground');
+
+        setTimeout(() => window.location.assign(href), 2200);
+      }
+
+      function swingDoorsOpen() {
+        const doorLeft = document.getElementById('doorLeft');
+        const doorRight = document.getElementById('doorRight');
+        doorLeft.classList.add('doorLeftAjar');
+        doorRight.classList.add('doorRightAjar');
+      }
+
       function openDoor(event) {
-        if (isHuman()) {
-          window.alert('You pushed the blocks but it needs a machine to push them further.');
-        } else if (wrongClicks > 0) {
-          window.alert('The blocks were pushed in the wrong order.')
-        } else {
-          window.alert('The adventure continues!');
+      // TODO human protection
+      //  if (isHuman()) {
+      //    window.alert('The doors are jammed and won\'t open all the way. Something smaller could get through.');
+      //  } else {
+          window.alert('Moving through the door.');
           zoomAndNavigate('r6.html');
-        }
+      //  }
       }
 
       function isHuman() {
         return hoverTempleCount > 3 || !isCypressRunning();
       }
-
+      
       function isCypressRunning() {
         return window.Cypress;
       }
 
     </script>
+
+    <script lang="javascript" id="dragging">
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      
+      let ball;
+      let key;
+
+      let dragStartOffsetFromBallCentreX = 0;
+      let dragStartOffsetFromBallCentreY = 0;
+
+      let draggingBall = false;
+      let draggingKey = false;
+
+      function hideBall() {
+        if (!ball) ball = document.getElementById('ball');
+        ball.style.opacity = 0.2;
+      }
+
+      function showBall() {
+        if (!ball) ball = document.getElementById('ball');
+        ball.style.opacity = 1;
+      }
+
+      function hideKey() {
+        if (!key) key = document.getElementById('key');
+        key.style.opacity = 0.2;
+      }
+
+      function showKey() {
+        if (!key) key = document.getElementById('key');
+        key.style.opacity = 1;
+      }
+      
+      function dragStartBall(ev) {
+        // ev.dataTransfer.setData("subject", ev.target);
+        draggingBall = true;
+        hideBall();
+
+        const mouseX = ev.clientX;
+        const mouseY = ev.clientY;
+
+        if (!ball) ball = document.getElementById('ball');
+        
+        const ballRect = ball.getBoundingClientRect();
+        const ballCentreX = (ballRect.left + ballRect.right) / 2;
+        const ballCentreY = ballRect.top + 10; // (ballRect.top + ballRect.bottom) / 2;
+
+        dragStartOffsetFromBallCentreX = ballCentreX - mouseX;
+        dragStartOffsetFromBallCentreY = ballCentreY - mouseY;
+      }
+
+      function dragStartKey(ev) {
+        // ev.dataTransfer.setData("subject", ev.target);
+        draggingKey = true;
+        hideKey();
+      }
+
+      const dropLocations = {
+        small: { left: 717, top: 414 },
+        large: { left: 877, top: 337 }
+        //column: { left: 179, top: 303 }
+      }
+
+      let previousLocation = 'small';
+
+      function drop(ev, targetLocation) {
+        // console.log("Drop " + targetLocation);
+        ev.preventDefault();
+       // const subject = ev.dataTransfer.getData("subject");
+        // console.log("DROPPED, target=" + targetLocation);
+        //console.log(subject.getAttribute('id'));
+
+        if (draggingBall) {
+          if (targetLocation == 'column') {
+            if (previousLocation == 'small') {
+              sway();
+            }
+            if (previousLocation == 'large')
+            {
+              fall();
+            }
+          } else if (dropLocations[targetLocation]) {
+            if (!ball) ball = document.getElementById('ball');
+            
+            const dropLocation = dropLocations[targetLocation];
+            ball.style.left = dropLocation.left;
+            ball.style.top = dropLocation.top;
+
+            previousLocation = targetLocation;
+          }
+
+          moveRopeToBall();
+          dragEndBall(ev);
+        }
+
+        if (draggingKey) {
+          if (targetLocation == 'door') {
+            swingDoorsOpen();
+            setTimeout(openDoor, 2000);
+            dragEndKey(ev);
+            hideKey();
+          }
+        }
+      }
+
+      function dragOver(ev) {
+        // Note that dataTransfer types can be seen here but not the values, by design.
+
+        if (draggingBall) {
+          const x = ev.pageX;
+          const y = ev.pageY;
+
+          const ballCentreWindowX = x + dragStartOffsetFromBallCentreX;
+          const ballCentreWindowY = y + dragStartOffsetFromBallCentreY;
+          
+          const containerOrigin = getContainerOrigin();
+          const ballCentreX = ballCentreWindowX - containerOrigin.x;
+          const ballCentreY = ballCentreWindowY - containerOrigin.y;
+          
+          window.moveRopeEnd(ballCentreX, ballCentreY);
+        }
+      }
+      
+      function moveRopeToBall() {
+        if (!ball) ball = document.getElementById('ball');
+        const ballRect = ball.getBoundingClientRect();
+
+        const ballCentreClientX = (ballRect.left + ballRect.right) / 2;
+        const ballCentreClientY = (ballRect.top + ballRect.bottom) / 2;
+        
+        const ballCentreWindowX = window.scrollX + ballCentreClientX;
+        const ballCentreWindowY = window.scrollY + ballCentreClientY;
+        
+        const containerOrigin = getContainerOrigin();
+        const ballCentreX = ballCentreWindowX - containerOrigin.x;
+        const ballCentreY = ballCentreWindowY - containerOrigin.y;
+
+        window.moveRopeEnd(ballCentreX, ballCentreY);
+      }
+
+      let containerCache;
+      function calculateContainerOrigin() {   
+        const container = containerCache;
+        const containerRect = container.getBoundingClientRect();
+
+        const conatinerOriginWindowX = window.scrollX + containerRect.left;
+        const conatinerOriginWindowY = window.scrollY + containerRect.top;
+
+        return { x: conatinerOriginWindowX, y: conatinerOriginWindowY }
+      }
+
+      function getContainerOrigin() {
+        if (!containerCache) {
+          containerCache = document.getElementById('container');
+        }
+
+        return calculateContainerOrigin();
+      }
+
+      function dragEndBall(ev) { 
+        draggingBall = false;
+        moveRopeToBall();
+        showBall();
+      }
+
+      function dragEndKey(ev) { 
+        draggingKey = false;
+        showKey();
+      }
+
+    </script>
+
+    <script lang="javascript" id="ropeRendering">
+      // Thanks to https://muffinman.io/blog/draw-svg-rope-using-javascript/
+      // Code from https://codepen.io/stanko/pen/vYaEMKX
+
+      // ----- VECTORS ----- //
+      function multiplyVector(v, scalar) {
+        return {
+          x: v.x * scalar,
+          y: v.y * scalar
+        };
+      }
+
+      function getVector(a, b) {
+        return {
+          x: b.x - a.x,
+          y: b.y - a.y
+        };
+      }
+
+      function addVectors(a, b) {
+        return {
+          x: a.x + b.x,
+          y: a.y + b.y
+        };
+      }
+
+      // ----- MATH ----- //
+
+      function getPointOnLine(start, end, ratio) {
+        const vector = getVector(start, end);
+        const v = multiplyVector(vector, ratio);
+        return {
+          x: start.x + v.x,
+          y: start.y + v.y
+        };
+      }
+
+      function getAngleBetweenThreePoints(a, b, c) {
+        const vectorBA = getVector(a, b);
+        const vectorBC = getVector(c, b);
+
+        const angle =
+          Math.atan2(vectorBC.y, vectorBC.x) - Math.atan2(vectorBA.y, vectorBA.x);
+
+        return angle;
+      }
+
+      // ----- CHAIKIN ----- //
+
+      function cut(start, end, ratio) {
+        const r1 = {
+          x: start.x * (1 - ratio) + end.x * ratio,
+          y: start.y * (1 - ratio) + end.y * ratio
+        };
+        const r2 = {
+          x: start.x * ratio + end.x * (1 - ratio),
+          y: start.y * ratio + end.y * (1 - ratio)
+        };
+        return [r1, r2];
+      }
+
+      function chaikin(curve, iterations = 1, closed = false, ratio = 0.25) {
+        if (ratio > 0.5) {
+          ratio = 1 - ratio;
+        }
+
+        for (let i = 0; i < iterations; i++) {
+          let refined = [];
+          refined.push(curve[0]);
+
+          for (let j = 1; j < curve.length; j++) {
+            let points = cut(curve[j - 1], curve[j], ratio);
+            refined = refined.concat(points);
+          }
+
+          if (closed) {
+            refined.shift();
+            refined = refined.concat(cut(curve[curve.length - 1], curve[0], ratio));
+          } else {
+            refined.push(curve[curve.length - 1]);
+          }
+
+          curve = refined;
+        }
+        return curve;
+      }
+
+      // ----- ROPE ----- //
+
+      function getPathPoints(d, step = 10) {
+        // For potential NodeJS version
+        // https://www.npmjs.com/package/svg-path-properties
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+
+        const length = path.getTotalLength();
+
+        const count = length / step;
+
+        const points = [];
+
+        for (let i = 0; i < count + 1; i++) {
+          const n = i * step;
+          points.push(path.getPointAtLength(n));
+        }
+
+        const vectorStart = getVector(points[1], points[0]);
+        const vectorEnd = getVector(
+          points[points.length - 2],
+          points[points.length - 1]
+        );
+
+        return [
+          // Add helper points at the start
+          addVectors(points[0], vectorStart),
+          ...points,
+          // and end
+          addVectors(points[points.length - 1], vectorEnd)
+        ];
+      }
+
+      // Takes three points and returns two points.
+      // Points are located at the end of a vector which is bisector of the angle between these three points.
+      // The distance is "thickness" param
+      /*
+                                • outerPoint[0]
+                              /
+                              /
+                  v1 •------• v2
+                            / \
+                          /   • v3
+            outerPoint[1] •
+        */
+      function getOuterPoints(v1, v2, v3, thickness, angleOffset = 0) {
+        /*
+                  v1 •------• v2
+                    angle1 / \
+                          /   • v3
+        */
+        let angle1 = getAngleBetweenThreePoints(v1, v2, v3) / 2;
+
+        const offset = angle1 > 0 ? -1 : 1;
+        // Angle between (v1, v2) vector and x axis
+        /*
+                      v2 •--------• (v2.x + offset, v2.y)
+                        / angle2
+                      /
+                  v1 •
+        */
+        const angle2 = getAngleBetweenThreePoints(v1, v2, {
+          x: v2.x + offset, // Moving point on x axis
+          y: v2.y
+        });
+
+        // Angle between the x axis and the bisector angle
+        const angle = angle2 - angle1 + angleOffset;
+
+        const r = thickness / 2;
+
+        const point1 = {
+          x: v2.x + Math.cos(angle) * r,
+          y: v2.y - Math.sin(angle) * r
+        };
+
+        const point2 = {
+          x: v2.x + Math.cos(angle + Math.PI) * r,
+          y: v2.y - Math.sin(angle + Math.PI) * r
+        };
+
+        return [point1, point2];
+      }
+
+      function getLines(points, thickness, angleOffset = 0) {
+        const normals = [];
+
+        for (let i = 1; i < points.length - 1; i++) {
+          const v1 = points[i - 1];
+          const v2 = points[i];
+          const v3 = points[i + 1];
+
+          const line = getOuterPoints(v1, v2, v3, thickness, angleOffset);
+
+          normals.push(line);
+        }
+
+        // Adding an extra line for the last segment
+        normals.push(normals[normals.length - 1]);
+
+        return normals;
+      }
+
+      function getSegments(normals, fixGaps = false) {
+        const segments = [];
+
+        for (let i = 0; i < normals.length - 2; i++) {
+          const l1 = normals[i];
+          const l2 = normals[i + 1];
+          const l3 = normals[i + 2];
+          const path = [l1[0], l1[1], l2[1], l2[0]];
+
+          const prevSegment = segments[i - 1];
+
+          const A = l1[0];
+          const B = l1[1];
+          const C = l2[0];
+          const D = l2[1];
+          const E = l3[0];
+          /*
+          F---------E
+          |         |
+          D---------C
+          |         |
+          B---------A
+          */
+
+          const ratio1 = 0.3; // Parametrize
+          const ratio2 = 1 - ratio1;
+
+          const BD033 = getPointOnLine(B, D, 0.33);
+          const DC_p1 = getPointOnLine(D, C, ratio1);
+          let corner1 = getPointOnLine(BD033, DC_p1, 0.5);
+          // Move the point closer to the corner
+          corner1 = addVectors(corner1, multiplyVector(getVector(corner1, D), 0.25));
+          const DC_p2 = getPointOnLine(D, C, ratio2);
+          const CE066 = getPointOnLine(C, E, 0.66);
+          let corner2 = getPointOnLine(DC_p2, CE066, 0.5);
+          // Move the point closer to the corner
+          corner2 = addVectors(corner2, multiplyVector(getVector(corner2, C), 0.25));
+          const AC066 = getPointOnLine(A, C, 0.66);
+          const AB_p1 = getPointOnLine(A, B, ratio1);
+          const AB_p2 = getPointOnLine(A, B, ratio2);
+
+          const line1 = [
+            prevSegment ? prevSegment.line1[2] : B,
+            BD033,
+            corner1,
+            fixGaps ? corner1 : null,
+            fixGaps ? corner1 : null,
+            DC_p1,
+            DC_p2,
+            corner2
+          ].filter((p) => p);
+
+          const line2 = [
+            corner2,
+            AC066,
+            prevSegment ? prevSegment.line1[fixGaps ? 7 : 5] : null,
+            prevSegment && fixGaps ? prevSegment.line1[7] : null,
+            prevSegment && fixGaps ? prevSegment.line1[7] : null,
+            AB_p1,
+            prevSegment ? AB_p2 : null,
+            prevSegment ? prevSegment.line1[2] : B
+          ].filter((p) => p);
+
+          const roundedLine1 = chaikin(line1, 2, false, 0.25);
+          const roundedLine2 = chaikin(line2, 2, false, 0.25);
+          roundedLine1.pop();
+          roundedLine2.pop();
+          const points = [...roundedLine1, ...roundedLine2];
+
+          segments.push({
+            line1,
+            line2,
+            path,
+            points
+          });
+        }
+
+        return segments;
+      }
+
+      function renderRope(
+        path,
+        svg,
+        options = {
+          step: 10,
+          thickness: 20,
+          angle: Math.PI * 0.25,
+          colors: []
+        },
+        render = {
+          path: 0,
+          points: 0,
+          normals: 0,
+          polygons: 0,
+          polygonsRounded: 0,
+          segments: 0,
+          rope: 1
+        }
+      ) {
+        const points = getPathPoints(path, options.step);
+        const normals = getLines(points, options.thickness, options.angle);
+        const segments = getSegments(normals, options.fixGaps);
+
+        const paths = `
+          <g stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="black">
+            <g opacity="${render.rope}" class="rope">
+              ${segments
+                .map(
+                  (segment, i) =>
+                    `<path d="M ${segment.points
+                      .map((p) => `${p.x} ${p.y}`)
+                      .join(" L ")} Z" style="fill: ${
+                      options.colors[i % options.colors.length] || "none"
+                    }" />`
+                )
+                .join("\n")}
+          </g>
+        `;
+          //   <g opacity="${render.normals}" class="normals">
+          //     ${normals.map(
+          //       (line) =>
+          //         `<path d="M ${line[0].x} ${line[0].y} L ${line[1].x} ${line[1].y}" />`
+          //     )}
+          //   </g>
+          //   <g opacity="${render.polygons}" class="polygons">
+          //   ${segments
+          //     .map(
+          //       (segment) =>
+          //         `<path d="M ${segment.path
+          //           .map((p) => `${p.x} ${p.y}`)
+          //           .join(" L ")} Z"/>`
+          //     )
+          //     .join("\n")}
+          //   </g>
+          //   <g opacity="${render.polygonsRounded}" class="polygons-rounded">
+          //   ${segments
+          //     .map(
+          //       (segment) =>
+          //         `<path d="M ${chaikin(segment.path, 3, true, 0.15)
+          //           .map((p) => `${p.x} ${p.y}`)
+          //           .join(" L ")} Z"/>`
+          //     )
+          //     .join("\n")}
+          //   </g>
+          //   <g opacity="${render.segments}" class="segments">
+          //   ${segments
+          //     .map(
+          //       (segment) =>
+          //         `<g class="segment">
+          //           <path d="M ${segment.line1
+          //             .map((p) => `${p.x} ${p.y}`)
+          //             .join(" L ")}"/>
+          //           <path d="M ${segment.line2
+          //             .map((p) => `${p.x} ${p.y}`)
+          //             .join(" L ")}"/>
+          //         </g>`
+          //     )
+          //     .join("\n")}
+          //   </g>
+          //   <path class="path" d="${path}" opacity="${render.path}" />
+          //   <g opacity="${render.points}" class="points">
+          //   ${points.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="3" />`).join("")}
+          //   </g>
+          // </g>
+
+        svg.innerHTML = paths;
+      }
+
+    </script>
+
   </head>
 
   <body onload="loaded();">
 
-    <div class="image-container">
+    <div id="container" class="image-container">
       <div id="cropFrame" class="image-container">
 
         <img
           id="sun"
           src="img/r3-sky.png"
           alt="Blue sky with sun"
-          draggable="false"
           class="fullImage"
+          draggable="false"
         />
 
         <img
-          src="img/r3-background.png"
+          src="img/r4-background.png"
           alt="Temple"
-          onmousemove="hoverTemple();"
-          draggable="false"
           class="fullImage backgroundImage"
+          draggable="false"
         />
 
         <img
-          src="img/r3-foreground.png"
-          alt="Temple courtyard"
-          onmousemove="hoverTemple();"
+          id="doorLeft"
+          src="img/r4-door-left.png"
+          alt="Door"
           draggable="false"
-          class="fullImage foregroundImage"
         />
 
-        <ol class="blocks">
+        <img
+          id="doorRight"
+          src="img/r4-door-right.png"
+          alt="Door"
+          draggable="false"
+        />
 
-        </ol>
+        <div
+          id="doorDropTarget"
+          class="layer5"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'door');"
+        ></div>
+
+        <img
+          id="key"
+          src="img/key.png"
+          alt="Old key"
+          class="layer1 key"
+          draggable="false"
+          ondragstart="dragStartKey(event);"
+          ondragend="dragEndKey(event);"
+        />
+
+        <img
+          id="column"
+          src="img/r4-column.png"
+          alt="Large stone column"
+          class="layer5 column"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'column');"
+        />
+
+        <img
+          src="img/r3-small-pedestal.png"
+          alt="Small stone pedestal"
+          class="layer5 small-pedestal"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'small');"
+        />
         
+        <img
+          src="img/r3-large-pedestal.png"
+          alt="Large stone pedestal"
+          class="layer5 large-pedestal"
+          draggable="false"
+          ondragover="dragOver(event);allowDrop(event);"
+          ondrop="drop(event, 'large');"
+          />
+
+        <div
+          class="layer4 fullImage"
+          id="transparentDragDivBehindTargets"
+          draggable="false"
+          ondragover="dragOver(event);"
+        ></div>
+
+        <img
+          id="ball"
+          src="img/ball.png"
+          alt="Large iron cannon ball"
+          class="layer5"
+          draggable="true"
+          ondragstart="dragStartBall(event);"
+          ondragend="dragEndBall(event);"
+          ondragover="dragOver(event);"
+        />
+
+        <svg id="cable" class="behindBackground" draggable="false"><path id="cablePath"></path></svg>
+        <svg id="rope" class="layer3" draggable="false"></svg>
+
       </div>
     </div>
+ 
+    <script type="module" lang="javascript" id="cablePhysics">
+      // Thanks https://codepen.io/keetraxx/pen/oNzXKVN
+
+      // Script at end of body so elements have been created 
+
+      import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+            
+      // Rope drawing options
+      const ropeRenderOptions = {
+            step: 20,
+            thickness: 20,
+            angle: Math.PI * 0.15,
+            colors: ["#e4cdad", "#dcbf99", "#d6b88e", "#dcbf99"]
+          };
+      
+      // How many simulation points a cable will have, more will take up more resources
+      const CABLE_SEGMENTS = 5;
+      const CABLE_GRAVITY = 0.005;
+      const CABLE_STRENGTH = 1.7;
+      
+      const cableAnchorX = 550;
+      const cableAnchorY = -100;
+      
+      // Draws a line out of the simulation points
+      const simulationNodeDrawer = d3
+      .line()
+        .x((d) => d.x)
+        .y((d) => d.y)
+        .curve(d3.curveBasis);
+        
+      // Cache DOM elements
+      let cablePath = document.getElementById('cablePath');
+      const ropeSvg = document.getElementById('rope');
+      
+      // Cache d3 elements
+      const cable = d3.select('path#cablePath');
+
+      // Create the nodes: o  o  o  o  o
+      const nodes = d3.range(CABLE_SEGMENTS).map(() => ({}));
+    
+      // Link the nodes:  o-->o-->o-->o-->o
+      const links = d3
+        .pairs(nodes)
+        .map(([source, target]) => ({ source, target }));
+    
+      // fix the position of the first node where you clicked
+      nodes[0].fx = cableAnchorX;
+      nodes[0].fy = cableAnchorY;
+  
+      // use a force simulation to simulate the cable
+      const sim = d3
+        .forceSimulation(nodes)
+        .force("gravity", d3.forceY(2000).strength(CABLE_GRAVITY)) // simulate gravity
+        .force("collide", d3.forceCollide(20)) // simulate cable auto disentanglement (cable nodes will push each other away)
+        .force("links", d3.forceLink(links).strength(CABLE_STRENGTH)) // string the cables nodes together
+        .on("tick", () => tickSim(cable));// draw the path on each simulation tick
+        
+      // each cable has its own nodes and simulation
+      cable.datum({ nodes, sim });    
+    
+      function tickSim(c) {
+        c.attr("d", (d) => simulationNodeDrawer(d.nodes)); 
+        const cablePathCommands = cablePath.getAttribute('d');
+        renderRope(cablePathCommands, ropeSvg, ropeRenderOptions);
+      }
+
+      function moveRopeEnd(x, y) {
+        if (cable) {
+          const { nodes, sim } = cable.datum();
+          const start = nodes[0];
+          const end = nodes[nodes.length - 1];
+          
+          // set new position of the end of the cable
+          end.fx = x;
+          end.fy = y;
+          
+          // measure distance
+          const distance = Math.sqrt(
+            Math.pow(end.fx - start.fx, 2) + Math.pow(end.fy - start.fy, 2)
+          );
+          
+          // set the link distance
+          sim.force("links").distance(distance / CABLE_SEGMENTS);
+          sim.alpha(1);
+          sim.restart();
+        }
+      }
+
+      window.moveRopeEnd = moveRopeEnd;
+
+      moveRopeToBall();
+    
+    //   d3.select(document)
+    //   .on("mousemove", (mouseEvent) => {
+    //  //   moveRopeEnd(mouseEvent.pageX, mouseEvent.pageY);
+    //   });    
+    
+    </script>
+
   </body>
 </html>
