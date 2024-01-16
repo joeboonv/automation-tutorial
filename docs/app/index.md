@@ -3,13 +3,9 @@ layout: app
 title: Unlock Automation - The Temple of Time
 ---
 
-<style>
-  
-</style>
+# Can you discover the secrets of the Temple of Time?
 
 ![Ancient temple in the middle of a lake](img/intro.jpg)
-
-# Can you discover the secrets of the Temple of Time?
 
 ## Create an _automated test_ to navigate through the temple, avoiding traps, and unlocking doors
 
