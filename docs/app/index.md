@@ -11,7 +11,7 @@ title: Unlock Automation - The Temple of Time
 
 # Can you discover the secrets of the Temple of Time?
 
-## Use Cypress to navigate through the temple, avoiding traps, and unlocking doors
+## Create an _automated test_ to navigate through the temple, avoiding traps, and unlocking doors
 
 Be careful, the temple might change each time you visit!
 

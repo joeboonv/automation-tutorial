@@ -67,7 +67,10 @@ body {
 }
 
 .foregroundImage {
-  z-index: 2;
+  z-index: 200;
+  height: 660px;
+  width: auto;
+  opacity: 0;
 }
 
 .blocks {
@@ -95,7 +98,7 @@ body {
 }
 
 .removeBlock {
-  animation-duration: 800ms;
+  animation-duration:300ms;
   animation-name: blockDisappears;
   animation-composition: add;
   animation-timing-function: linear;
@@ -103,11 +106,8 @@ body {
 }
 
 @keyframes blockDisappears {
-  0% { top: 0px; opacity: 0; }
-  20% { top: -140px; scale: 0.8; left: -8; opacity: 0; }
-  21% { top: -140px; scale: 0.8; z-index: -70; left: -8; opacity: 0; }
-  99% { top: 50px; scale: 0.5; z-index: -70; left: -40; opacity: 0; }
-  100% { top: 50px; scale: 0.5; z-index: -70; left: -40; opacity: -1; }
+  0% { left: 0px; }
+  100% { left: -250px; }
 }
 
     </style>
@@ -132,6 +132,8 @@ body {
         const maxBlocks = 7;
         const numberOfBlocks = randomBetween(minBlocks, maxBlocks);
         addBlocks(numberOfBlocks);
+        const foreground = document.getElementsByClassName('foregroundImage')[0];
+        foreground.style.opacity = 1.0;
       }
 
       function randomBetween(min, max) {
@@ -145,8 +147,8 @@ body {
 
       function addBlocks(numberOfBlocks) {
         addingBlocks = true;
-        const bottom = 390;
-        const height = 55;
+        const bottom = 325;
+        const height = 45;
         const overlap = 12;
         const msdelay = 400;
         const newBlockAnimationDurationMs = 400;
